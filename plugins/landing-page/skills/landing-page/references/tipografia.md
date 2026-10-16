@@ -54,6 +54,7 @@ p { text-wrap: pretty; max-width: 65ch; }
 - **Espaçamento entre letras:** de −0,02em a −0,04em em sem serifa grande; de +0,08em a +0,14em em caixa-alta pequena. Condensada em caixa-alta normalmente não precisa de ajuste.
 - **Palavra longa no celular:** calcule o tamanho do display pela palavra mais longa do título em 390px de largura e confira no screenshot. Prefira reduzir o tamanho a hifenizar o título.
 - **Colunas estreitas de texto:** use `hyphens: auto`, que funciona com `<html lang="pt-BR">`.
+- **Traço fino em letra de alto contraste:** em Didone (Bodoni, Didot) e outras serifadas de contraste alto, o traço fino quase desaparece no tamanho óptico máximo. Num número gigante, um "5" pode virar "1.5". Quando a fonte tem eixo `opsz`, use um valor baixo (20–40) nos números e palavras que precisam ser lidos. O tamanho máximo do eixo fica só para títulos em que o traço fino é efeito, não informação.
 
 ## Carregamento
 

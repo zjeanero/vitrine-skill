@@ -34,7 +34,7 @@ Para qualquer elemento, pergunte: **ele serviria igual para o concorrente?** Se 
 - **Modo escuro com brilho radial atrás do título.**
   → Fundo escuro só se o mundo do cliente for escuro (bar noturno, estúdio de tatuagem), e com textura própria.
 - **O mesmo `border-radius` grande e a mesma sombra suave em tudo.**
-  → Escolha o tratamento de cantos e de profundidade pelo conceito: canto vivo, fio de 1px, sombra dura ou nenhuma.
+  → Escolha o tratamento de cantos e de profundidade pelo conceito: canto vivo, fio fino, sombra dura ou nenhuma. O fio de 1px vale só como decoração; se ele carrega informação, veja `stack.md`.
 - **Texto em gradiente** numa palavra do título.
   → Dê ênfase com escala, peso, itálico ou cor chapada.
 - **Ícones Lucide ou Heroicons em quadradinhos coloridos; emoji como ícone.**
