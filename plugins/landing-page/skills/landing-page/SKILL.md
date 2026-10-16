@@ -60,7 +60,7 @@ Dois exemplos do raciocínio. Eles ilustram o *método*; não reaproveite estas 
 
 ### 3. Conceito
 
-Leia `registro.md` (projetos anteriores) para não repetir a fonte display nem a paleta dominante de um cliente recente. Depois, escreva 2 ou 3 direções realmente diferentes entre si. Cada uma deve ter:
+Leia o registro de projetos anteriores em `~/.claude/landing-page/registro.md` (se existir) para não repetir a fonte display nem a paleta dominante de um cliente recente. Ele fica fora da pasta da skill para não se perder quando a skill for atualizada. Depois, escreva 2 ou 3 direções realmente diferentes entre si. Cada uma deve ter:
 - **Ideia em uma frase** e o artefato ou a metáfora que a sustenta.
 - **Tipografia:** uma voz com personalidade e uma voz quieta. Veja `references/tipografia.md`.
 - **Paleta:** 3 a 5 cores tiradas dos materiais reais, com a função de cada uma.
@@ -134,6 +134,11 @@ O `NOTAS.md` deve ser curto e em português, com:
 - A lista de fotos para o cliente produzir.
 - Como publicar.
 
-Acrescente uma linha ao `registro.md` desta skill com o cliente, o conceito, as fontes e a paleta.
+Acrescente uma linha a `~/.claude/landing-page/registro.md`. Se o arquivo não existir, crie-o com este cabeçalho:
+
+```
+| Data | Cliente | Conceito | Fonte display / texto | Paleta dominante |
+|---|---|---|---|---|
+```
 
 Na resposta ao usuário, dê o conceito em duas ou três frases, o que ficou pendente e o caminho da pasta.

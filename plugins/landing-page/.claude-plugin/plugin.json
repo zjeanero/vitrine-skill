@@ -1,0 +1,10 @@
+{
+  "name": "landing-page",
+  "version": "0.1.0",
+  "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: conceito tirado do mundo do cliente, texto em português sem dados inventados, WhatsApp, SEO local e revisão visual por screenshot.",
+  "author": {
+    "name": "zjeanero"
+  },
+  "repository": "https://github.com/zjeanero/claude-skills",
+  "keywords": ["landing-page", "design", "frontend", "negocio-local", "pt-br"]
+}

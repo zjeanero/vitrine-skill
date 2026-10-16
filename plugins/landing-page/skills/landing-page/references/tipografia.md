@@ -8,7 +8,7 @@ A tipografia carrega a maior parte da personalidade de uma landing page, porque 
 2. **Voz quieta (texto): legível, neutra, com bom suporte a português.** Aqui Inter e companhia são aceitáveis, porque a função delas é sumir.
 3. **No máximo duas famílias.** Uma família só, bem usada (pesos e larguras extremos), também funciona.
 4. **Contraste claro em uma dimensão:** serifada × sem serifa, condensada × larga ou mono × proporcional. Duas sem serifa parecidas viram ruído.
-5. **Confira o `registro.md`** e não repita a fonte display de um projeto recente.
+5. **Confira o registro** (`~/.claude/landing-page/registro.md`) e não repita a fonte display de um projeto recente.
 6. **Teste os acentos antes de decidir:** renderize "Ação, pão, coração, Vovó, ÇÃÕÉÊÍ". Muita fonte display gratuita fora do Google Fonts não tem ã, õ ou ç. O navegador troca só aquela letra pela fonte reserva, e a palavra fica remendada. Isso aparece no screenshot; confira.
 
 ## Pontos de partida por espírito

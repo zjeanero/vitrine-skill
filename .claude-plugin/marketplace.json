@@ -1,0 +1,19 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-skills",
+  "description": "Skills pessoais para o Claude Code.",
+  "owner": {
+    "name": "zjeanero"
+  },
+  "plugins": [
+    {
+      "name": "landing-page",
+      "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: conceito tirado do mundo do cliente, texto em português sem dados inventados, WhatsApp, SEO local e revisão visual por screenshot.",
+      "author": {
+        "name": "zjeanero"
+      },
+      "source": "./plugins/landing-page",
+      "category": "development"
+    }
+  ]
+}
