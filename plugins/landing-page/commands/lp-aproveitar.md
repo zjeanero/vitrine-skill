@@ -1,6 +1,7 @@
 ---
 description: Extrai conteúdo real do que o cliente já tem (site, Instagram, Google, resposta do briefing)
 argument-hint: "[links do cliente, ou: colei a resposta do cliente acima]"
+allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*)
 ---
 
 Use a skill `landing-page` (no plugin, `landing-page:landing-page`).

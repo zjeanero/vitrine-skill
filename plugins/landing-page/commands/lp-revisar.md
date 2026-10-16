@@ -1,6 +1,7 @@
 ---
 description: Diagnóstico de um site existente — o que tem "cara de IA", o que falta para negócio local, o que manter
 argument-hint: "[url ou pasta do site]"
+allowed-tools: Read, Glob, Grep, Write, Bash(node:*), Bash(mkdir:*), Bash(ls:*)
 ---
 
 Use a skill `landing-page` (no plugin, `landing-page:landing-page`) e faça o diagnóstico descrito na seção "Diagnóstico" de `references/aproveitar.md`.

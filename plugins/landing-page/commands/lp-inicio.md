@@ -1,7 +1,14 @@
 ---
 description: Mostra o passo a passo da skill landing-page, os comandos e como começar
+allowed-tools: Read, Glob, Bash(ls:*)
 ---
 
-Use a skill `landing-page` (no plugin ela aparece como `landing-page:landing-page`; carregue-a com a ferramenta Skill se ainda não estiver carregada) e mostre o guia de início de `references/comecar.md`.
+Mostre à pessoa o guia de início da skill landing-page, que está abaixo, adaptando o tom e sem jargão.
 
-Antes, verifique se existe a pasta `~/.claude/landing-page/`, onde fica o perfil da pessoa. Se não existir, destaque que o primeiro passo recomendado é `/lp-perfil`. Termine perguntando por onde a pessoa quer começar.
+Perfil da pessoa (pasta `~/.claude/landing-page/`): !`ls ~/.claude/landing-page 2>/dev/null || echo "ainda não existe"`
+
+Se o perfil ainda não existe, destaque que o primeiro passo recomendado é `/lp-perfil`. Termine perguntando por onde a pessoa quer começar.
+
+---
+
+@${CLAUDE_PLUGIN_ROOT}/skills/landing-page/references/comecar.md

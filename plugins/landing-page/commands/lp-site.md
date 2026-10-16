@@ -1,6 +1,7 @@
 ---
 description: Constrói a landing page do cliente (com revisão visual no computador e no celular)
 argument-hint: "[cliente e/ou direção escolhida, ex.: padaria do Sérgio, direção 2]"
+allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(mv:*)
 ---
 
 Use a skill `landing-page` (no plugin, `landing-page:landing-page`) e siga o processo completo do `SKILL.md`.
