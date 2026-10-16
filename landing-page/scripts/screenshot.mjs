@@ -17,7 +17,7 @@
 // Saída (na pasta indicada):
 //   desktop-01.png, desktop-02.png ...  uma imagem por tela rolada (1440x900)
 //   mobile-01.png, mobile-02.png ...    idem no celular (390x844)
-//   desktop-full.png, mobile-full.png   página inteira
+//   desktop-full.jpg, mobile-full.jpg   página inteira (até 12000px de altura)
 //   report.json                         erros de JS, recursos que falharam, overflow horizontal
 
 import { spawn } from 'node:child_process';
@@ -130,6 +130,11 @@ async function launch() {
     } else if (msg.method) {
       for (const l of listeners) l(msg);
     }
+  };
+  // Se o Chrome cair, falha as chamadas pendentes em vez de deixar o processo pendurado.
+  ws.onclose = () => {
+    for (const { reject } of pending.values()) reject(new Error('O Chrome fechou a conexão (provável travamento).'));
+    pending.clear();
   };
   const send = (method, params = {}, sessionId) =>
     new Promise((resolve, reject) => {
@@ -270,19 +275,6 @@ async function capture(browser, name, vp) {
     files.push(file);
   }
 
-  if (fullPage) {
-    await evaluate('window.scrollTo(0, 0)');
-    await sleep(600);
-    const clipHeight = Math.min(height, 14000);
-    const { data } = await s('Page.captureScreenshot', {
-      format: 'png',
-      captureBeyondViewport: true,
-      clip: { x: 0, y: 0, width: vp.width, height: clipHeight, scale: 1 },
-    });
-    writeFileSync(join(outDir, `${name}-full.png`), Buffer.from(data, 'base64'));
-    files.push(`${name}-full.png`);
-  }
-
   const layout = await evaluate(`(() => {
     const doc = document.documentElement;
     const overflowX = doc.scrollWidth > doc.clientWidth + 1;
@@ -308,19 +300,45 @@ async function capture(browser, name, vp) {
     return { scrollWidth: doc.scrollWidth, clientWidth: doc.clientWidth, overflowX, overflowingElements: wide, fonts };
   })()`);
 
+  // Página inteira por último: se o Chrome travar aqui, as medições acima já estão salvas.
+  let fullPageError = null;
+  if (fullPage) {
+    try {
+      await evaluate('window.scrollTo(0, 0)');
+      // Densidade 1: em densidade 2 uma página longa passa do limite de textura e derruba o Chrome.
+      await s('Emulation.setDeviceMetricsOverride', { width: vp.width, height: vp.height, deviceScaleFactor: 1, mobile: vp.mobile });
+      await sleep(800);
+      const shot = s('Page.captureScreenshot', {
+        format: 'jpeg',
+        quality: 75,
+        captureBeyondViewport: true,
+        clip: { x: 0, y: 0, width: vp.width, height: Math.min(height, 12000), scale: 1 },
+      });
+      const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('tempo esgotado na captura da página inteira')), 45000));
+      const { data } = await Promise.race([shot, timeout]);
+      writeFileSync(join(outDir, `${name}-full.jpg`), Buffer.from(data, 'base64'));
+      files.push(`${name}-full.jpg`);
+    } catch (e) {
+      fullPageError = e.message;
+    }
+  }
+
   off();
-  await send('Target.closeTarget', { targetId });
-  return { viewport: `${vp.width}x${vp.height}`, pageHeight: height, files, layout, errors, failedRequests: failed };
+  try { await send('Target.closeTarget', { targetId }); } catch {}
+  return { viewport: `${vp.width}x${vp.height}`, pageHeight: height, files, layout, errors, failedRequests: failed, fullPageError };
 }
 
-const browser = await launch();
+// Um Chrome por tamanho de tela: se um travar, o outro não é afetado.
 const report = { target, capturedAt: new Date().toISOString(), results: {} };
-try {
-  for (const [name, vp] of Object.entries(selected)) {
+for (const [name, vp] of Object.entries(selected)) {
+  const browser = await launch();
+  try {
     report.results[name] = await capture(browser, name, vp);
+  } catch (e) {
+    report.results[name] = { viewport: `${vp.width}x${vp.height}`, files: [], errors: [`falha na captura: ${e.message}`], failedRequests: [] };
+  } finally {
+    await browser.close();
   }
-} finally {
-  await browser.close();
 }
 writeFileSync(join(outDir, 'report.json'), JSON.stringify(report, null, 2));
 

@@ -2,6 +2,8 @@
 
 Skills pessoais para o Claude Code.
 
+**Comece pelo [GUIA.md](GUIA.md):** o que fizemos, o que tem aqui, como usar a skill e como comparar resultados com e sem ela.
+
 ## landing-page
 
 Cria landing pages e sites de uma página com identidade própria, que não parecem feitos por IA, para clientes de freela/agência e negócios locais. O processo:
