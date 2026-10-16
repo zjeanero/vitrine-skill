@@ -118,6 +118,10 @@ const html = `<!doctype html>
   .copiar { font: inherit; white-space: nowrap; font-weight: 600; background: var(--tinta); color: #fff; border: 0; border-radius: 8px; padding: 12px 18px; cursor: pointer; min-height: 44px; }
   #saida { display: none; width: 100%; min-height: 120px; }
   .rodape > div:has(#saida[style*="block"]) { flex-wrap: wrap; }
+  .escolha { background: #fbfaf7; border: 1.5px dashed #cfc9bd; border-radius: 10px; padding: 14px 16px; margin: 0 0 16px; }
+  .escolha h3 { margin: 0 0 2px; font-size: 1rem; }
+  .escolha p { margin: 0; color: var(--suave); font-size: .9rem; }
+  .escolha button[aria-pressed="true"] { background: var(--tinta); border-color: var(--tinta); color: #fff; }
   .zoom { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; overflow: auto; z-index: 10; cursor: zoom-out; }
   .zoom img { display: block; max-width: 100%; margin: 0 auto; }
   @media (prefers-reduced-motion: reduce) { .barra i { transition: none; } }
@@ -126,7 +130,7 @@ const html = `<!doctype html>
 <body>
 <header>
   <h1>${escapeHtml(data.titulo)}</h1>
-  <p class="ajuda">Para cada site: escolha <b>Aprovado</b>, <b>Em dúvida</b> ou <b>Não aprovado</b>, toque no que gostou e no que não curtiu e, se quiser, escreva uma melhoria. Toque num print para ampliar. No fim, use <b>Copiar resultado</b> e cole no Claude.${data.cego ? ' Os nomes das versões são sorteados para você avaliar sem saber qual é qual.' : ''}</p>
+  <p class="ajuda">Para cada site: escolha <b>Aprovado</b>, <b>Em dúvida</b> ou <b>Não aprovado</b>, toque no que gostou e no que não curtiu e, se quiser, escreva uma melhoria. Toque num print para ampliar. Quando houver mais de uma versão do mesmo site, diga também <b>qual você mandaria para o cliente</b>. No fim, use <b>Copiar resultado</b> e cole no Claude.${data.cego ? ' Os nomes das versões são sorteados para você avaliar sem saber qual é qual.' : ''}</p>
 </header>
 <div class="progresso"><div><div class="barra"><i id="barra"></i></div><span id="contagem"></span></div></div>
 <main id="lista"></main>
@@ -146,10 +150,37 @@ const html = `<!doctype html>
   try { estado = JSON.parse(localStorage.getItem(chave) || '{}'); } catch (e) { estado = {}; }
   const salvar = () => { try { localStorage.setItem(chave, JSON.stringify(estado)); } catch (e) {} };
   const item = (c) => (estado[c] ||= { veredito: null, gostei: [], naoCurti: [], obs: '' });
+  const escolhas = (estado.__escolhas ||= {});
+  const tamanho = {};
+  data.cards.forEach((c) => { tamanho[c.grupo] = (tamanho[c.grupo] || 0) + 1; });
+
+  // Escolha forçada: entre versões do mesmo site, qual iria para o cliente.
+  function blocoEscolha(grupo) {
+    const opcoes = data.cards.filter((x) => x.grupo === grupo);
+    const sec = document.createElement('section');
+    sec.className = 'escolha';
+    const h = document.createElement('h3'); h.textContent = 'Qual você mandaria para o cliente?';
+    const p = document.createElement('p'); p.textContent = 'Comparando as versões de ' + grupo + '.';
+    const botoes = document.createElement('div'); botoes.className = 'veredito';
+    for (const [cod, nome] of [...opcoes.map((o) => [o.codigo, o.nome]), ['nenhuma', 'Nenhuma']]) {
+      const b = document.createElement('button');
+      b.dataset.escolha = cod; b.textContent = nome; b.setAttribute('aria-pressed', String(escolhas[grupo] === cod));
+      botoes.appendChild(b);
+    }
+    sec.append(h, p, botoes);
+    sec.addEventListener('click', (ev) => {
+      const b = ev.target.closest('button[data-escolha]');
+      if (!b) return;
+      escolhas[grupo] = escolhas[grupo] === b.dataset.escolha ? undefined : b.dataset.escolha;
+      sec.querySelectorAll('[data-escolha]').forEach((x) => x.setAttribute('aria-pressed', String(x.dataset.escolha === escolhas[grupo])));
+      salvar();
+    });
+    return sec;
+  }
 
   const lista = document.getElementById('lista');
   let grupoAtual = null;
-  for (const c of data.cards) {
+  for (const [idx, c] of data.cards.entries()) {
     if (c.grupo !== grupoAtual) {
       grupoAtual = c.grupo;
       const h = document.createElement('h2'); h.textContent = c.grupo; lista.appendChild(h);
@@ -185,6 +216,8 @@ const html = `<!doctype html>
     });
     card.querySelector('textarea').addEventListener('input', (ev) => { s.obs = ev.target.value; salvar(); });
     lista.appendChild(card);
+    const prox = data.cards[idx + 1];
+    if ((!prox || prox.grupo !== c.grupo) && tamanho[c.grupo] >= 2) lista.appendChild(blocoEscolha(c.grupo));
   }
   document.getElementById('zoom').addEventListener('click', (ev) => { ev.currentTarget.style.display = 'none'; });
 
@@ -208,7 +241,15 @@ const html = `<!doctype html>
         (s.naoCurti.length ? ' · não curti: ' + s.naoCurti.join(', ') : '') +
         (s.obs.trim() ? ' · obs: "' + s.obs.trim() + '"' : ''));
     }
-    linhas.push('', '<lp-aprovacao>' + JSON.stringify({ lote: data.lote, data: new Date().toISOString().slice(0, 10), itens }) + '</lp-aprovacao>');
+    const escolhasLista = Object.keys(tamanho).filter((g) => tamanho[g] >= 2).map((g) => ({ grupo: g, codigo: escolhas[g] || null }));
+    if (escolhasLista.length) {
+      linhas.push('');
+      for (const e of escolhasLista) {
+        const o = data.cards.find((x) => x.codigo === e.codigo);
+        linhas.push(e.grupo + ' · mandaria para o cliente: ' + (e.codigo === 'nenhuma' ? 'nenhuma' : o ? o.nome : 'não escolhido'));
+      }
+    }
+    linhas.push('', '<lp-aprovacao>' + JSON.stringify({ lote: data.lote, data: new Date().toISOString().slice(0, 10), itens, escolhas: escolhasLista }) + '</lp-aprovacao>');
     const texto = linhas.join('\\n');
     const aviso = document.getElementById('aviso');
     try {

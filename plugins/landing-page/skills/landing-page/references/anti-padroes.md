@@ -78,9 +78,15 @@ Para qualquer elemento, pergunte: **ele serviria igual para o concorrente?** Se 
 - **Preloader, portão de entrada, cursor customizado ou scroll-jacking** em página de negócio local.
   → Conteúdo imediato. No celular nem existe cursor.
 
+## O erro oposto: fugir tanto que não parece do setor
+
+Escapar do clichê não pode apagar os sinais que fazem o cliente final confiar. Um consultório que parece loja de brinquedos, ou um escritório de advocacia que parece bar, perde a confiança que o site deveria criar.
+→ Para cada setor, identifique 1 ou 2 sinais de confiança e mantenha. Em saúde, por exemplo: aparência limpa e calma, credenciais visíveis e cores que passem cuidado e higiene. A identidade vem do resto: o conceito, a tipografia, o momento-assinatura.
+
 ## Teste final
 
 Antes de entregar, responda com honestidade:
 1. Se eu trocar o nome do cliente pelo de um concorrente, a página continua funcionando? (Deveria parar de fazer sentido.)
 2. Qual é o momento-assinatura, e ele aparece nos screenshots?
 3. Quantos itens desta lista estão na página sem uma razão que venha do cliente?
+4. Alguém que nunca ouviu falar do cliente reconhece o setor (saúde, advocacia, comida…) em 3 segundos?

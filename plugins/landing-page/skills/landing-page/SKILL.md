@@ -115,6 +115,12 @@ Leia o registro de projetos anteriores em `~/.claude/landing-page/registro.md` (
 - **Imagem:** que fotos e com que tratamento, ou que elementos gráficos substituem as fotos.
 - **Momento-assinatura:** a única coisa de que alguém vai se lembrar depois de fechar a aba. O melhor é útil: responde uma pergunta real do cliente de um jeito que só esse negócio responderia.
 - **O que ela evita de propósito.**
+- **Os sinais do setor que ela mantém:** 1 ou 2 códigos que fazem o cliente final reconhecer o setor em 3 segundos.
+  - **Saúde:** aparência limpa e calma, registro profissional à vista, cores que passem cuidado e higiene.
+  - **Advocacia:** sobriedade e o número da OAB.
+  - **Comida:** o produto em destaque e apetite.
+
+  **Distinto não é irreconhecível.** Fuja do clichê do setor, mas não dos sinais que dão confiança. Quando o pedido diz "fuja do visual de clínica", o que se troca é o clichê (azul genérico, dente sorrindo), nunca a cara de lugar de saúde.
 
 Se o usuário estiver disponível, apresente as direções e deixe que ele escolha. Quando quem decide é o cliente final, gere a apresentação de `references/apresentacao.md` e espere a escolha. Se o usuário não estiver disponível, escolha a mais forte, explique por quê e siga. Antes de construir, leia `references/anti-padroes.md`: ali estão os sinais de piloto automático que você vai ser tentado a usar.
 

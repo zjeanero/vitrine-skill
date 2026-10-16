@@ -38,6 +38,14 @@ O design autoral não pode atrapalhar o trabalho da página: fazer a pessoa cert
   - cuidado com "antes e depois", preço usado como chamariz e depoimentos de pacientes.
 
   Não use nada disso sem o cliente confirmar que está de acordo com as regras do conselho dele, e registre o ponto no `NOTAS.md`.
+
+  **A página precisa parecer de saúde.** Mesmo quando o cliente pede para fugir do visual de clínica, mantenha:
+  - aparência limpa, com respiro;
+  - um tom calmo;
+  - o registro profissional visível no topo;
+  - pelo menos uma cor que passe higiene e cuidado (um fundo claro e limpo, um verde ou azul suave).
+
+  O calor e a personalidade vêm do conceito e da tipografia. Página de saúde com clima de loja de brinquedos ou de café perde a confiança dos pais e dos pacientes.
 - **Advocacia:** a OAB também restringe a publicidade. O tom deve ser informativo, sem captação ostensiva e sem promessa de resultado.
 
 ## SEO local

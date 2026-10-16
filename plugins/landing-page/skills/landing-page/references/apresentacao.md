@@ -7,6 +7,7 @@ Antes de construir o site inteiro, mostre ao cliente as 2 ou 3 direções da eta
 ```
 <cliente>/conceitos/
 ├── index.html        a apresentação (abre no celular e no computador)
+├── direcao-1.html    a primeira tela da direção 1, completa e responsiva (idem direcao-2, direcao-3)
 ├── pagina.pdf        a mesma coisa em PDF, fácil de mandar no WhatsApp
 └── screenshots/      prints da revisão
 ```
@@ -29,9 +30,10 @@ Depois, mova `pagina.pdf` para `<cliente>/conceitos/`.
    - **De onde vem:** o objeto ou o jeito do negócio que inspirou a direção.
    - **Tipografia ao vivo:** o nome do negócio e um título real escritos nas fontes da direção, com acentos (ã, ç). Use texto, nunca imagem.
    - **Cores:** de 3 a 5 amostras, com nomes que digam de onde vêm ("casca do pão", "papel do saco") e não códigos.
-   - **A primeira tela da direção, de verdade:** feita em HTML e CSS, numa moldura de computador reduzida (um bloco de 1440×900 com `transform: scale()`) e numa moldura de celular. É o que mais convence o cliente.
+   - **A primeira tela da direção, de verdade:** feita em HTML e CSS no arquivo `direcao-N.html`, que funciona sozinho no computador e no celular. A apresentação mostra esse arquivo numa moldura de computador reduzida (`<iframe>` de 1440×900 com `transform: scale()`) e numa moldura de celular (`<iframe>` de 390×844). É o que mais convence o cliente. Com arquivos separados, cada direção também pode passar por `/lp:avaliar`, e a construção reaproveita a direção escolhida.
    - **O momento especial:** em 2 linhas, a coisa de que as pessoas vão lembrar.
    - **O que essa direção evita.**
+   - **O que ela mantém do setor:** os sinais que fazem o cliente final reconhecer e confiar ("continua com cara de consultório: limpo, calmo, com o CRO à vista").
 5. **Fechamento:** "Qual caminho tem mais a cara de vocês? Pode responder 1, 2 ou 3, e pode misturar ('as cores da 2 com o título da 1')."
 
 ## Regras

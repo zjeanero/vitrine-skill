@@ -32,7 +32,12 @@ node <pasta-desta-skill>/scripts/aprovacao.mjs <manifesto.json> <pasta>/aprovaca
 
 ## 2. Processar o resultado
 
-O texto colado termina com um bloco `<lp-aprovacao>{...}</lp-aprovacao>`. Ele tem o lote, a data e, para cada site, o código, o veredito (`aprovado`, `duvida`, `nao` ou nulo), as listas `gostei` e `naoCurti` e a `obs`.
+O texto colado termina com um bloco `<lp-aprovacao>{...}</lp-aprovacao>`. Ele tem:
+- o lote e a data;
+- para cada site: o código, o veredito (`aprovado`, `duvida`, `nao` ou nulo), as listas `gostei` e `naoCurti` e a `obs`;
+- `escolhas`: em cada grupo com mais de uma versão, qual iria para o cliente (um código, `nenhuma` ou nulo).
+
+**A escolha é o sinal mais forte de preferência.** Ela desempata quando tudo foi aprovado.
 
 1. **Traduza os códigos.** No modo cego, use o `-chaves.json` do lote; fora dele, o código é o próprio `id`.
 2. **Levante as características de cada site.** São elas que permitem aprender alguma coisa:
@@ -45,9 +50,11 @@ O texto colado termina com um bloco `<lp-aprovacao>{...}</lp-aprovacao>`. Ele te
 3. **Acrescente uma linha por site** em `~/.claude/landing-page/aprovacoes.md`. Crie o arquivo se não existir; nunca apague linhas antigas.
 
 ```
-| Data | Lote | Site | Veredito | Gostei | Não curti | Observação | Características |
-|---|---|---|---|---|---|---|---|
+| Data | Lote | Site | Veredito | Escolhido p/ cliente | Gostei | Não curti | Observação | Características |
+|---|---|---|---|---|---|---|---|---|
 ```
+
+Em "Escolhido p/ cliente", use "Sim", "Não" ou "—" quando não houve comparação.
 
 4. **Recalcule `~/.claude/landing-page/gosto-aprendido.md`** a partir de **todo** o histórico (formato abaixo).
 5. **Responda à pessoa** com:
@@ -75,6 +82,7 @@ Aprendido das aprovações. Atualizado em <data>: <N> sites avaliados (<A> aprov
 
 **Regras do cálculo:**
 - **Média por característica:** Aprovado vale 1, Em dúvida vale 0,5, Não aprovado vale 0. Sempre mostre a média **e** a quantidade de sites.
+- **Escolhas:** conte à parte ("escolhida para o cliente em 3 de 4 comparações"). Quando a média não separa as opções, é a escolha que diz o que a pessoa prefere.
 - **O que vira tendência:** só características com 3 ou mais sites. Abaixo disso, vão em "Sinais iniciais".
 - **Peso das etiquetas:** "Gostei/Não curti" valem mais que o veredito. Um site aprovado com "Não curti: Cores" conta contra a paleta dele.
 - **Observações escritas:** entram literalmente em "Pedidos diretos", com o site e a data. São os sinais mais fortes que existem.
