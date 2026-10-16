@@ -1,7 +1,7 @@
 ---
 description: Monta, atualiza, exporta, importa ou salva seu perfil na skill landing-page (referências, stack, gosto)
 argument-hint: "[links, ou: exportar | importar <arquivo> | salvar]"
-allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*)
+allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), PowerShell(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*)
 ---
 
 Use a skill `landing-page` (no plugin, `lp:landing-page`) e siga `references/perfil.md`.

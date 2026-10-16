@@ -1,7 +1,7 @@
 ---
 name: landing-page
 description: Cria landing pages com identidade própria, que não parecem feitas por IA, para clientes de freela e negócios locais (restaurante, padaria, clínica, oficina, barbearia, loja, escritório, profissional liberal). Cobre o trabalho inteiro - mensagem de briefing para o cliente, aproveitar o que ele já tem (site, Instagram, Google), apresentação de conceitos para aprovação, construção em HTML/CSS/JS (ou a stack do perfil), SEO local, WhatsApp e revisão visual por screenshot. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, site institucional, página para cliente, redesign, briefing de cliente, proposta visual, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo sem dizer "landing page". Use também para configurar o perfil da skill (referências, stack, gosto), para revisar um site existente e quando a pessoa perguntar como usar a skill.
-allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(mv:*)
+allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), PowerShell(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(mv:*)
 ---
 
 # Landing page autoral
