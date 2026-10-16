@@ -17,13 +17,15 @@ Para mudanças pequenas, edite só o arquivo afetado. Não refaça o perfil inte
 Faça as perguntas numa lista curta. Se a pessoa não souber alguma, siga com o que tiver:
 1. Para quem você faz sites? (tipo de cliente, região, idioma)
 2. Qual stack você usa ou quer usar, e onde costuma hospedar?
-3. De 3 a 5 sites que você admira, e o que gosta em cada um.
+3. De 3 a 5 referências que você admira, e o que gosta em cada uma. Podem ser links, prints (arraste a imagem para o chat) ou uma pasta com prints. Não precisam ser sites: vale embalagem, revista, cartaz.
 4. Algum estilo ou site que você odeia, ou que acha a cara do "feito por IA"?
 5. Tem alguma regra sua? (ex.: "nada de carrossel", "sempre botão de WhatsApp")
 
 ### 2. Analisar as referências
 
-Para cada site, rode o script de screenshot:
+**Prints e imagens:** quando a pessoa manda imagens no chat, você as vê diretamente. Quando aponta uma pasta, leia os arquivos de imagem dela. Nos dois casos, analise o que está visível. Não dá para saber a fonte exata por um print, então descreva o estilo ("serifada de alto contraste, parecida com uma Didot") em vez de chutar um nome.
+
+**Links:** para cada site, rode o script de screenshot:
 
 ```bash
 node <pasta-desta-skill>/scripts/screenshot.mjs <url> <pasta-temporária>/<nome-do-site> --slices=6 --wait=4000

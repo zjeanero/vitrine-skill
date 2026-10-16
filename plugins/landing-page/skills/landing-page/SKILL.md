@@ -1,11 +1,40 @@
 ---
 name: landing-page
-description: Cria landing pages e sites de uma página com identidade própria, que não parecem feitos por IA nem saídos de template, para clientes de freela/agência e negócios locais (restaurante, padaria, clínica, consultório, oficina, barbearia, loja, academia, escritório, profissional liberal). Cobre o processo inteiro - briefing, conceito visual tirado do mundo do cliente, tipografia, texto em português, construção em HTML/CSS/JS (PHP opcional), SEO local, WhatsApp e revisão visual por screenshot no desktop e no celular. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, página de captura, site institucional, página para um cliente ou negócio, redesign de página, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo que ele não use a expressão "landing page". Use também para configurar ou personalizar esta skill (perfil com referências, stack e gosto de quem usa).
+description: Cria landing pages com identidade própria, que não parecem feitas por IA, para clientes de freela e negócios locais (restaurante, padaria, clínica, oficina, barbearia, loja, escritório, profissional liberal). Cobre o trabalho inteiro - mensagem de briefing para o cliente, aproveitar o que ele já tem (site, Instagram, Google), apresentação de conceitos para aprovação, construção em HTML/CSS/JS (ou a stack do perfil), SEO local, WhatsApp e revisão visual por screenshot. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, site institucional, página para cliente, redesign, briefing de cliente, proposta visual, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo sem dizer "landing page". Use também para configurar o perfil da skill (referências, stack, gosto), para revisar um site existente e quando a pessoa perguntar como usar a skill.
 ---
 
 # Landing page autoral
 
 O objetivo são páginas que um bom designer reconheceria como *decididas*, não geradas.
+
+## Como esta skill é usada
+
+A pessoa pode chegar por um comando (`/lp-...`) ou falando normalmente. Identifique o pedido e siga o modo certo:
+
+| Pedido | O que fazer |
+|---|---|
+| "Como uso isso?", `/lp-inicio`, ou primeiro uso | `references/comecar.md` |
+| Configurar o gosto, adicionar referência (link ou print), `/lp-perfil` | `references/perfil.md` |
+| Preparar as perguntas para o cliente, `/lp-briefing` | `references/briefing.md` |
+| Material do cliente: resposta, fotos, links de site, Instagram ou Google; `/lp-aproveitar` | `references/aproveitar.md` |
+| Mostrar caminhos visuais para o cliente escolher, `/lp-conceitos` | Etapas 1 a 3 abaixo + `references/apresentacao.md` |
+| Fazer o site, `/lp-site` | O processo completo abaixo |
+| Avaliar um site que já existe, `/lp-revisar` | Diagnóstico em `references/aproveitar.md` |
+
+**Primeiro uso:** se `~/.claude/landing-page/` não existir, a pessoa ainda não tem perfil.
+- **Pedido vago** ("oi", "como funciona"): mostre a versão curta do guia de `references/comecar.md` e pergunte por onde ela quer começar.
+- **Pedido concreto** (um site para um cliente): faça o trabalho e, na entrega, ofereça numa frase montar o perfil e conhecer os comandos.
+
+**Pasta do cliente:** todo trabalho de cliente acontece numa pasta com o nome dele. O trabalho anterior que estiver nessa pasta (briefing, material, conceitos) é aproveitado nas etapas seguintes.
+
+```
+<cliente>/
+├── briefing.md      fatos do negócio, cada um com a fonte
+├── material/        fotos, prints e logo do cliente
+├── conceitos/       apresentação das direções
+├── site/            o site
+└── NOTAS.md
+```
 
 ## Por que páginas feitas por IA parecem todas iguais
 
@@ -52,7 +81,9 @@ Junte o necessário para não precisar inventar nada:
 - **Material existente:** logo, cores da fachada/uniforme/embalagem, fotos reais, avaliações do Google.
 - **Ação principal:** quase sempre chamar no WhatsApp, ligar ou ir até o local.
 
-Se o usuário estiver disponível, faça as perguntas que faltam de uma vez, numa lista curta. Se não estiver, ou se pedir para seguir, assuma o razoável, anote cada suposição e continue. As suposições vão para o `NOTAS.md` da entrega.
+Se já existir `<cliente>/briefing.md`, comece por ele e pelo `material/`.
+
+Se o usuário estiver disponível, faça as perguntas que faltam de uma vez, numa lista curta. Quando faltar muito e só o cliente souber responder (histórias, fotos, avaliações), ofereça a mensagem de briefing de `references/briefing.md`. Se o usuário não estiver disponível, ou pedir para seguir, assuma o razoável, anote cada suposição e continue. As suposições vão para o `NOTAS.md` da entrega.
 
 ### 2. Escavação do mundo do cliente
 
@@ -79,7 +110,7 @@ Leia o registro de projetos anteriores em `~/.claude/landing-page/registro.md` (
 - **Momento-assinatura:** a única coisa de que alguém vai se lembrar depois de fechar a aba. O melhor é útil: responde uma pergunta real do cliente de um jeito que só esse negócio responderia.
 - **O que ela evita de propósito.**
 
-Se o usuário estiver disponível, apresente as direções e deixe que ele escolha. Se não estiver, escolha a mais forte, explique por quê e siga. Antes de construir, leia `references/anti-padroes.md`: ali estão os sinais de piloto automático que você vai ser tentado a usar.
+Se o usuário estiver disponível, apresente as direções e deixe que ele escolha. Quando quem decide é o cliente final, gere a apresentação de `references/apresentacao.md` e espere a escolha. Se o usuário não estiver disponível, escolha a mais forte, explique por quê e siga. Antes de construir, leia `references/anti-padroes.md`: ali estão os sinais de piloto automático que você vai ser tentado a usar.
 
 ### 4. Estrutura e texto
 
@@ -114,7 +145,7 @@ Os pontos que mais afetam o resultado:
 Você não enxerga a página enquanto escreve o código, então tire screenshots e olhe:
 
 ```bash
-node <pasta-desta-skill>/scripts/screenshot.mjs <pasta-do-site>/index.html <pasta-do-site>/screenshots
+node <pasta-desta-skill>/scripts/screenshot.mjs <cliente>/site/index.html <cliente>/site/screenshots
 ```
 
 O script usa o Chrome ou o Edge instalado, sem dependências. Ele imprime um resumo (fonte do título, alertas) e gera:
@@ -145,15 +176,18 @@ Corrija e tire os screenshots de novo. Faça pelo menos uma rodada de ajuste: a 
 
 ### 7. Entrega
 
-Organize tudo numa pasta com o nome do cliente:
+O site vai para a pasta do cliente:
 
 ```
 <cliente>/
-├── index.html            (ou index.php, se usar PHP)
-├── assets/               (css/, js/, img/, fonts/)
-├── screenshots/          (da última revisão)
+├── site/
+│   ├── index.html        (ou index.php, se usar PHP)
+│   ├── assets/           (css/, js/, img/, fonts/)
+│   └── screenshots/      (da última revisão)
 └── NOTAS.md
 ```
+
+Se o usuário pedir outra estrutura, ou se for uma pasta de projeto que já existe, siga a dele.
 
 O `NOTAS.md` deve ser curto e em português, com:
 - O conceito em um parágrafo.
@@ -169,4 +203,4 @@ Acrescente uma linha a `~/.claude/landing-page/registro.md`. Se o arquivo não e
 |---|---|---|---|---|
 ```
 
-Na resposta ao usuário, dê o conceito em duas ou três frases, o que ficou pendente e o caminho da pasta.
+Na resposta ao usuário, dê o conceito em duas ou três frases, o que ficou pendente e o caminho da pasta. Termine com o próximo passo natural. Por exemplo: "quando o cliente mandar as fotos, cole aqui que eu troco as pendentes".

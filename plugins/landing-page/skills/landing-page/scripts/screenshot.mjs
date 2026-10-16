@@ -11,7 +11,9 @@
 //   --wait=MS               espera extra após o load, para fontes e animações (padrão 2500)
 //   --no-full               não gera a imagem da página inteira
 //   --click=SELETOR         clica num elemento antes de capturar (ex.: botão "Enter", menu mobile)
-//   --extra                 inclui no report.json o texto visível da página e métricas de avaliação
+//   --extra                 inclui no report.json o texto visível da página, a lista de imagens
+//                           e métricas de avaliação (útil para aproveitar o site atual de um cliente)
+//   --pdf                   salva também pagina.pdf (bom para mandar ao cliente pelo WhatsApp)
 //
 // Sites com rolagem virtual (WebGL, scroll em JS) são rolados com eventos de roda do mouse.
 //
@@ -40,7 +42,7 @@ const flags = Object.fromEntries(
 );
 
 if (positional.length < 2) {
-  console.error('Uso: node screenshot.mjs <url-ou-arquivo> <pasta-de-saida> [--only=desktop|mobile] [--slices=12] [--wait=2500] [--no-full] [--click=SELETOR] [--extra]');
+  console.error('Uso: node screenshot.mjs <url-ou-arquivo> <pasta-de-saida> [--only=desktop|mobile] [--slices=12] [--wait=2500] [--no-full] [--click=SELETOR] [--extra] [--pdf]');
   process.exit(1);
 }
 
@@ -54,6 +56,7 @@ const extraWait = Number(flags.wait ?? 2500);
 const fullPage = !flags['no-full'];
 const clickSelector = typeof flags.click === 'string' ? flags.click : null;
 const withExtra = Boolean(flags.extra);
+const withPdf = Boolean(flags.pdf);
 
 const VIEWPORTS = {
   desktop: { width: 1440, height: 900, mobile: false, dsf: 1 },
@@ -237,6 +240,10 @@ const FIRST_SCREEN_JS = (extra) => `(() => {
     out.h1Texto = h1 ? h1.innerText.trim().replace(/\\s+/g, ' ').slice(0, 200) : null;
     out.h1Fonte = h1 ? family(h1) : null;
     out.textoDaPagina = document.body.innerText.replace(/\\s+/g, ' ').slice(0, 20000);
+    out.imagens = [...document.images]
+      .filter((img) => img.naturalWidth >= 200)
+      .map((img) => ({ src: img.currentSrc || img.src, alt: img.alt, largura: img.naturalWidth, altura: img.naturalHeight }))
+      .slice(0, 40);
   }
   return out;
 })()`;
@@ -390,6 +397,17 @@ async function capture(browser, name, vp) {
 
   const layout = await evaluate(LAYOUT_JS);
 
+  let pdfError = null;
+  if (withPdf && !vp.mobile) {
+    try {
+      const { data } = await s('Page.printToPDF', { printBackground: true, preferCSSPageSize: true });
+      writeFileSync(join(outDir, 'pagina.pdf'), Buffer.from(data, 'base64'));
+      files.push('pagina.pdf');
+    } catch (e) {
+      pdfError = e.message;
+    }
+  }
+
   // Página inteira por último: se o Chrome travar aqui, as medições acima já estão salvas.
   let fullPageError = null;
   if (fullPage) {
@@ -415,7 +433,7 @@ async function capture(browser, name, vp) {
 
   off();
   await tab.close();
-  return { viewport: `${vp.width}x${vp.height}`, pageHeight: height, files, primeiraTela: firstScreen, layout, errors, failedRequests: failed, fullPageError };
+  return { viewport: `${vp.width}x${vp.height}`, pageHeight: height, files, primeiraTela: firstScreen, layout, errors, failedRequests: failed, fullPageError, pdfError };
 }
 
 // Folha de contato: miniaturas numeradas de todas as telas numa imagem só.

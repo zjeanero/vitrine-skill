@@ -8,7 +8,7 @@
   "plugins": [
     {
       "name": "landing-page",
-      "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: conceito tirado do mundo do cliente, texto em português sem dados inventados, WhatsApp, SEO local e revisão visual por screenshot.",
+      "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: briefing para o cliente, aproveitar o que ele já tem, conceitos para aprovação, site com WhatsApp e SEO local, revisão visual por screenshot. Comece com /lp-inicio.",
       "author": {
         "name": "zjeanero"
       },
