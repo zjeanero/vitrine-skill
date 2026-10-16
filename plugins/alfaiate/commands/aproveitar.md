@@ -4,7 +4,7 @@ argument-hint: "[links do cliente, ou: colei a resposta do cliente acima]"
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), PowerShell(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*)
 ---
 
-Use a skill `landing-page` (no plugin, `lp:landing-page`).
+Use a skill `landing-page` (no plugin, `alfaiate:landing-page`).
 - **Links:** siga `references/aproveitar.md`.
 - **Resposta do briefing colada na conversa** (texto, áudio transcrito, fotos): siga o passo 4 de `references/briefing.md`.
 

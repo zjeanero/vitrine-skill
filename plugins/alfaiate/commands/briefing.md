@@ -4,7 +4,7 @@ argument-hint: "[cliente e o que você já sabe, ex.: Padaria do Sérgio, Santa 
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(mkdir:*), Bash(ls:*)
 ---
 
-Use a skill `landing-page` (no plugin, `lp:landing-page`) e siga `references/briefing.md`.
+Use a skill `landing-page` (no plugin, `alfaiate:landing-page`) e siga `references/briefing.md`.
 
 Cliente e informações: $ARGUMENTS
 

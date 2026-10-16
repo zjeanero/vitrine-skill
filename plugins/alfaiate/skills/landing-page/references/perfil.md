@@ -90,8 +90,8 @@ Junte o perfil num **arquivo só**, fácil de mandar por WhatsApp ou e-mail. Sal
 ```markdown
 # Perfil da skill landing-page: <nome>
 
-Para usar: instale o plugin (/plugin install lp --marketplace zjeanero/claude-skills)
-e digite /lp:perfil importar <caminho deste arquivo>.
+Para usar: instale o plugin (/plugin install alfaiate --marketplace zjeanero/claude-skills)
+e digite /alfaiate:perfil importar <caminho deste arquivo>.
 
 <!-- lp:arquivo preferencias.md -->
 (conteúdo de preferencias.md)
@@ -106,7 +106,7 @@ e digite /lp:perfil importar <caminho deste arquivo>.
 - **O `registro.md` e o `aprovacoes.md` ficam de fora por padrão,** porque têm nomes de clientes. Inclua só se a pessoa pedir. O `gosto-aprendido.md` vai junto: é o gosto da pessoa, sem dados de cliente.
 - **Antes de exportar, revise o conteúdo** e tire o que for particular (nome de cliente, telefone).
 - **Exportação parcial:** se a pessoa pedir só uma parte ("exporta só as minhas referências"), inclua só aquela parte, com o mesmo marcador.
-- **Na entrega,** diga onde o arquivo ficou e o que o amigo precisa fazer: instalar o plugin e usar `/lp:perfil importar <arquivo>`.
+- **Na entrega,** diga onde o arquivo ficou e o que o amigo precisa fazer: instalar o plugin e usar `/alfaiate:perfil importar <arquivo>`.
 
 ## Importar (usar o perfil que alguém mandou)
 

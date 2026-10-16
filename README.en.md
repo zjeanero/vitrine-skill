@@ -1,8 +1,8 @@
 [Português](README.md) · **English**
 
-# lp: landing pages that don't look AI-generated
+# Alfaiate: tailor-made landing pages that don't look AI-generated
 
-A **Claude Code** plugin that builds landing pages for freelance clients and local businesses. Each page grows out of the client's own world, not a template.
+*Alfaiate* is Portuguese for tailor. A **Claude Code** plugin that builds landing pages for freelance clients and local businesses. Each page grows out of the client's own world, not a template.
 
 > Built for Brazilian small businesses: it writes in Brazilian Portuguese, and the command names are in Portuguese too.
 
@@ -15,10 +15,10 @@ A **Claude Code** plugin that builds landing pages for freelance clients and loc
 In Claude Code, type:
 
 ```
-/plugin install lp --marketplace zjeanero/claude-skills
+/plugin install alfaiate --marketplace zjeanero/claude-skills
 ```
 
-Close and reopen Claude Code and type **`/lp:inicio`** (*início* = start). It checks whether anything is missing on your computer and walks you through the steps.
+Close and reopen Claude Code and type **`/alfaiate:inicio`** (*início* = start). It checks whether anything is missing on your computer and walks you through the steps.
 
 <details>
 <summary><b>First time? What you need</b></summary>
@@ -32,12 +32,12 @@ Close and reopen Claude Code and type **`/lp:inicio`** (*início* = start). It c
 
 | To | Command |
 |---|---|
-| Install from the terminal | `claude plugin install lp --marketplace zjeanero/claude-skills` |
+| Install from the terminal | `claude plugin install alfaiate --marketplace zjeanero/claude-skills` |
 | Install for one project only | add `--scope project` or `--scope local` |
-| Update | `claude plugin update lp@claude-skills` |
-| Turn off / remove | `claude plugin disable lp@claude-skills` / `claude plugin uninstall lp@claude-skills` |
+| Update | `claude plugin update alfaiate@claude-skills` |
+| Turn off / remove | `claude plugin disable alfaiate@claude-skills` / `claude plugin uninstall alfaiate@claude-skills` |
 | Install without GitHub | from the .zip package (see [Your profile and sharing](#your-profile-and-sharing)) |
-| Older Claude Code | `/plugin marketplace add zjeanero/claude-skills`, then `/plugin install lp@claude-skills` |
+| Older Claude Code | `/plugin marketplace add zjeanero/claude-skills`, then `/plugin install alfaiate@claude-skills` |
 </details>
 
 <details>
@@ -45,7 +45,7 @@ Close and reopen Claude Code and type **`/lp:inicio`** (*início* = start). It c
 
 | Problem | Fix |
 |---|---|
-| `/lp:inicio` doesn't show up | Close and reopen Claude Code |
+| `/alfaiate:inicio` doesn't show up | Close and reopen Claude Code |
 | Error about `--marketplace` | Run `claude update` |
 | Repository not found | It's still private: ask for the .zip package |
 | "node is not recognized" | Install Node LTS from [nodejs.org](https://nodejs.org) and reopen the terminal |
@@ -56,13 +56,13 @@ Close and reopen Claude Code and type **`/lp:inicio`** (*início* = start). It c
 
 | | You type | You get |
 |:-:|---|---|
-| **0** | `/lp:perfil` *(once; profile)* | Claude learns your taste from links or screenshots of references |
-| **1** | `/lp:briefing Padaria do Sérgio` | A ready-to-send WhatsApp message for the client, with questions and a photo list |
-| **2** | Paste the reply, or `/lp:aproveitar <link>` *(reuse)* | Everything organized: what's confirmed and what's missing |
-| **3** | `/lp:conceitos` *(concepts)* | 2 or 3 visual directions (HTML + PDF) for the client to pick |
-| **4** | `/lp:site` | The finished site, checked on desktop and mobile |
-| **5** | `/lp:avaliar` *(evaluate)* | A page to approve or reject the sites. The skill learns your taste from it |
-| **+** | `/lp:revisar <link>` *(review)* | An audit of any website: what looks AI-made and what's missing |
+| **0** | `/alfaiate:perfil` *(once; profile)* | Claude learns your taste from links or screenshots of references |
+| **1** | `/alfaiate:briefing Padaria do Sérgio` | A ready-to-send WhatsApp message for the client, with questions and a photo list |
+| **2** | Paste the reply, or `/alfaiate:aproveitar <link>` *(reuse)* | Everything organized: what's confirmed and what's missing |
+| **3** | `/alfaiate:conceitos` *(concepts)* | 2 or 3 visual directions (HTML + PDF) for the client to pick |
+| **4** | `/alfaiate:site` | The finished site, checked on desktop and mobile |
+| **5** | `/alfaiate:avaliar` *(evaluate)* | A page to approve or reject the sites. The skill learns your taste from it |
+| **+** | `/alfaiate:revisar <link>` *(review)* | An audit of any website: what looks AI-made and what's missing |
 
 The commands are just shortcuts: plain language works too.
 
@@ -93,23 +93,23 @@ Three fictional businesses got the same request, once with the skill and once wi
 
 The skill is the same for everyone. Your taste lives in a **profile**, in `~/.claude/landing-page/`, which updates never erase.
 
-- **Create or change it:** `/lp:perfil`
-- **Send it to a friend:** `/lp:perfil exportar` (export) creates a file. They run `/lp:perfil importar <file>` (import) and adapt it to their taste. Their copy never touches yours.
-- **Send it without GitHub:** `pwsh ferramentas/empacotar.ps1 -ComPerfil -Nome <your-name>` builds a .zip with the skill and your profile. They install it with `/plugin install lp --marketplace <folder>/skill`.
+- **Create or change it:** `/alfaiate:perfil`
+- **Send it to a friend:** `/alfaiate:perfil exportar` (export) creates a file. They run `/alfaiate:perfil importar <file>` (import) and adapt it to their taste. Their copy never touches yours.
+- **Send it without GitHub:** `pwsh ferramentas/empacotar.ps1 -ComPerfil -Nome <your-name>` builds a .zip with the skill and your profile. They install it with `/plugin install alfaiate --marketplace <folder>/skill`.
 
 <details>
 <summary><b>Detailed steps</b></summary>
 
 ```mermaid
 flowchart LR
-    A["<b>You</b><br/>/lp:perfil exportar"] -- "perfil-yourname.md" --> B["<b>Your friend</b><br/>/lp:perfil importar"]
+    A["<b>You</b><br/>/alfaiate:perfil exportar"] -- "perfil-yourname.md" --> B["<b>Your friend</b><br/>/alfaiate:perfil importar"]
     B --> C["Copy of your profile"]
-    C -- "/lp:perfil" --> D["Adapted to<br/>their taste"]
+    C -- "/alfaiate:perfil" --> D["Adapted to<br/>their taste"]
 ```
 
-1. **You** run `/lp:perfil exportar`. You get a single file, like `perfil-jean.md`, without the client log. Send it by WhatsApp, email or Drive.
-2. **They** install the skill and run `/lp:perfil importar perfil-jean.md`. They can drag the file into the window instead of typing the path.
-3. **They adapt it in plain language:** `/lp:perfil I use Astro`, `/lp:perfil add https://…`.
+1. **You** run `/alfaiate:perfil exportar`. You get a single file, like `perfil-jean.md`, without the client log. Send it by WhatsApp, email or Drive.
+2. **They** install the skill and run `/alfaiate:perfil importar perfil-jean.md`. They can drag the file into the window instead of typing the path.
+3. **They adapt it in plain language:** `/alfaiate:perfil I use Astro`, `/alfaiate:perfil add https://…`.
 
 **If they already have a profile,** Claude asks before touching anything: **merge** (your references join theirs), **replace** (theirs is kept in `antigo-<date>/`) or **cancel**.
 
@@ -127,7 +127,7 @@ No. You talk to Claude, and it delivers a finished folder. Knowing HTML only hel
 <details>
 <summary><b>What technology do the sites use?</b></summary>
 
-Plain HTML, CSS and JavaScript (plus PHP when needed), which run on any host. If you use another stack (Astro, Next.js, WordPress…), say so in `/lp:perfil`.
+Plain HTML, CSS and JavaScript (plus PHP when needed), which run on any host. If you use another stack (Astro, Next.js, WordPress…), say so in `/alfaiate:perfil`.
 </details>
 
 <details>
@@ -153,7 +153,7 @@ About 650 tokens per session, and roughly 7k each time the skill is used. A comp
 
 ```
 .claude-plugin/marketplace.json     catalog for one-command install
-plugins/landing-page/               the "lp" plugin: commands/ (the /lp:*) and skills/landing-page/ (the skill)
+plugins/alfaiate/                   the plugin: commands/ (the /alfaiate:*) and skills/landing-page/ (the skill)
 perfis/modelo/                      empty profile template
 avaliacao/                          with/without-skill tests
 ferramentas/empacotar.ps1           builds the .zip to share without GitHub
@@ -161,7 +161,7 @@ docs/img/                           images for this README
 ```
 
 **To release a version:**
-1. Bump `version` in `plugins/landing-page/.claude-plugin/plugin.json`.
+1. Bump `version` in `plugins/alfaiate/.claude-plugin/plugin.json`.
 2. Run `claude plugin validate .`.
-3. Push, then run `claude plugin update lp@claude-skills`.
+3. Push, then run `claude plugin update alfaiate@claude-skills`.
 </details>

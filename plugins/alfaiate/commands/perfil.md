@@ -4,7 +4,7 @@ argument-hint: "[links, ou: exportar | importar <arquivo> | salvar]"
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), PowerShell(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*)
 ---
 
-Use a skill `landing-page` (no plugin, `lp:landing-page`) e siga `references/perfil.md`.
+Use a skill `landing-page` (no plugin, `alfaiate:landing-page`) e siga `references/perfil.md`.
 
 Pedido: $ARGUMENTS
 
