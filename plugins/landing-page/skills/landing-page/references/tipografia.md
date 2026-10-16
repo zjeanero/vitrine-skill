@@ -66,6 +66,8 @@ Durante o desenvolvimento e nos testes, use o CSS do provedor, carregando só os
 <!-- Fontshare: https://api.fontshare.com/v2/css?f[]=nome-da-fonte@400,700&display=swap -->
 ```
 
+**O `preload` de fonte falha quando a página é aberta direto do arquivo (`file://`).** O navegador bloqueia a requisição por CORS, gera erro no console e o `report.json` acusa o problema. Durante o desenvolvimento e a revisão, deixe o `preload` comentado. Na entrega, anote no `NOTAS.md`, em "Como publicar", que ele deve ser ativado depois que o site estiver num servidor.
+
 Em produção, prefira hospedar os arquivos `.woff2` junto do site, com `@font-face`, `font-display: swap` e `<link rel="preload">` da fonte display. Há dois motivos:
 - **Desempenho:** uma conexão a menos para abrir.
 - **LGPD:** o IP do visitante deixa de ir para um terceiro.

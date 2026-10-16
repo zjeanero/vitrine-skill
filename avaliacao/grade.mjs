@@ -1,6 +1,6 @@
 // Corrige as runs de uma iteração.
 // Uso: node grade.mjs <pasta-iteration> [--skip-shots]
-// - Roda review.mjs em cada site (salva em <run>/review/), copia prints para outputs/.
+// - Roda o screenshot.mjs da skill com --extra em cada site (salva em <run>/review/), copia prints para outputs/.
 // - Avalia as assertions automáticas e mescla as manuais de <iteration>/manual.json, se existir.
 // - Escreve <run>/grading.json e <run>/review/texto.txt (texto visível, para revisão manual).
 import { spawnSync } from 'node:child_process';
@@ -14,7 +14,10 @@ const skipShots = rest.includes('--skip-shots');
 const manualPath = join(iterDir, 'manual.json');
 const manual = existsSync(manualPath) ? JSON.parse(readFileSync(manualPath, 'utf8')) : {};
 
-const GENERIC = ['inter', 'roboto', 'poppins', 'montserrat', 'open sans', 'lato', 'arial', 'helvetica', 'system-ui', '-apple-system', 'sans-serif', 'serif', 'dm sans', 'plus jakarta sans', 'manrope', 'outfit', 'sora', 'urbanist', 'figtree', 'geist', 'segoe ui'];
+const SKILL_SCRIPT = join(here, '..', 'plugins', 'landing-page', 'skills', 'landing-page', 'scripts', 'screenshot.mjs');
+const GENERIC = ['inter', 'roboto', 'poppins', 'montserrat', 'open sans', 'lato', 'arial', 'helvetica', 'system-ui', '-apple-system', 'sans-serif', 'serif', 'dm sans', 'plus jakarta sans', 'manrope', 'outfit', 'sora', 'urbanist', 'figtree', 'geist', 'lexend', 'segoe ui'];
+// Fontes "diferentes" que viraram padrão de página feita por IA (lista de anti-padroes.md da skill).
+const SECOND_ORDER = ['instrument serif', 'fraunces', 'playfair display', 'dm serif display', 'space grotesk', 'syne', 'clash display', 'satoshi', 'general sans', 'cabinet grotesk', 'bricolage grotesque'];
 const LOCAL_TYPES = ['LocalBusiness', 'Bakery', 'CafeOrCoffeeShop', 'Restaurant', 'FoodEstablishment', 'AutoRepair', 'AutomotiveBusiness', 'AutoBodyShop', 'Dentist', 'MedicalBusiness', 'MedicalClinic', 'Physician', 'HealthAndBeautyBusiness', 'Store', 'ProfessionalService', 'HomeAndConstructionBusiness'];
 const PHONES = { 'padaria-fermento-lenha': '5531988774410', 'oficina-pacheco': '5519997123088', 'odontopediatra-helena': '5581996542210' };
 
@@ -53,12 +56,29 @@ function gradeRun(evalName, assertions, runDir, config) {
 
   const reviewDir = join(runDir, 'review');
   if (!skipShots || !existsSync(join(reviewDir, 'report.json'))) {
-    const r = spawnSync(process.execPath, [join(here, 'review.mjs'), index, reviewDir, '--wait=2500', '--slices=12'], { encoding: 'utf8' });
+    const r = spawnSync(process.execPath, [SKILL_SCRIPT, index, reviewDir, '--wait=2500', '--slices=12', '--extra'], { encoding: 'utf8' });
     process.stdout.write(`[${evalName}/${runDir.split(/[\\/]/).pop()}] ${r.stdout}${r.stderr}`);
   }
   const report = JSON.parse(readFileSync(join(reviewDir, 'report.json'), 'utf8'));
   const D = report.results.desktop;
   const M = report.results.mobile;
+  // Aceita o report novo (screenshot.mjs da skill com --extra) e o antigo (review.mjs da iteração 1).
+  const pick = (R) => {
+    const P = R.primeiraTela || {};
+    const E = R.extra || {};
+    return {
+      body: P.textoDaPagina ?? E.bodyText,
+      fold: P.textoPrimeiraTela ?? E.aboveFoldText ?? '',
+      waVisible: P.whatsappNaPrimeiraTela ?? E.waVisibleAboveFold,
+      h1Count: P.quantidadeH1 ?? E.h1Count,
+      h1Text: P.h1Texto ?? E.h1Text,
+      h1Font: P.h1Fonte ?? E.h1Font ?? '',
+      h1Loaded: E.h1FontLoaded,
+      display: P.fonteDisplay,
+    };
+  };
+  const DX = pick(D);
+  const MX = pick(M);
 
   // Prints para a tela de comparação (direto em outputs/).
   const copies = [
@@ -73,7 +93,7 @@ function gradeRun(evalName, assertions, runDir, config) {
   const siteFiles = walk(dirname(index)).filter((f) => ['.html', '.php', '.css', '.js', '.mjs'].includes(extname(f).toLowerCase()));
   const html = readFileSync(index, 'utf8');
   const all = siteFiles.map((f) => readFileSync(f, 'utf8')).join('\n');
-  const body = D.extra?.bodyText || stripTags(html);
+  const body = DX.body || stripTags(html);
   const nbody = norm(body);
   writeFileSync(join(reviewDir, 'texto.txt'), body);
 
@@ -106,21 +126,32 @@ function gradeRun(evalName, assertions, runDir, config) {
       add(a, found, blocks.length ? `Tipos: ${types.join(', ') || '(nenhum)'}${found ? ` — ${found} com endereço e horário` : ' — falta tipo local, endereço ou horário'}` : 'Nenhum bloco JSON-LD.');
     } else if (key.startsWith('sem rolagem horizontal')) {
       const L = M.layout || {};
-      add(a, L.overflowX === false, L.overflowX ? `scrollWidth ${L.scrollWidth}px > ${L.clientWidth}px: ${(L.overflowingElements || []).join('; ')}` : `scrollWidth ${L.scrollWidth}px = viewport ${L.clientWidth}px`);
+      const cut = key.includes('cortado') ? L.cortadoNaBorda || [] : [];
+      const parts = [
+        L.overflowX ? `scrollWidth ${L.scrollWidth}px > ${L.clientWidth}px: ${(L.overflowingElements || []).join('; ')}` : `scrollWidth ${L.scrollWidth}px = viewport ${L.clientWidth}px`,
+        cut.length ? `cortado na borda: ${cut.join('; ')}` : null,
+      ].filter(Boolean);
+      add(a, L.overflowX === false && cut.length === 0, parts.join(' · '));
+    } else if (key.startsWith('fonte display')) {
+      const f = DX.display;
+      const fam = (f?.fonte || '').toLowerCase();
+      const generic = GENERIC.includes(fam);
+      const worn = SECOND_ORDER.includes(fam);
+      add(a, f && !generic && !worn && f.carregou, f ? `Maior texto da 1ª tela: "${f.texto}" em ${f.fonte} ${f.tamanhoPx}px (${generic ? 'genérica' : worn ? 'gasta (2ª ordem)' : 'ok'}, ${f.carregou ? 'carregou' : 'NÃO carregou'})` : 'Sem medição da fonte display.');
     } else if (key.startsWith('sem erros de javascript')) {
       const errs = [...new Set([...(D.errors || []), ...(M.errors || [])])];
       const fails = [...new Set([...(D.failedRequests || []), ...(M.failedRequests || [])])];
       add(a, errs.length === 0 && fails.length === 0, errs.length || fails.length ? `Erros: ${errs.join(' | ') || 'nenhum'}; recursos: ${fails.join(' | ') || 'nenhum'}` : 'Nenhum erro de JS nem recurso com falha (desktop e celular).');
     } else if (key.startsWith('fonte do titulo principal')) {
-      const fam = D.extra?.h1Font || '';
+      const fam = DX.h1Font || '';
       const first = fam.split(',')[0].trim().replace(/^["']|["']$/g, '');
       const generic = GENERIC.includes(first.toLowerCase());
-      const loaded = D.extra?.h1FontLoaded;
+      const loaded = DX.h1Loaded;
       add(a, first && !generic && loaded, first ? `h1 em "${first}" (${generic ? 'genérica' : 'não genérica'}, ${loaded ? 'carregou' : 'NÃO carregou — aparece a fonte reserva'})` : 'Sem h1.');
     } else if (key.startsWith('botao/link do whatsapp visivel')) {
-      add(a, M.extra?.waVisibleAboveFold, M.extra?.waVisibleAboveFold ? 'Link de WhatsApp visível em 390×844 sem rolar.' : `Nenhum link de WhatsApp visível na primeira tela do celular. Primeira tela: "${(M.extra?.aboveFoldText || '').slice(0, 200)}"`);
+      add(a, MX.waVisible, MX.waVisible ? 'Link de WhatsApp visível em 390×844 sem rolar.' : `Nenhum link de WhatsApp visível na primeira tela do celular. Primeira tela: "${MX.fold.slice(0, 200)}"`);
     } else if (key.startsWith('exatamente um <h1>')) {
-      add(a, D.extra?.h1Count === 1, `${D.extra?.h1Count} h1 na página${D.extra?.h1Text ? `: "${D.extra.h1Text}"` : ''}`);
+      add(a, DX.h1Count === 1, `${DX.h1Count} h1 na página${DX.h1Text ? `: "${DX.h1Text}"` : ''}`);
     } else if (key.startsWith('respeita prefers-reduced-motion')) {
       const hasMotion = /@keyframes|animation\s*:|transition\s*:|\.animate\(|requestAnimationFrame|animation-timeline/i.test(all);
       const handles = /prefers-reduced-motion/i.test(all);
@@ -139,8 +170,8 @@ function gradeRun(evalName, assertions, runDir, config) {
     } else if (key.startsWith('endereco (rua marmore')) {
       add(a, /marmore/.test(nbody) && /512/.test(nbody), `Mármore:${/marmore/.test(nbody)} 512:${/512/.test(nbody)}`);
     } else if (key.startsWith('diferencial do video')) {
-      const fold = norm(D.extra?.aboveFoldText || '');
-      add(a, /video/.test(fold), `Primeira tela (desktop): "${(D.extra?.aboveFoldText || '').slice(0, 300)}"`);
+      const fold = norm(DX.fold);
+      add(a, /video/.test(fold), `Primeira tela (desktop): "${DX.fold.slice(0, 300)}"`);
     } else if (key.startsWith('horarios (seg')) {
       const ok = /8h|8:00|08:00/.test(nbody) && /18h|18:00/.test(nbody) && /12h|12:00|meio-dia|meio dia/.test(nbody) && /sab/.test(nbody) && /brasil/.test(nbody) && /2150|2\.150/.test(nbody);
       add(a, ok, `8h:${/8h|8:00|08:00/.test(nbody)} 18h:${/18h|18:00/.test(nbody)} 12h:${/12h|12:00|meio-dia|meio dia/.test(nbody)} sábado:${/sab/.test(nbody)} Av. Brasil:${/brasil/.test(nbody)} 2150:${/2150|2\.150/.test(nbody)}`);

@@ -90,6 +90,8 @@ Texto em português do Brasil, com a voz do dono do negócio:
 - **Título:** afirma algo específico ou convida para algo concreto. "Deixe até as 10h, busque às 18h. Rua Aimorés, 1020." diz mais que "Cuidado e qualidade para suas roupas".
 - **Botões:** nomeiam a ação real, como "Chamar no WhatsApp", "Ver como chegar" ou "Pedir orçamento da revisão". Evite "Saiba mais" e "Comece agora".
 - **Nunca invente** depoimentos, números ("+500 clientes"), prêmios, certificações, preços ou anos de experiência. Use marcadores visíveis, como `[[DEPOIMENTO REAL DE CLIENTE]]`, e liste-os no `NOTAS.md`. Dado inventado expõe o cliente (Código de Defesa do Consumidor, conselhos profissionais) e destrói a confiança quando é descoberto.
+- **Conteúdo ilustrativo** é permitido quando serve ao conceito: uma conversa de WhatsApp de exemplo, o desenho de uma peça, uma etiqueta preenchida. Ele precisa estar rotulado como exemplo na própria página, e não pode trazer preço, nome de cliente ou número que pareça real.
+- **Serviço que ninguém informou também é invenção.** Não afirme como fato como o atendimento funciona (adaptações, garantias, prazos) se o briefing não disse. Escreva como pendência para o cliente confirmar.
 
 ### 5. Construção
 
@@ -115,20 +117,31 @@ Você não enxerga a página enquanto escreve o código, então tire screenshots
 node <pasta-desta-skill>/scripts/screenshot.mjs <pasta-do-site>/index.html <pasta-do-site>/screenshots
 ```
 
-O script usa o Chrome ou o Edge instalado, sem dependências. Ele gera:
+O script usa o Chrome ou o Edge instalado, sem dependências. Ele imprime um resumo (fonte do título, alertas) e gera:
+- `contato-desktop.png` e `contato-mobile.png`: **folhas de contato**, com miniaturas numeradas de todas as telas numa imagem só.
 - `desktop-01.png`, `desktop-02.png` e assim por diante: uma imagem por tela rolada, em 1440×900.
 - `mobile-01.png` e seguintes, em 390×844.
-- As versões de página inteira.
-- `report.json`, com erros de JavaScript, recursos que falharam, rolagem horizontal e as fontes realmente aplicadas.
+- `desktop-full.jpg` e `mobile-full.jpg`: a página inteira, para quem for revisar depois.
+- `report.json`, com:
+  - erros de JavaScript e recursos que falharam;
+  - rolagem lateral e conteúdo cortado na borda;
+  - a fonte do maior texto da primeira tela e se ela carregou;
+  - se o WhatsApp aparece sem rolar.
 
-Abra as imagens e avalie com olhar de diretor de arte:
-- **Primeira tela (desktop-01 e mobile-01):** existe um elemento dominante? Em 3 segundos dá para saber o que é, onde fica e como agir? Dá para reconhecer este cliente, ou poderia ser qualquer um do setor?
-- **Ritmo:** as seções variam em densidade, escala e largura, ou repetem o mesmo esquema "título centralizado + blocos"?
+**Olhe pouco e bem, porque cada imagem aberta custa caro.** A ordem é:
+1. Leia o resumo e o `report.json`.
+2. Abra `desktop-01.png` e `mobile-01.png`: a primeira tela é a que mais importa.
+3. Abra as duas folhas de contato para ver o ritmo da página inteira.
+4. Abra uma tela individual só quando a folha mostrar algo suspeito (texto cortado, sobreposição, seção estranha). Não abra todas, e nunca abra a página inteira: ela é para pessoas, não para você.
+
+Avalie com olhar de diretor de arte:
+- **Primeira tela:** existe um elemento dominante? Em 3 segundos dá para saber o que é, onde fica e como agir? Dá para reconhecer este cliente, ou poderia ser qualquer um do setor?
+- **Ritmo (folhas de contato):** as seções variam em densidade, escala e largura, ou repetem o mesmo esquema "título centralizado + blocos"? Alguma seção ficou longa demais no celular?
 - **Anti-padrões:** algum item de `references/anti-padroes.md` entrou sem querer?
 - **Detalhes:** acentos (ã, ç, ê) na fonte certa, contraste legível, nada cortado ou sobreposto, botão principal visível no celular sem rolar.
-- **report.json:** `overflowX` precisa ser `false` no mobile, e erros de JS e recursos com falha precisam ser zero.
+- **report.json:** no celular, `overflowX` precisa ser `false` e `cortadoNaBorda` precisa estar vazio. Erros de JS e recursos com falha precisam ser zero. A `fonteDisplay` precisa ser a fonte que você escolheu, com `carregou: true`.
 
-Corrija e tire os screenshots de novo. Faça pelo menos uma rodada de ajuste: a primeira versão quase nunca é a melhor, e a maior parte da qualidade aparece na segunda passada.
+Corrija e tire os screenshots de novo. Faça pelo menos uma rodada de ajuste: a primeira versão quase nunca é a melhor, e a maior parte da qualidade aparece na segunda passada. Nas rodadas seguintes, olhe só o que mudou.
 
 ### 7. Entrega
 

@@ -103,4 +103,7 @@ Poucos ícones, em SVG inline e desenhados a partir do conceito, ou nenhum ícon
 - **Metadados:** meta tags, Open Graph e JSON-LD, conforme `negocio-local.md`.
 - **Links:** WhatsApp, `tel:` e mapa no formato correto.
 - **Conteúdo:** nada depende de JavaScript para aparecer.
-- **Celular:** sem rolagem horizontal em 390px (o `report.json` do screenshot confirma).
+- **Celular:** sem rolagem horizontal em 390px; o `report.json` do screenshot confirma.
+- **Vazamento escondido:** não use `overflow-x: hidden` ou `clip` no `html`/`body` para esconder um vazamento. Ele continua lá, só que cortado: botões e barras fixas ficam pela metade na borda da tela. Ache e corrija o elemento que vaza; o `report.json` lista os culpados em `overflowingElements` e `cortadoNaBorda`.
+- **Elementos girando ou se movendo** (selos rotativos, letreiros) mudam de tamanho durante a animação e podem vazar só em alguns quadros. Deixe folga ou recorte o elemento dentro do próprio container.
+- **Fontes:** sem `preload` de fonte enquanto o site é aberto do arquivo (veja `tipografia.md`).
