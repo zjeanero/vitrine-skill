@@ -189,6 +189,28 @@ O Claude pergunta antes de mexer em qualquer coisa:
 - **Posso mandar só as referências?** Pode. Peça *"exporta só as minhas referências"*.
 - **E se eu mudar o meu perfil depois?** A cópia dele não muda sozinha. Se quiser mandar a versão nova, exporte de novo.
 
+### Sem acesso ao GitHub? Mande tudo num .zip
+
+Enquanto o repositório não é público, dá para mandar **a skill e o seu perfil num arquivo só**.
+
+**1. Você gera o pacote.** O jeito mais fácil é pedir ao Claude: *"gera o pacote da skill com o meu perfil pra mandar pro meu amigo"*. Ou rode no PowerShell, na pasta do repositório:
+
+```
+pwsh ferramentas/empacotar.ps1 -ComPerfil -Nome jean
+```
+
+Aparece `lp-skill-<versão>.zip` na Área de Trabalho, com a skill, o seu perfil (sem o registro de clientes) e um `LEIA-ME.txt` com o passo a passo.
+
+**2. Ele instala.** Descompacta numa pasta que não vá apagar e, no Claude Code, aponta para a pasta `skill` que veio dentro:
+
+```
+/plugin install lp --marketplace C:\Users\NOME-DELE\Documents\lp-skill-0.6.1\skill
+```
+
+**3. Ele importa o perfil,** se quiser: `/lp:perfil importar perfil-jean.md`. Daí em diante é igual ao que está acima.
+
+> A cada versão nova da skill, é preciso mandar um .zip novo. Quando o repositório for público, o comando do GitHub resolve tudo, e as atualizações chegam com `claude plugin update`.
+
 ---
 
 ## Todos os comandos
@@ -280,6 +302,7 @@ plugins/landing-page/               o plugin "lp"
     └── scripts/screenshot.mjs      prints + folha de contato + relatório (sem dependências)
 perfis/modelo/                      perfil-modelo vazio
 avaliacao/                          testes com e sem a skill (casos, correção automática)
+ferramentas/empacotar.ps1           gera o .zip da skill (e do perfil) para mandar sem GitHub
 docs/img/                           imagens deste README
 ```
 

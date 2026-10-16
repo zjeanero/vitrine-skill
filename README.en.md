@@ -191,6 +191,28 @@ Claude asks before touching anything:
 - **Can I send only my references?** Yes. Ask *"export only my references"*.
 - **What if I change my profile later?** Their copy doesn't update by itself. To send the new version, export again.
 
+### No GitHub access? Send everything in a .zip
+
+While the repository isn't public, you can send **the skill and your profile in a single file**.
+
+**1. You build the package.** The easiest way is to ask Claude: *"build the skill package with my profile to send to my friend"*. Or run this in PowerShell, from the repository folder:
+
+```
+pwsh ferramentas/empacotar.ps1 -ComPerfil -Nome jean
+```
+
+You get `lp-skill-<version>.zip` on your Desktop, with the skill, your profile (without the client log) and a `LEIA-ME.txt` with the steps (in Portuguese).
+
+**2. They install it.** They unzip it into a folder they won't delete and, in Claude Code, point to the `skill` folder inside:
+
+```
+/plugin install lp --marketplace C:\Users\THEIR-NAME\Documents\lp-skill-0.6.1\skill
+```
+
+**3. They import your profile,** if they want: `/lp:perfil importar perfil-jean.md`. From there it works as described above.
+
+> Every new version of the skill means sending a new .zip. Once the repository is public, the GitHub command handles everything, and updates arrive with `claude plugin update`.
+
 ---
 
 ## All commands
@@ -282,6 +304,7 @@ plugins/landing-page/               the "lp" plugin
     └── scripts/screenshot.mjs      screenshots + contact sheet + report (no dependencies)
 perfis/modelo/                      empty profile template
 avaliacao/                          with/without-skill tests (cases, automatic grading)
+ferramentas/empacotar.ps1           builds the skill (and profile) .zip to share without GitHub
 docs/img/                           images for this README
 ```
 
