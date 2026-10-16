@@ -62,6 +62,22 @@ Para ajustar depois, é só pedir: *"aumenta o título"*, *"o cliente mandou as 
 
 ---
 
+## A sua versão da skill
+
+A skill é a mesma para todo mundo. O que muda de pessoa para pessoa fica num **perfil**, salvo no seu computador:
+
+| | Vem com o plugin (igual para todos) | Fica no seu perfil (só seu) |
+|---|---|---|
+| **O quê** | O método, os anti-padrões de "cara de IA", tipografia, checklist de negócio local, comandos | As suas referências, a sua stack, o seu gosto, os seus projetos |
+| **Onde** | Instalado pelo `/plugin install` | `~/.claude/landing-page/` |
+| **Atualizações** | Chegam com `claude plugin update` | Nunca são apagadas pelas atualizações |
+
+**Para criar o seu, digite `/lp:perfil`.** O Claude pergunta para quem você faz sites e qual stack você usa, e pede de 3 a 5 referências: links, prints ou até uma embalagem ou revista de que você goste. Ele analisa tudo e guarda. Daí em diante, em gosto e stack, **o seu perfil manda**.
+
+A skill traz 4 sites de estúdios analisados como **exemplo de formato**, e as suas referências tomam o lugar deles. Um perfil completo de exemplo está em [`perfis/zjeanero/`](perfis/zjeanero/).
+
+---
+
 ## Todos os comandos
 
 | Comando | Para quê |
