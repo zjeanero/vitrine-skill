@@ -354,7 +354,14 @@ async function capture(browser, name, vp) {
   const files = [];
 
   // Rolagem virtual: o documento não rola, o conteúdo anda via JS ao receber eventos de roda.
-  if (height <= vp.height + 10) {
+  // Página curta comum (cabe numa tela) não é rolagem virtual: segue o caminho normal.
+  const virtualScroll =
+    height <= vp.height + 10 &&
+    (await evaluate(`(() => {
+      const o = getComputedStyle(document.documentElement).overflowY + ' ' + getComputedStyle(document.body).overflowY;
+      return /hidden|clip/.test(o) || !!document.querySelector('canvas');
+    })()`));
+  if (virtualScroll) {
     for (let i = 0; i < maxSlices; i++) {
       if (i > 0) {
         for (let k = 0; k < 6; k++) {
