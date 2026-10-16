@@ -59,6 +59,7 @@ Feche e abra o Claude Code e digite **`/lp:inicio`**. Ele confere se falta algo 
 | **2** | Cole a resposta, ou `/lp:aproveitar <link>` | Tudo organizado: o que é fato e o que falta |
 | **3** | `/lp:conceitos` | 2 ou 3 caminhos visuais (HTML + PDF) para o cliente escolher |
 | **4** | `/lp:site` | O site pronto, conferido no computador e no celular |
+| **5** | `/lp:avaliar` | Uma página para aprovar ou reprovar os sites. A skill aprende o seu gosto com isso |
 | **+** | `/lp:revisar <link>` | O diagnóstico de qualquer site: o que tem cara de IA e o que falta |
 
 Os comandos são só atalhos: também funciona falando normalmente.

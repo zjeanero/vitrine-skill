@@ -61,6 +61,7 @@ Close and reopen Claude Code and type **`/lp:inicio`** (*início* = start). It c
 | **2** | Paste the reply, or `/lp:aproveitar <link>` *(reuse)* | Everything organized: what's confirmed and what's missing |
 | **3** | `/lp:conceitos` *(concepts)* | 2 or 3 visual directions (HTML + PDF) for the client to pick |
 | **4** | `/lp:site` | The finished site, checked on desktop and mobile |
+| **5** | `/lp:avaliar` *(evaluate)* | A page to approve or reject the sites. The skill learns your taste from it |
 | **+** | `/lp:revisar <link>` *(review)* | An audit of any website: what looks AI-made and what's missing |
 
 The commands are just shortcuts: plain language works too.

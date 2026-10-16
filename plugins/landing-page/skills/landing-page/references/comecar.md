@@ -35,6 +35,9 @@ Eu crio landing pages com identidade própria, que não parecem feitas por IA, p
 
 5. **Ajustes:** fale normalmente. "Aumenta o título", "troca a cor do botão", "o cliente mandou fotos novas, coloca no lugar das pendentes".
 
+6. **Aprovação:** `/lp:avaliar`
+   Uma página com os prints, para marcar Aprovado, Em dúvida ou Não aprovado. Com o tempo, eu aprendo o que funciona pra você e puxo os próximos sites para esse lado.
+
 ## Comandos
 
 | Comando | Para quê |
@@ -46,6 +49,7 @@ Eu crio landing pages com identidade própria, que não parecem feitas por IA, p
 | `/lp:conceitos` | Apresentação das direções para o cliente escolher |
 | `/lp:site` | Constrói o site |
 | `/lp:revisar` | Diagnóstico de um site existente: o que tem "cara de IA" e o que falta |
+| `/lp:avaliar` | Página para aprovar ou reprovar sites prontos. Eu aprendo o seu gosto com isso |
 
 Nada disso é obrigatório: dá para pedir tudo falando normalmente, por exemplo "faz uma landing page pra barbearia do Marcos em Contagem…".
 

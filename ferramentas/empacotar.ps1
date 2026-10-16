@@ -44,6 +44,9 @@ $(Get-Content "$dir\preferencias.md" -Raw)
 <!-- lp:arquivo referencias.md -->
 $(Get-Content "$dir\referencias.md" -Raw)
 "@
+  if (Test-Path "$dir\gosto-aprendido.md") {
+    $perfil += "`n<!-- lp:arquivo gosto-aprendido.md -->`n" + (Get-Content "$dir\gosto-aprendido.md" -Raw)
+  }
   Set-Content -Encoding utf8 "$base\perfil-$Nome.md" $perfil
   $perfilLinha = @"
 

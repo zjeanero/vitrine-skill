@@ -98,9 +98,12 @@ e digite /lp:perfil importar <caminho deste arquivo>.
 
 <!-- lp:arquivo referencias.md -->
 (conteúdo de referencias.md)
+
+<!-- lp:arquivo gosto-aprendido.md -->
+(conteúdo de gosto-aprendido.md, se existir)
 ```
 
-- **O `registro.md` fica de fora por padrão,** porque tem nomes de clientes. Inclua só se a pessoa pedir.
+- **O `registro.md` e o `aprovacoes.md` ficam de fora por padrão,** porque têm nomes de clientes. Inclua só se a pessoa pedir. O `gosto-aprendido.md` vai junto: é o gosto da pessoa, sem dados de cliente.
 - **Antes de exportar, revise o conteúdo** e tire o que for particular (nome de cliente, telefone).
 - **Exportação parcial:** se a pessoa pedir só uma parte ("exporta só as minhas referências"), inclua só aquela parte, com o mesmo marcador.
 - **Na entrega,** diga onde o arquivo ficou e o que o amigo precisa fazer: instalar o plugin e usar `/lp:perfil importar <arquivo>`.
@@ -113,7 +116,7 @@ e digite /lp:perfil importar <caminho deste arquivo>.
    - **juntar:** acrescenta as referências recebidas às dela e mantém as preferências dela;
    - **substituir:** guarda o perfil antigo numa subpasta `antigo-<data>/` antes de trocar;
    - **cancelar.**
-4. **Nunca importe o `registro.md` de outra pessoa.** O registro é de cada um.
+4. **Nunca importe o `registro.md` nem o `aprovacoes.md` de outra pessoa.** São de cada um. O `gosto-aprendido.md` recebido entra como ponto de partida: na próxima vez em que a pessoa aprovar sites, ele é recalculado com as aprovações dela.
    - **Para desfazer um "substituir"** ("volta o meu perfil antigo"), copie de volta os arquivos da subpasta `antigo-<data>/` mais recente, depois de guardar o perfil atual do mesmo jeito.
 5. **No fim, ofereça adaptar:** "Quer deixar com a sua cara? Me conte a sua stack, para quem você faz sites e mande referências suas". O perfil importado é **uma cópia**: o que a pessoa mudar não afeta o original de quem mandou.
 

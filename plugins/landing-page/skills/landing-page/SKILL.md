@@ -21,6 +21,7 @@ A pessoa pode chegar por um comando (`/lp-...`) ou falando normalmente. Identifi
 | Mostrar caminhos visuais para o cliente escolher, `/lp:conceitos` | Etapas 1 a 3 abaixo + `references/apresentacao.md` |
 | Fazer o site, `/lp:site` | O processo completo abaixo |
 | Avaliar um site que já existe, `/lp:revisar` | Diagnóstico em `references/aproveitar.md` |
+| Aprovar ou reprovar sites prontos, ou resultado de aprovação colado, `/lp:avaliar` | `references/aprovacao.md` |
 
 **Primeiro uso:** se `~/.claude/landing-page/` não existir, a pessoa ainda não tem perfil.
 - **Pedido vago** ("oi", "como funciona"): mostre a versão curta do guia de `references/comecar.md` e pergunte por onde ela quer começar.
@@ -61,10 +62,12 @@ O formato de uma boa análise de referência está em `references/referencias-ex
 
 ## Perfil pessoal
 
-Cada pessoa que usa esta skill pode ter um perfil próprio na pasta `~/.claude/landing-page/` (no Windows, `C:\Users\<nome>\.claude\landing-page\`). Ele fica fora da pasta da skill para sobreviver às atualizações. São três arquivos:
+Cada pessoa que usa esta skill pode ter um perfil próprio na pasta `~/.claude/landing-page/` (no Windows, `C:\Users\<nome>\.claude\landing-page\`). Ele fica fora da pasta da skill para sobreviver às atualizações. Os arquivos são:
 - `preferencias.md`: para quem a pessoa faz sites, a stack preferida, o gosto, o que ela ama e o que odeia.
 - `referencias.md`: sites que ela admira, analisados no mesmo formato de `references/referencias-exemplo.md`.
 - `registro.md`: projetos já entregues, com fontes e paletas, para não repetir.
+- `gosto-aprendido.md`: o que funciona para a pessoa, aprendido das aprovações (veja `references/aprovacao.md`). As tendências puxam as escolhas, e os pedidos diretos valem como regra.
+- `aprovacoes.md`: o histórico das aprovações. Não precisa ler no dia a dia, só ao recalcular o gosto aprendido.
 
 No início de cada trabalho, leia os arquivos que existirem. Em gosto e stack, o perfil tem prioridade sobre os padrões desta skill. O método continua valendo sempre: escavação, honestidade, revisão visual. Se a pasta não existir, siga com os padrões e, na entrega, ofereça em uma frase montar o perfil.
 
@@ -206,4 +209,4 @@ Acrescente uma linha a `~/.claude/landing-page/registro.md`. Se o arquivo não e
 |---|---|---|---|---|
 ```
 
-Na resposta ao usuário, dê o conceito em duas ou três frases, o que ficou pendente e o caminho da pasta. Termine com o próximo passo natural. Por exemplo: "quando o cliente mandar as fotos, cole aqui que eu troco as pendentes".
+Na resposta ao usuário, dê o conceito em duas ou três frases, o que ficou pendente e o caminho da pasta. Termine com o próximo passo natural. Por exemplo: "quando o cliente mandar as fotos, cole aqui que eu troco as pendentes". Ofereça também `/lp:avaliar` para a pessoa aprovar o resultado: é assim que a skill aprende o gosto dela.
