@@ -163,3 +163,7 @@ docs/img/                           imagens deste README
 2. Rode `claude plugin validate .`.
 3. Faça o push e rode `claude plugin update alfaiate@claude-skills`.
 </details>
+
+## Licença
+
+[MIT](LICENSE): use, modifique e faça sites para seus clientes à vontade. Só mantenha o arquivo de licença junto.

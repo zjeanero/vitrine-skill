@@ -165,3 +165,7 @@ docs/img/                           images for this README
 2. Run `claude plugin validate .`.
 3. Push, then run `claude plugin update alfaiate@claude-skills`.
 </details>
+
+## License
+
+[MIT](LICENSE): use it, change it and build sites for your clients freely. Just keep the license file with it.
