@@ -54,13 +54,48 @@ Para ajustar depois, é só pedir: *"aumenta o título"*, *"o cliente mandou as 
 
 ---
 
-## O que muda com a skill
+## Skill × prompt direto na IA
 
-- **Começa pelo mundo do cliente.** Os objetos, as palavras e o jeito do negócio viram o conceito visual. Nada de "título centralizado + 3 cards com ícone".
-- **Não inventa nada.** Depoimento, número ou prêmio que o cliente não deu aparece marcado `[[assim]]`, para você completar.
-- **Confere o próprio trabalho.** Ela tira prints no computador e no celular, acha o que quebrou e corrige antes de entregar.
-- **Foi feita para negócio local no Brasil.** WhatsApp com mensagem pronta, Google, horários e as regras de publicidade de dentista, médico e advogado.
-- **Aprende o seu gosto.** O seu perfil (referências, stack, o que você odeia) fica salvo e vale para todo site.
+Dá para pedir uma landing page direto para qualquer IA, e o resultado nem é ruim: nos nossos testes, o Claude sem a skill acertou quase todo o básico técnico. A diferença está no que um prompt sozinho não garante: **identidade, honestidade e acabamento.**
+
+| | Prompt direto | Com a skill |
+|---|---|---|
+| **Ponto de partida** | A opção mais provável: título centralizado, cards com ícone, gradiente. Por isso tudo sai parecido. | Uma **escavação** do mundo do cliente (objetos, palavras, rituais), que vira o conceito. O saco de pão, a ordem de serviço. |
+| **Tipografia** | As fontes da moda. Nos testes, a mesma fonte (Fraunces) apareceu em 2 de 3 sites. | Uma letra com personalidade, escolhida pelo espírito do negócio, a partir de fontes verificadas com licença e teste de acentos (ã, ç). |
+| **Conteúdo** | Preenche o que falta inventando: selo "Aprovado pelo bairro", serviços que ninguém informou. | **Nunca inventa.** O que falta aparece marcado `[[assim]]` e vai para a lista de pendências. |
+| **Fotos** | Banco de imagens, ilustração genérica, ou nada. | Fotos reais com tratamento. Onde falta foto, deixa um espaço dirigido e a **lista de fotos** para o cliente tirar. |
+| **Conferência** | Entrega sem olhar o resultado. Nos testes, um site vazava para o lado no celular. | Tira **prints no computador e no celular**, procura erro (rolagem lateral, fonte que não carregou, WhatsApp escondido) e corrige antes de entregar. |
+| **Negócio local** | Genérico. | WhatsApp com mensagem pronta, horários, Google (dados estruturados), regras de publicidade (CFO, CFM, OAB), LGPD, página leve no 4G. |
+| **Trabalho com o cliente** | Só o código. | Mensagem de briefing, aproveitamento do site/Instagram/Google que ele já tem, apresentação de conceitos para aprovar e notas de entrega. |
+| **Seu gosto** | Começa do zero a cada conversa. | Um **perfil** salvo com as suas referências, a sua stack e as suas regras, e um registro que evita repetir fontes e cores entre clientes. |
+| **Consistência** | Depende de como você escreve o prompt naquele dia. | O mesmo método toda vez, com comandos curtos. |
+| **Custo** | Menos tokens. | Um pouco mais por site, por causa da revisão visual, que já foi otimizada para olhar poucas imagens. |
+
+<details>
+<summary><b>O que tem dentro da skill</b></summary>
+
+| Peça | O que faz |
+|---|---|
+| **Método em 7 etapas** | Briefing → escavação → conceito → texto → construção → revisão visual → entrega |
+| **Catálogo de anti-padrões** | Dezenas de sinais de "cara de IA" em layout, cores, tipografia, texto e animação, cada um com o que fazer no lugar. Inclui as fontes "diferentes" que a IA já gastou |
+| **Guia de tipografia** | Como escolher a letra pelo espírito do negócio, fontes verificadas (Google Fonts, Fontshare) organizadas por estilo, escala e carregamento |
+| **Checklist de negócio local** | WhatsApp, telefone, mapa, horários, SEO local, regras de conselhos profissionais, LGPD, desempenho e acessibilidade |
+| **Script de prints** | Fotografa a página no computador e no celular, gera uma folha de contato e um relatório de erros. Não precisa instalar nada além de Node e Chrome |
+| **Guias de cada etapa** | Mensagem de briefing, aproveitamento de conteúdo, apresentação de conceitos, diagnóstico de site existente |
+| **Perfil e registro** | O seu gosto salvo, exportável para outras pessoas, e o histórico de projetos |
+| **7 comandos** | Atalhos para cada etapa (`/lp:inicio`, `/lp:site`…) |
+</details>
+
+<details>
+<summary><b>Como a skill foi testada</b></summary>
+
+Três negócios fictícios (uma padaria, uma oficina mecânica e uma dentista de criança) receberam **o mesmo pedido** duas vezes: uma com a skill e outra sem. Os 6 sites passaram pelos mesmos critérios automáticos: link de WhatsApp certo, nada vazando no celular, sem erros, SEO local, fonte do título, nada inventado e regras do CFO.
+
+- **Critérios automáticos:** 100% com a skill, 95% sem. O modelo sozinho já é forte no básico técnico.
+- **Onde a diferença apareceu:** no visual (as imagens acima), nas fontes gastas, no conteúdo inventado e no acabamento no celular.
+
+Os casos de teste e as ferramentas de correção estão em [`avaliacao/`](avaliacao/).
+</details>
 
 ---
 

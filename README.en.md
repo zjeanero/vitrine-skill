@@ -56,13 +56,48 @@ Need changes later? Just ask: *"make the headline bigger"*, *"the client sent th
 
 ---
 
-## What the skill does differently
+## The skill vs. a plain prompt
 
-- **It starts from the client's world.** The objects, words and habits of the business become the visual concept. No "centered headline + 3 icon cards".
-- **It never makes things up.** Testimonials, numbers or awards the client didn't provide are marked `[[like this]]` for you to fill in.
-- **It checks its own work.** It screenshots the page on desktop and mobile, finds what broke and fixes it before delivering.
-- **It's made for local businesses in Brazil.** WhatsApp with a pre-filled message, Google listings, opening hours, and the advertising rules for dentists, doctors and lawyers.
-- **It learns your taste.** Your profile (references, stack, pet peeves) is saved and applies to every site.
+You can ask any AI for a landing page directly, and the result isn't bad: in our tests, Claude without the skill got almost all the technical basics right. The difference is in what a prompt alone doesn't guarantee: **identity, honesty and finish.**
+
+| | Plain prompt | With the skill |
+|---|---|---|
+| **Starting point** | The most likely option: centered headline, icon cards, gradient. That's why everything looks alike. | An **excavation** of the client's world (objects, words, rituals) that becomes the concept: the bread bag, the work order. |
+| **Typography** | Trendy fonts. In our tests, the same font (Fraunces) showed up in 2 of 3 sites. | A typeface with personality, chosen for the spirit of the business, from verified, licensed fonts tested for Portuguese accents. |
+| **Content** | Fills gaps by making things up: a "neighborhood approved" badge, services nobody mentioned. | **Never makes things up.** Missing info is marked `[[like this]]` and goes on the pending list. |
+| **Photos** | Stock photos, generic illustrations, or nothing. | Real photos with art direction. Where a photo is missing, it leaves a directed placeholder and a **shot list** for the client. |
+| **Checking** | Delivers without looking at the result. In our tests, one site overflowed sideways on mobile. | Takes **desktop and mobile screenshots**, looks for problems (horizontal scroll, fonts that didn't load, hidden WhatsApp button) and fixes them before delivering. |
+| **Local business** | Generic. | WhatsApp with a pre-filled message, opening hours, Google structured data, professional advertising rules, privacy law, lightweight pages for 4G. |
+| **Working with the client** | Code only. | Briefing message, reuse of the client's existing site/Instagram/Google content, concept presentation for approval and delivery notes. |
+| **Your taste** | Starts from scratch every conversation. | A saved **profile** with your references, stack and rules, plus a log that avoids repeating fonts and colors across clients. |
+| **Consistency** | Depends on how you write the prompt that day. | The same method every time, with short commands. |
+| **Cost** | Fewer tokens. | A bit more per site because of the visual review, which is already optimized to look at few images. |
+
+<details>
+<summary><b>What's inside the skill</b></summary>
+
+| Piece | What it does |
+|---|---|
+| **7-step method** | Briefing → excavation → concept → copy → build → visual review → delivery |
+| **Anti-pattern catalog** | Dozens of "AI look" tells in layout, color, typography, copy and motion, each with what to do instead. Includes the "distinctive" fonts AI has already worn out |
+| **Typography guide** | How to pick type for the spirit of the business, verified fonts (Google Fonts, Fontshare) grouped by style, scale and loading |
+| **Local-business checklist** | WhatsApp, phone, map, opening hours, local SEO, professional council rules, privacy, performance and accessibility |
+| **Screenshot script** | Captures the page on desktop and mobile, builds a contact sheet and an error report. Needs nothing but Node and Chrome |
+| **Step guides** | Briefing message, content reuse, concept presentation, audit of an existing site |
+| **Profile and log** | Your saved taste, exportable to other people, and your project history |
+| **7 commands** | Shortcuts for each step (`/lp:inicio`, `/lp:site`…) |
+</details>
+
+<details>
+<summary><b>How the skill was tested</b></summary>
+
+Three fictional businesses (a bakery, an auto repair shop and a pediatric dentist) got **the same request** twice: once with the skill and once without. All 6 sites went through the same automatic checks: correct WhatsApp link, nothing overflowing on mobile, no errors, local SEO, heading font, nothing made up and dental advertising rules.
+
+- **Automatic checks:** 100% with the skill, 95% without. The model alone is already strong on the technical basics.
+- **Where the difference showed:** in the visuals (images above), the worn-out fonts, the made-up content and the mobile finish.
+
+The test cases and grading tools are in [`avaliacao/`](avaliacao/).
+</details>
 
 ---
 
