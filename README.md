@@ -1,3 +1,5 @@
+**Português** · [English](README.en.md)
+
 # lp: landing pages que não parecem feitas por IA
 
 Um plugin para o **Claude Code** que cria landing pages para clientes de freela e negócios locais. Cada página nasce do mundo do próprio cliente, como o saco de pão da padaria ou a ordem de serviço da oficina, e não de um template.
