@@ -1,0 +1,139 @@
+---
+name: landing-page
+description: Cria landing pages e sites de uma página com identidade própria, que não parecem feitos por IA nem saídos de template, para clientes de freela/agência e negócios locais (restaurante, padaria, clínica, consultório, oficina, barbearia, loja, academia, escritório, profissional liberal). Cobre o processo inteiro - briefing, conceito visual tirado do mundo do cliente, tipografia, texto em português, construção em HTML/CSS/JS (PHP opcional), SEO local, WhatsApp e revisão visual por screenshot no desktop e no celular. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, página de captura, site institucional, página para um cliente ou negócio, redesign de página, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo que ele não use a expressão "landing page".
+---
+
+# Landing page autoral
+
+O objetivo são páginas que um bom designer reconheceria como *decididas*, não geradas.
+
+## Por que páginas feitas por IA parecem todas iguais
+
+Em cada decisão (fonte, cor, layout, frase do título), o caminho mais fácil é a opção mais provável. A soma dessas opções prováveis é exatamente o "visual vibecodado": hero centralizado, gradiente roxo, três cards com ícone, Inter em tudo, "Transforme seu negócio". Nenhum desses elementos é errado isoladamente; o problema é que ninguém decidiu nada.
+
+A saída é trocar decisões prováveis por decisões que só fazem sentido para *este* cliente. Um teste vale para qualquer escolha: **se ela serviria igualmente para o concorrente do outro lado da rua, ela é padrão, não decisão.** Use esse teste o tempo todo: no conceito, na paleta, no título, na foto, no botão.
+
+## O que as referências do usuário ensinam
+
+O usuário escolheu quatro sites como norte de qualidade: Unseen Studio, bychudy, pixelwrld e dão (daofor.design). A análise completa está em `references/referencias.md`. Os estilos são muito diferentes entre si, mas o método é o mesmo:
+
+1. **Uma ideia governa a página.** O bychudy *é* uma área de trabalho de computador; o pixelwrld é uma tela de ícones de apps; o Unseen é uma galeria em 3D; o dão é uma capa de revista que troca de disciplina ("FOR PHOTOGRAPHY", "FOR WEB DESIGN"). Nenhum deles começou de uma lista de seções.
+2. **A ideia vem do mundo de quem é apresentado.** A área de trabalho é a ferramenta do designer; os ícones são os produtos do product designer. A metáfora nunca é genérica: sai da rotina, dos objetos e da linguagem do próprio sujeito.
+3. **A personalidade é concentrada.** Há um ou dois gestos fortes (uma condensada gigante, uma fonte manuscrita, uma foto enorme desfocada) e o resto fica quieto. Três dos quatro sites usam Inter no texto corrido, e tudo bem: o texto de apoio precisa sumir para o gesto principal aparecer.
+4. **Contraste de escala.** Tipografia enorme ao lado de rótulos pequenos, e muito espaço vazio. Nunca tudo em tamanho médio.
+5. **A imagem é protagonista, e é real.** Fotos dirigidas (duotone, recorte, desfoque) e trabalho real. Nada de banco de imagens, ilustração genérica ou grade de ícones.
+6. **Interface mínima.** Listas com fios finos em vez de cards, rótulos pequenos em caixa-alta espaçada, pills só onde filtram algo.
+7. **Texto com voz humana.** "Welcome to my corner of the internet :)", "Design with class. Built to last.", "Made in Vietnam • Based in Amsterdam".
+
+O que **não** levar para cliente local: portão de entrada ("Enter"), áudio, rolagem virtual em WebGL, site de uma tela só. Isso funciona em portfólio de estúdio, cujo público quer ser surpreendido. Na padaria do bairro, atrapalha quem só quer o horário e o WhatsApp. Leve o *método*, não os efeitos.
+
+## Processo
+
+Siga as etapas na ordem. Pular o conceito e ir direto ao código é o caminho mais curto para a página genérica.
+
+### 1. Briefing
+
+Junte o necessário para não precisar inventar nada:
+- **Negócio:** nome, o que faz, desde quando, quem toca (pessoas reais têm nome), bairro e cidade.
+- **Diferença real:** o que torna esse lugar diferente *de verdade*. Pergunte por histórias e hábitos, não por adjetivos.
+- **Público:** quem é e o que ele precisa saber para comprar, agendar ou visitar.
+- **Contato e funcionamento:** WhatsApp, telefone, endereço, horários, Instagram, formas de pagamento, entrega ou atendimento em domicílio.
+- **Material existente:** logo, cores da fachada/uniforme/embalagem, fotos reais, avaliações do Google.
+- **Ação principal:** quase sempre chamar no WhatsApp, ligar ou ir até o local.
+
+Se o usuário estiver disponível, faça as perguntas que faltam de uma vez, numa lista curta. Se não estiver, ou se pedir para seguir, assuma o razoável, anote cada suposição e continue. As suposições vão para o `NOTAS.md` da entrega.
+
+### 2. Escavação do mundo do cliente
+
+Antes de pensar em layout, faça por escrito um inventário do mundo desse negócio:
+- **Artefatos:** objetos que o negócio e os clientes dele manuseiam. Cardápio, comanda, recibo, etiqueta, tabela de preços, ficha, receituário, embalagem, letreiro, uniforme, ferramenta.
+- **Materiais e cores reais:** do lugar, do produto, da fachada, do bairro.
+- **Vocabulário:** como o dono fala, os termos do ofício, os apelidos dos produtos.
+- **Rituais e tempo:** o que acontece em cada horário, sazonalidade, filas, fornadas, plantões, prazos.
+- **Lugar:** rua, bairro, cidade, clima, referências locais.
+
+Os artefatos são a fonte mais rica de design único. Cada um já traz uma tipografia, uma grade, uma paleta e um jeito de organizar informação que nenhum template tem.
+
+Dois exemplos do raciocínio. Eles ilustram o *método*; não reaproveite estas ideias em outros clientes.
+- **Lavanderia de bairro.** Artefatos: comanda numerada com via de carbono, tabela de preço por peça, símbolos de lavagem da etiqueta das roupas. Conceito: "a comanda". A página se organiza como o tíquete que o cliente recebe (número, itens, prazo de retirada), e os símbolos de lavagem reais viram o sistema de ícones. Tipografia: monoespaçada de máquina de etiqueta + grotesca neutra. Paleta: o papel, o carbono rosado, o azul do cabide. Momento-assinatura: um simulador de cesto que soma as peças e diz quando buscar.
+- **Escritório de contabilidade.** Artefatos: livro-razão, guias de imposto, calendário de obrigações. Conceito: "o calendário fiscal". A página abre com os próximos vencimentos, calculados pela data de hoje, usando numerais tabulares e fios de livro contábil. Momento-assinatura: "o que vence este mês" para MEI, autônomo e empresa.
+
+### 3. Conceito
+
+Leia `registro.md` (projetos anteriores) para não repetir a fonte display nem a paleta dominante de um cliente recente. Depois, escreva 2 ou 3 direções realmente diferentes entre si. Cada uma deve ter:
+- **Ideia em uma frase** e o artefato ou a metáfora que a sustenta.
+- **Tipografia:** uma voz com personalidade e uma voz quieta. Veja `references/tipografia.md`.
+- **Paleta:** 3 a 5 cores tiradas dos materiais reais, com a função de cada uma.
+- **Imagem:** que fotos e com que tratamento, ou que elementos gráficos substituem as fotos.
+- **Momento-assinatura:** a única coisa de que alguém vai se lembrar depois de fechar a aba. O melhor é útil: responde uma pergunta real do cliente de um jeito que só esse negócio responderia.
+- **O que ela evita de propósito.**
+
+Se o usuário estiver disponível, apresente as direções e deixe que ele escolha. Se não estiver, escolha a mais forte, explique por quê e siga. Antes de construir, leia `references/anti-padroes.md`: ali estão os sinais de piloto automático que você vai ser tentado a usar.
+
+### 4. Estrutura e texto
+
+Monte as seções a partir das perguntas que o cliente final faz antes de agir, e não do molde "hero → features → depoimentos → CTA". Para negócio local, quase sempre são: *o que é, onde fica, quando abre, quanto custa (ou como pedir orçamento), por que confiar, como falar.* A ordem e a forma de cada resposta vêm do conceito: o horário pode ser um quadro de giz, uma linha de comanda ou um relógio.
+
+Texto em português do Brasil, com a voz do dono do negócio:
+- **Concreto:** substantivos e nomes próprios (rua, bairro, produto, pessoa) no lugar de adjetivos como "qualidade", "excelência" ou "inovador".
+- **Título:** afirma algo específico ou convida para algo concreto. "Deixe até as 10h, busque às 18h. Rua Aimorés, 1020." diz mais que "Cuidado e qualidade para suas roupas".
+- **Botões:** nomeiam a ação real, como "Chamar no WhatsApp", "Ver como chegar" ou "Pedir orçamento da revisão". Evite "Saiba mais" e "Comece agora".
+- **Nunca invente** depoimentos, números ("+500 clientes"), prêmios, certificações, preços ou anos de experiência. Use marcadores visíveis, como `[[DEPOIMENTO REAL DE CLIENTE]]`, e liste-os no `NOTAS.md`. Dado inventado expõe o cliente (Código de Defesa do Consumidor, conselhos profissionais) e destrói a confiança quando é descoberto.
+
+### 5. Construção
+
+A stack padrão é HTML + CSS escrito à mão + JavaScript puro só onde houver interação. Use PHP apenas quando houver motivo concreto, como um formulário que envia e-mail ou partes repetidas em várias páginas. Antes de escrever o código, leia:
+- `references/stack.md`: estrutura, CSS, movimento, imagens e PHP.
+- `references/negocio-local.md`: WhatsApp, horários, SEO local, dados estruturados, desempenho no 4G e regras de conselhos profissionais.
+
+Os pontos que mais afetam o resultado:
+- **Tokens primeiro.** Defina cores, fontes, escala e espaçamentos como variáveis CSS a partir do conceito, antes de escrever as seções.
+- **Celular é uma composição própria,** não o desktop empilhado. A maioria dos clientes de negócio local abre a página no celular, vindo do Instagram ou do Google Maps.
+- **Palavras longas.** Português tem palavras como "odontopediatria" e "fisioterapeuta". A tipografia gigante precisa caber em 390px sem quebrar no meio da palavra nem criar rolagem lateral.
+- **Sem foto real, sem banco de imagens.** Use "fotos pendentes" dirigidas (um bloco no tamanho e na cor certos, com a descrição da foto a ser feita) ou elementos gráficos derivados do artefato. As descrições viram a lista de fotos do `NOTAS.md`, um entregável útil para o cliente.
+
+### 6. Revisão visual (obrigatória)
+
+Você não enxerga a página enquanto escreve o código, então tire screenshots e olhe:
+
+```bash
+node <pasta-desta-skill>/scripts/screenshot.mjs <pasta-do-site>/index.html <pasta-do-site>/screenshots
+```
+
+O script usa o Chrome ou o Edge instalado, sem dependências. Ele gera:
+- `desktop-01.png`, `desktop-02.png` e assim por diante: uma imagem por tela rolada, em 1440×900.
+- `mobile-01.png` e seguintes, em 390×844.
+- As versões de página inteira.
+- `report.json`, com erros de JavaScript, recursos que falharam, rolagem horizontal e as fontes realmente aplicadas.
+
+Abra as imagens e avalie com olhar de diretor de arte:
+- **Primeira tela (desktop-01 e mobile-01):** existe um elemento dominante? Em 3 segundos dá para saber o que é, onde fica e como agir? Dá para reconhecer este cliente, ou poderia ser qualquer um do setor?
+- **Ritmo:** as seções variam em densidade, escala e largura, ou repetem o mesmo esquema "título centralizado + blocos"?
+- **Anti-padrões:** algum item de `references/anti-padroes.md` entrou sem querer?
+- **Detalhes:** acentos (ã, ç, ê) na fonte certa, contraste legível, nada cortado ou sobreposto, botão principal visível no celular sem rolar.
+- **report.json:** `overflowX` precisa ser `false` no mobile, e erros de JS e recursos com falha precisam ser zero.
+
+Corrija e tire os screenshots de novo. Faça pelo menos uma rodada de ajuste: a primeira versão quase nunca é a melhor, e a maior parte da qualidade aparece na segunda passada.
+
+### 7. Entrega
+
+Organize tudo numa pasta com o nome do cliente:
+
+```
+<cliente>/
+├── index.html            (ou index.php, se usar PHP)
+├── assets/               (css/, js/, img/, fonts/)
+├── screenshots/          (da última revisão)
+└── NOTAS.md
+```
+
+O `NOTAS.md` deve ser curto e em português, com:
+- O conceito em um parágrafo.
+- As suposições feitas.
+- Tudo o que está pendente ou com marcador: depoimentos, fotos, dados a confirmar.
+- A lista de fotos para o cliente produzir.
+- Como publicar.
+
+Acrescente uma linha ao `registro.md` desta skill com o cliente, o conceito, as fontes e a paleta.
+
+Na resposta ao usuário, dê o conceito em duas ou três frases, o que ficou pendente e o caminho da pasta.
