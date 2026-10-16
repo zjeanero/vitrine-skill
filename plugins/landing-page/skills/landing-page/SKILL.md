@@ -45,17 +45,19 @@ A saída é trocar decisões prováveis por decisões que só fazem sentido para
 
 ## O que bons sites autorais têm em comum
 
-Os princípios abaixo saíram da análise de quatro sites de estúdios e designers: Unseen Studio, bychudy, pixelwrld e dão (daofor.design). A análise completa está em `references/referencias-exemplo.md`. Os estilos são muito diferentes entre si, mas o método é o mesmo:
+Sites de estúdios e designers premiados têm estilos muito diferentes entre si, mas costumam seguir o mesmo método:
 
-1. **Uma ideia governa a página.** O bychudy *é* uma área de trabalho de computador; o pixelwrld é uma tela de ícones de apps; o Unseen é uma galeria em 3D; o dão é uma capa de revista que troca de disciplina ("FOR PHOTOGRAPHY", "FOR WEB DESIGN"). Nenhum deles começou de uma lista de seções.
-2. **A ideia vem do mundo de quem é apresentado.** A área de trabalho é a ferramenta do designer; os ícones são os produtos do product designer. A metáfora nunca é genérica: sai da rotina, dos objetos e da linguagem do próprio sujeito.
-3. **A personalidade é concentrada.** Há um ou dois gestos fortes (uma condensada gigante, uma fonte manuscrita, uma foto enorme desfocada) e o resto fica quieto. Três dos quatro sites usam Inter no texto corrido, e tudo bem: o texto de apoio precisa sumir para o gesto principal aparecer.
+1. **Uma ideia governa a página.** Um portfólio que *é* uma área de trabalho de computador; uma página pessoal que é uma tela de ícones de apps; um site de diretor de arte que é uma capa de revista. Nenhum deles começou de uma lista de seções.
+2. **A ideia vem do mundo de quem é apresentado.** A área de trabalho é a ferramenta do designer; os ícones são os produtos de quem os criou. A metáfora nunca é genérica: sai da rotina, dos objetos e da linguagem do próprio sujeito.
+3. **A personalidade é concentrada.** Há um ou dois gestos fortes (uma condensada gigante, uma letra manuscrita, uma foto enorme e desfocada) e o resto fica quieto. Muitos desses sites usam uma sem serifa comum, até a Inter, no texto corrido, e tudo bem: o texto de apoio precisa sumir para o gesto principal aparecer.
 4. **Contraste de escala.** Tipografia enorme ao lado de rótulos pequenos, e muito espaço vazio. Nunca tudo em tamanho médio.
 5. **A imagem é protagonista, e é real.** Fotos dirigidas (duotone, recorte, desfoque) e trabalho real. Nada de banco de imagens, ilustração genérica ou grade de ícones.
 6. **Interface mínima.** Listas com fios finos em vez de cards, rótulos pequenos em caixa-alta espaçada, pills só onde filtram algo.
-7. **Texto com voz humana.** "Welcome to my corner of the internet :)", "Design with class. Built to last.", "Made in Vietnam • Based in Amsterdam".
+7. **Texto com voz humana.** Frases curtas, específicas e com o jeito de falar de quem está por trás, nunca slogans que serviriam para qualquer um.
 
 O que **não** levar para cliente local: portão de entrada ("Enter"), áudio, rolagem virtual em WebGL, site de uma tela só. Isso funciona em portfólio de estúdio, cujo público quer ser surpreendido. Na padaria do bairro, atrapalha quem só quer o horário e o WhatsApp. Leve o *método*, não os efeitos.
+
+O formato de uma boa análise de referência está em `references/referencias-exemplo.md`. As referências que definem o gosto de quem usa a skill ficam no perfil dela (veja abaixo).
 
 ## Perfil pessoal
 

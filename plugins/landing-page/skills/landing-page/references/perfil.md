@@ -7,6 +7,7 @@ O perfil faz a skill trabalhar do jeito de quem a usa: o gosto, a stack e os cli
 - A pessoa pede para configurar ou personalizar a skill ("configura do meu jeito", "monta meu perfil").
 - A pessoa traz uma referência nova ("adiciona esse site nas minhas referências").
 - A pessoa muda uma preferência ("agora trabalho com Astro", "nunca mais quero carrossel").
+- A pessoa quer mandar o perfil para alguém (**exportar**), usar o perfil que recebeu de alguém (**importar**) ou guardar uma cópia (**salvar**). Veja as seções no fim deste arquivo.
 
 Para mudanças pequenas, edite só o arquivo afetado. Não refaça o perfil inteiro.
 
@@ -80,4 +81,48 @@ Crie o arquivo só se ele não existir. Nunca apague um registro antigo.
 
 ### 6. Confirmar
 
-Mostre um resumo do perfil à pessoa: os princípios tirados das referências, a stack e as regras. Pergunte se ficou do jeito dela e ajuste o que ela pedir.
+Mostre um resumo do perfil à pessoa: os princípios tirados das referências, a stack e as regras. Pergunte se ficou do jeito dela e ajuste o que ela pedir. Depois, ofereça salvar (veja "Salvar" abaixo).
+
+## Exportar (mandar o seu perfil para alguém)
+
+Junte o perfil num **arquivo só**, fácil de mandar por WhatsApp ou e-mail. Salve em `perfil-<nome>.md`, na pasta atual, ou onde a pessoa pedir:
+
+```markdown
+# Perfil da skill landing-page: <nome>
+
+Para usar: instale o plugin (/plugin install lp --marketplace zjeanero/claude-skills)
+e digite /lp:perfil importar <caminho deste arquivo>.
+
+<!-- lp:arquivo preferencias.md -->
+(conteúdo de preferencias.md)
+
+<!-- lp:arquivo referencias.md -->
+(conteúdo de referencias.md)
+```
+
+- **O `registro.md` fica de fora por padrão,** porque tem nomes de clientes. Inclua só se a pessoa pedir.
+- **Antes de exportar, revise o conteúdo** e tire o que for particular (nome de cliente, telefone).
+
+## Importar (usar o perfil que alguém mandou)
+
+1. Leia o arquivo e separe as partes pelos marcadores `<!-- lp:arquivo ... -->`.
+2. **Se a pessoa ainda não tem perfil,** crie os arquivos em `~/.claude/landing-page/`.
+3. **Se ela já tem perfil,** pergunte o que fazer antes de tocar em qualquer coisa:
+   - **juntar:** acrescenta as referências recebidas às dela e mantém as preferências dela;
+   - **substituir:** guarda o perfil antigo numa subpasta `antigo-<data>/` antes de trocar;
+   - **cancelar.**
+4. **Nunca importe o `registro.md` de outra pessoa.** O registro é de cada um.
+5. **No fim, ofereça adaptar:** "Quer deixar com a sua cara? Me conte a sua stack, para quem você faz sites e mande referências suas". O perfil importado é **uma cópia**: o que a pessoa mudar não afeta o original de quem mandou.
+
+## Salvar (cópia de segurança)
+
+**Se a pasta `~/.claude/landing-page/` for um repositório git com destino configurado,** ofereça salvar depois de qualquer mudança. Se a pessoa aceitar, rode `git add -A`, depois `git commit -m "Update profile: <o que mudou, em poucas palavras>"` e por fim `git push`.
+
+**Se não for um repositório,** explique que dá para guardar uma cópia privada no GitHub. Só crie com a pessoa de acordo, e confirme o nome:
+
+```bash
+cd ~/.claude/landing-page && git init -b main && git add -A && git commit -m "Create profile"
+gh repo create <nome> --private --source . --push
+```
+
+**Num computador novo,** para recuperar o perfil: `git clone https://github.com/<usuario>/<nome>.git ~/.claude/landing-page`.

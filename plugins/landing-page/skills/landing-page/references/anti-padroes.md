@@ -28,7 +28,7 @@ Para qualquer elemento, pergunte: **ele serviria igual para o concorrente?** Se 
 ## Visual
 
 - **Gradientes roxo, índigo ou azul-violeta,** blobs desfocados ("aurora"), mesh gradient de fundo.
-  → Use as cores dos materiais reais do cliente. Gradiente só se vier do conceito, como o duotone do dão, que imita a luz de estúdio fotográfico.
+  → Use as cores dos materiais reais do cliente. Gradiente só se vier do conceito, como um duotone que imita a luz de estúdio no site de um fotógrafo.
 - **Glassmorphism** (cards com backdrop-blur), brilho neon, borda com glow sobre fundo escuro.
   → Superfícies com material: papel, grão, cor chapada, fotografia.
 - **Modo escuro com brilho radial atrás do título.**

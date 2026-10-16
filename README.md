@@ -76,7 +76,9 @@ A skill é a mesma para todo mundo. O que muda de pessoa para pessoa fica num **
 
 **Para criar o seu, digite `/lp:perfil`.** O Claude pergunta para quem você faz sites e qual stack você usa, e pede de 3 a 5 referências: links, prints ou até uma embalagem ou revista de que você goste. Ele analisa tudo e guarda. Daí em diante, em gosto e stack, **o seu perfil manda**.
 
-A skill traz 4 sites de estúdios analisados como **exemplo de formato**, e as suas referências tomam o lugar deles. Um perfil completo de exemplo está em [`perfis/zjeanero/`](perfis/zjeanero/).
+A skill traz dois exemplos neutros que mostram o formato de uma boa análise de referência, e as suas referências tomam o lugar deles. Um perfil-modelo vazio, com instruções, está em [`perfis/modelo/`](perfis/modelo/).
+
+**Quer mandar o seu perfil para um amigo?** Digite `/lp:perfil exportar`: sai um arquivo só, para mandar por WhatsApp. Ele digita `/lp:perfil importar <arquivo>` e pode adaptar tudo ao gosto dele. A cópia dele não mexe na sua.
 
 ---
 
@@ -167,7 +169,7 @@ plugins/landing-page/               o plugin "lp"
     ├── SKILL.md                    modos de uso + processo em 7 etapas
     ├── references/                 anti-padrões, tipografia, negócio local, briefing, conceitos…
     └── scripts/screenshot.mjs      prints + folha de contato + relatório (sem dependências)
-perfis/                             perfis de exemplo
+perfis/modelo/                      perfil-modelo vazio
 avaliacao/                          testes com e sem a skill (casos, correção automática)
 docs/img/                           imagens deste README
 ```
@@ -177,5 +179,5 @@ docs/img/                           imagens deste README
 2. Rode `claude plugin validate .`.
 3. Faça o push e rode `claude plugin update lp@claude-skills`.
 
-O histórico completo (o que fizemos, os testes e os próximos passos) está no **[GUIA.md](GUIA.md)**.
+Os testes com e sem a skill ficam em `avaliacao/`.
 </details>

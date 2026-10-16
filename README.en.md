@@ -78,7 +78,9 @@ The skill is the same for everyone. What changes from person to person lives in 
 
 **To create yours, type `/lp:perfil`.** Claude asks who you build sites for and which stack you use, then asks for 3 to 5 references: links, screenshots, even packaging or a magazine you like. It analyzes them and saves your profile. From then on, **your profile wins** on taste and stack.
 
-The skill ships with 4 studio websites analyzed as a **format example**, and your references take their place. A complete example profile lives in [`perfis/zjeanero/`](perfis/zjeanero/).
+The skill ships with two neutral examples that show the format of a good reference analysis, and your references take their place. An empty profile template with instructions lives in [`perfis/modelo/`](perfis/modelo/).
+
+**Want to send your profile to a friend?** Type `/lp:perfil exportar` to get a single file you can send over WhatsApp. They type `/lp:perfil importar <file>` and can adapt everything to their own taste. Their copy never touches yours.
 
 ---
 
@@ -169,7 +171,7 @@ plugins/landing-page/               the "lp" plugin
     ├── SKILL.md                    usage modes + 7-step process
     ├── references/                 anti-patterns, typography, local business, briefing, concepts…
     └── scripts/screenshot.mjs      screenshots + contact sheet + report (no dependencies)
-perfis/                             example profiles
+perfis/modelo/                      empty profile template
 avaliacao/                          with/without-skill tests (cases, automatic grading)
 docs/img/                           images for this README
 ```
@@ -179,5 +181,5 @@ docs/img/                           images for this README
 2. Run `claude plugin validate .`.
 3. Push, then run `claude plugin update lp@claude-skills`.
 
-The full history (what was built, the tests and the next steps) is in **[GUIA.md](GUIA.md)**, in Portuguese.
+The with/without-skill tests live in `avaliacao/`.
 </details>

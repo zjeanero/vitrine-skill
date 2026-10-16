@@ -53,7 +53,7 @@ Nomes como `--papel`, `--giz` e `--ferrugem` mantêm o conceito vivo enquanto vo
 - **Mobile-first:** os estilos base valem para 390px, e `@media (min-width: …)` faz a página crescer.
 - **CSS moderno com bom suporte em 2026:** `clamp()`, `min()`/`max()`, `:has()`, `color-mix()`, `oklch()`, `text-wrap`, subgrid, container queries, `position: sticky`, `aspect-ratio`, `@layer`.
 - **Melhoria progressiva:** animações ligadas à rolagem (`animation-timeline: view()`) e View Transitions entram dentro de `@supports`.
-- **Seções que empilham** (como no dão): cada seção com `position: sticky; top: 0` e altura de tela cobre a anterior ao rolar, sem biblioteca. No celular, confira se o conteúdo cabe na tela; se não couber, desligue o efeito.
+- **Seções que empilham:** cada seção com `position: sticky; top: 0` e altura de tela cobre a anterior ao rolar, sem biblioteca. No celular, confira se o conteúdo cabe na tela; se não couber, desligue o efeito.
 
 ## Movimento
 
