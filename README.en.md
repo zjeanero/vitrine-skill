@@ -12,21 +12,47 @@ A **Claude Code** plugin that builds landing pages for freelance clients and loc
 
 ---
 
-## Get started in 1 minute
+## Installation
 
-**1. Install.** In Claude Code, type:
+In Claude Code, type:
 
 ```
 /plugin install lp --marketplace zjeanero/claude-skills
 ```
 
-**2. Restart Claude Code and type:**
+Close and reopen Claude Code and type **`/lp:inicio`** (*início* = start). It checks whether anything is missing on your computer and walks you through the steps.
 
-```
-/lp:inicio
-```
+<details>
+<summary><b>First time? What you need</b></summary>
 
-That's it: Claude walks you through the steps and asks where you'd like to start.
+- **Node 22 or newer.** In a terminal, type `node --version`. If you don't have it, download the LTS version from [nodejs.org](https://nodejs.org).
+- **Chrome or Edge.** Windows already ships with Edge.
+</details>
+
+<details>
+<summary><b>For professionals</b></summary>
+
+| To | Command |
+|---|---|
+| Install from the terminal | `claude plugin install lp --marketplace zjeanero/claude-skills` |
+| Install for one project only | add `--scope project` or `--scope local` |
+| Update | `claude plugin update lp@claude-skills` |
+| Turn off / remove | `claude plugin disable lp@claude-skills` / `claude plugin uninstall lp@claude-skills` |
+| Install without GitHub | from the .zip package (see [Share with a friend](#share-with-a-friend)) |
+| Older Claude Code | `/plugin marketplace add zjeanero/claude-skills`, then `/plugin install lp@claude-skills` |
+</details>
+
+<details>
+<summary><b>Trouble?</b></summary>
+
+| Problem | Fix |
+|---|---|
+| `/lp:inicio` doesn't show up | Close and reopen Claude Code |
+| Error about `--marketplace` | Run `claude update` |
+| Repository not found | It's still private: ask for the .zip package |
+| "node is not recognized" | Install Node LTS from [nodejs.org](https://nodejs.org) and reopen the terminal |
+| "Chrome/Edge não encontrado" (not found) | Install Google Chrome |
+</details>
 
 ---
 
@@ -275,7 +301,7 @@ About 650 tokens per session, so Claude knows the skill exists, and roughly 7k e
 <details>
 <summary><b>Do I need anything installed?</b></summary>
 
-Node 22 or newer and Chrome or Edge, which are used to take the review screenshots. If your browser lives somewhere unusual, set the `CHROME_PATH` environment variable.
+Node 22 or newer and Chrome or Edge, which are used to take the review screenshots. `/lp:inicio` checks this for you and tells you if something is missing. Step by step under [Installation](#installation).
 </details>
 
 <details>

@@ -41,6 +41,15 @@ const flags = Object.fromEntries(
   }),
 );
 
+// --verificar: confere os requisitos (Node 22+ e Chrome/Edge) e diz o que falta, sem capturar nada.
+if (flags.verificar) {
+  const major = Number(process.versions.node.split('.')[0]);
+  const browser = chromePath();
+  console.log(`Node ${process.versions.node}: ${major >= 22 ? 'ok' : 'ANTIGO. Precisa ser 22 ou mais: baixe a versão LTS em https://nodejs.org'}`);
+  console.log(browser ? `Navegador: ok (${browser})` : 'Navegador: NÃO ENCONTRADO. Instale o Google Chrome ou o Microsoft Edge, ou defina CHROME_PATH com o caminho do navegador.');
+  process.exit(major >= 22 && browser ? 0 : 1);
+}
+
 if (positional.length < 2) {
   console.error('Uso: node screenshot.mjs <url-ou-arquivo> <pasta-de-saida> [--only=desktop|mobile] [--slices=12] [--wait=2500] [--no-full] [--click=SELETOR] [--extra] [--pdf]');
   process.exit(1);
@@ -68,6 +77,15 @@ const MOBILE_UA =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1';
 
 function findChrome() {
+  const found = chromePath();
+  if (!found) {
+    console.error('Chrome/Edge não encontrado. Defina CHROME_PATH com o caminho do executável.');
+    process.exit(1);
+  }
+  return found;
+}
+
+function chromePath() {
   const local = process.env.LOCALAPPDATA;
   const candidates = [
     process.env.CHROME_PATH,
@@ -77,17 +95,14 @@ function findChrome() {
     'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
     'C:/Program Files/Microsoft/Edge/Application/msedge.exe',
     '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+    '/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge',
     '/usr/bin/google-chrome',
     '/usr/bin/google-chrome-stable',
     '/usr/bin/chromium',
     '/usr/bin/chromium-browser',
+    '/usr/bin/microsoft-edge',
   ].filter(Boolean);
-  const found = candidates.find((p) => existsSync(p));
-  if (!found) {
-    console.error('Chrome/Edge não encontrado. Defina CHROME_PATH com o caminho do executável.');
-    process.exit(1);
-  }
-  return found;
+  return candidates.find((p) => existsSync(p)) || null;
 }
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

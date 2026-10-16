@@ -10,21 +10,47 @@ Um plugin para o **Claude Code** que cria landing pages para clientes de freela 
 
 ---
 
-## Começar em 1 minuto
+## Instalação
 
-**1. Instale.** Dentro do Claude Code, digite:
+No Claude Code, digite:
 
 ```
 /plugin install lp --marketplace zjeanero/claude-skills
 ```
 
-**2. Reinicie o Claude Code e digite:**
+Feche e abra o Claude Code e digite **`/lp:inicio`**. Ele confere se falta algo no seu computador e mostra o passo a passo.
 
-```
-/lp:inicio
-```
+<details>
+<summary><b>Primeira vez? O que precisa ter</b></summary>
 
-Pronto: o Claude mostra o passo a passo e pergunta por onde você quer começar.
+- **Node 22 ou mais novo.** No terminal, digite `node --version`. Se não tiver, baixe a versão LTS em [nodejs.org](https://nodejs.org).
+- **Chrome ou Edge.** O Windows já vem com o Edge.
+</details>
+
+<details>
+<summary><b>Para profissionais</b></summary>
+
+| Para | Comando |
+|---|---|
+| Instalar pelo terminal | `claude plugin install lp --marketplace zjeanero/claude-skills` |
+| Instalar só num projeto | acrescente `--scope project` ou `--scope local` |
+| Atualizar | `claude plugin update lp@claude-skills` |
+| Desligar / remover | `claude plugin disable lp@claude-skills` / `claude plugin uninstall lp@claude-skills` |
+| Instalar sem GitHub | a partir do pacote .zip (veja [Passar para um amigo](#passar-para-um-amigo)) |
+| Claude Code antigo | `/plugin marketplace add zjeanero/claude-skills` e depois `/plugin install lp@claude-skills` |
+</details>
+
+<details>
+<summary><b>Deu problema?</b></summary>
+
+| Problema | Solução |
+|---|---|
+| `/lp:inicio` não aparece | Feche e abra o Claude Code |
+| Erro com `--marketplace` | Rode `claude update` |
+| Não encontrou o repositório | Ainda é privado: peça o pacote .zip |
+| "node não é reconhecido" | Instale o Node LTS em [nodejs.org](https://nodejs.org) e reabra o terminal |
+| "Chrome/Edge não encontrado" | Instale o Google Chrome |
+</details>
 
 ---
 
@@ -273,7 +299,7 @@ Cerca de 650 tokens fixos por sessão, para o Claude saber que a skill existe, e
 <details>
 <summary><b>Precisa ter alguma coisa instalada?</b></summary>
 
-Node 22 ou mais novo e Chrome ou Edge, que servem para tirar os prints de revisão. Se o navegador estiver num lugar diferente do padrão, defina a variável `CHROME_PATH`.
+Node 22 ou mais novo e Chrome ou Edge, que servem para tirar os prints de revisão. O `/lp:inicio` confere isso sozinho e avisa se faltar algo. O passo a passo está em [Instalação](#instalação).
 </details>
 
 <details>
