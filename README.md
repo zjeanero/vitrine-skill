@@ -15,19 +15,28 @@ Cria landing pages e sites de uma página com identidade própria, que não pare
 5. **Construção em HTML/CSS/JS,** com PHP opcional, SEO local e WhatsApp.
 6. **Revisão visual por screenshot** no desktop e no celular.
 
-Arquivos:
+Arquivos (em `plugins/landing-page/skills/landing-page/`):
 - `SKILL.md`: o processo completo.
 - `references/`: anti-padrões de "cara de IA", análise dos sites de referência, tipografia, requisitos de negócio local, stack.
 - `scripts/screenshot.mjs`: prints de desktop (1440×900) e celular (390×844), com relatório de erros de JS, recursos quebrados e rolagem horizontal. Não tem dependências.
-- `registro.md`: fontes e paletas usadas em cada projeto, para os clientes não ficarem parecidos entre si.
-- `evals/`: casos de teste.
+
+O registro de fontes e paletas de cada projeto, que evita clientes parecidos entre si, fica em `~/.claude/landing-page/registro.md`, fora do plugin, para sobreviver às atualizações. Os casos de teste e as ferramentas de avaliação ficam em `avaliacao/`.
 
 ### Instalar
 
-Copie a pasta `landing-page` para a pasta de skills do Claude Code:
+Dentro do Claude Code:
 
-- Windows: `C:\Users\<você>\.claude\skills\landing-page`
-- macOS/Linux: `~/.claude/skills/landing-page`
+```
+/plugin install landing-page --marketplace zjeanero/claude-skills
+```
+
+Ou no terminal:
+
+```
+claude plugin install landing-page --marketplace zjeanero/claude-skills
+```
+
+Para atualizar depois: `claude plugin update landing-page@claude-skills`. Para remover: `claude plugin uninstall landing-page@claude-skills`.
 
 O script de screenshot precisa de Node 22 ou mais recente e de Chrome ou Edge instalado. Se o navegador estiver num lugar diferente do padrão, defina a variável `CHROME_PATH`.
 
