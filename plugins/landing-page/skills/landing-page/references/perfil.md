@@ -102,6 +102,8 @@ e digite /lp:perfil importar <caminho deste arquivo>.
 
 - **O `registro.md` fica de fora por padrão,** porque tem nomes de clientes. Inclua só se a pessoa pedir.
 - **Antes de exportar, revise o conteúdo** e tire o que for particular (nome de cliente, telefone).
+- **Exportação parcial:** se a pessoa pedir só uma parte ("exporta só as minhas referências"), inclua só aquela parte, com o mesmo marcador.
+- **Na entrega,** diga onde o arquivo ficou e o que o amigo precisa fazer: instalar o plugin e usar `/lp:perfil importar <arquivo>`.
 
 ## Importar (usar o perfil que alguém mandou)
 
@@ -112,6 +114,7 @@ e digite /lp:perfil importar <caminho deste arquivo>.
    - **substituir:** guarda o perfil antigo numa subpasta `antigo-<data>/` antes de trocar;
    - **cancelar.**
 4. **Nunca importe o `registro.md` de outra pessoa.** O registro é de cada um.
+   - **Para desfazer um "substituir"** ("volta o meu perfil antigo"), copie de volta os arquivos da subpasta `antigo-<data>/` mais recente, depois de guardar o perfil atual do mesmo jeito.
 5. **No fim, ofereça adaptar:** "Quer deixar com a sua cara? Me conte a sua stack, para quem você faz sites e mande referências suas". O perfil importado é **uma cópia**: o que a pessoa mudar não afeta o original de quem mandou.
 
 ## Salvar (cópia de segurança)

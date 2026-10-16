@@ -80,7 +80,81 @@ The skill is the same for everyone. What changes from person to person lives in 
 
 The skill ships with two neutral examples that show the format of a good reference analysis, and your references take their place. An empty profile template with instructions lives in [`perfis/modelo/`](perfis/modelo/).
 
-**Want to send your profile to a friend?** Type `/lp:perfil exportar` to get a single file you can send over WhatsApp. They type `/lp:perfil importar <file>` and can adapt everything to their own taste. Their copy never touches yours.
+To pass the skill on **with your taste** to someone else, see the next section.
+
+---
+
+## Share with a friend
+
+There are two parts: the **skill**, which is the same for everyone, and **your profile**, which holds your taste. Your friend installs the skill and gets your profile from you as a file.
+
+```mermaid
+flowchart LR
+    A["<b>You</b><br/>/lp:perfil exportar"] -- "perfil-yourname.md<br/>(WhatsApp, email…)" --> B["<b>Your friend</b><br/>/lp:perfil importar"]
+    B --> C["Their profile<br/>a copy of yours"]
+    C -- "/lp:perfil" --> D["Adapted to<br/>their taste"]
+```
+
+### You (sending)
+
+**1.** In Claude Code, type (`exportar` = export):
+
+```
+/lp:perfil exportar
+```
+
+**2.** Claude creates **a single file**, for example `perfil-jean.md`, with your preferences and references.
+- Your client log is **not included**, because it's private.
+- Before saving, Claude checks that nothing personal is left in the file, like a client's name or phone number.
+
+**3.** Send the file to your friend however you like: WhatsApp, email, Drive.
+
+### Your friend (receiving)
+
+**1.** They install the skill, if they haven't yet:
+
+```
+/plugin install lp --marketplace zjeanero/claude-skills
+```
+
+**2.** They save the file anywhere and type (`importar` = import):
+
+```
+/lp:perfil importar perfil-jean.md
+```
+
+> Tip: instead of typing the path, you can drag the file into the Claude Code window.
+
+**3.** Done: your taste becomes their starting point.
+
+### They can change anything
+
+The imported profile is **a copy**. They adapt it in plain language:
+
+```
+/lp:perfil add https://a-site-i-like.com
+/lp:perfil I work with Astro and host on Vercel
+/lp:perfil never use carousels
+```
+
+None of this changes **your** profile: everyone has their own, on their own computer.
+
+### What if they already have a profile?
+
+Claude asks before touching anything:
+
+| Option | What happens |
+|---|---|
+| **Merge** | Your references are added to theirs; their preferences stay |
+| **Replace** | Their profile is kept in an `antigo-<date>/` folder, and yours takes its place |
+| **Cancel** | Nothing changes |
+
+### Common questions
+
+- **Do they need access to your GitHub?** No. The exported file is enough.
+- **Can a "Replace" be undone?** Yes. The old profile stays in `antigo-<date>/`; just ask *"bring back my old profile"*.
+- **Can I send only my references?** Yes. Ask *"export only my references"*.
+- **What if I change my profile later?** Their copy doesn't update by itself. To send the new version, export again.
 
 ---
 

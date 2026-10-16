@@ -78,7 +78,81 @@ A skill é a mesma para todo mundo. O que muda de pessoa para pessoa fica num **
 
 A skill traz dois exemplos neutros que mostram o formato de uma boa análise de referência, e as suas referências tomam o lugar deles. Um perfil-modelo vazio, com instruções, está em [`perfis/modelo/`](perfis/modelo/).
 
-**Quer mandar o seu perfil para um amigo?** Digite `/lp:perfil exportar`: sai um arquivo só, para mandar por WhatsApp. Ele digita `/lp:perfil importar <arquivo>` e pode adaptar tudo ao gosto dele. A cópia dele não mexe na sua.
+Para passar a skill **com o seu gosto** para outra pessoa, veja a seção seguinte.
+
+---
+
+## Passar para um amigo
+
+São duas partes: a **skill**, igual para todos, e o **seu perfil**, com o seu gosto. O seu amigo instala a skill e recebe o perfil de você num arquivo.
+
+```mermaid
+flowchart LR
+    A["<b>Você</b><br/>/lp:perfil exportar"] -- "perfil-seunome.md<br/>(WhatsApp, e-mail…)" --> B["<b>Seu amigo</b><br/>/lp:perfil importar"]
+    B --> C["Perfil dele<br/>uma cópia do seu"]
+    C -- "/lp:perfil" --> D["Adaptado ao<br/>gosto dele"]
+```
+
+### Você, que manda
+
+**1.** No Claude Code, digite:
+
+```
+/lp:perfil exportar
+```
+
+**2.** O Claude cria **um arquivo só**, por exemplo `perfil-jean.md`, com as suas preferências e referências.
+- O seu registro de clientes **não vai junto**, porque é privado.
+- Antes de salvar, o Claude confere se não ficou nada pessoal no arquivo, como nome ou telefone de cliente.
+
+**3.** Mande o arquivo para o seu amigo do jeito que preferir: WhatsApp, e-mail, Drive.
+
+### Seu amigo, que recebe
+
+**1.** Ele instala a skill, se ainda não tiver:
+
+```
+/plugin install lp --marketplace zjeanero/claude-skills
+```
+
+**2.** Ele salva o arquivo recebido em qualquer pasta e digita:
+
+```
+/lp:perfil importar perfil-jean.md
+```
+
+> Dica: em vez de digitar o caminho, dá para arrastar o arquivo para a janela do Claude Code.
+
+**3.** Pronto: o seu gosto vira o ponto de partida dele.
+
+### Ele pode mudar à vontade
+
+O perfil importado é **uma cópia**. Ele adapta falando normalmente:
+
+```
+/lp:perfil adiciona https://um-site-que-eu-gosto.com
+/lp:perfil eu trabalho com Astro e hospedo na Vercel
+/lp:perfil nunca use carrossel
+```
+
+Nada disso muda o **seu** perfil: cada um tem o seu, no próprio computador.
+
+### E se ele já tiver um perfil?
+
+O Claude pergunta antes de mexer em qualquer coisa:
+
+| Opção | O que acontece |
+|---|---|
+| **Juntar** | As suas referências entram junto com as dele; as preferências dele continuam |
+| **Substituir** | O perfil dele fica guardado numa pasta `antigo-<data>/`, e o seu entra no lugar |
+| **Cancelar** | Nada muda |
+
+### Dúvidas comuns
+
+- **Ele precisa de acesso ao seu GitHub?** Não. O arquivo exportado basta.
+- **Dá para desfazer um "Substituir"?** Sim. O perfil antigo fica em `antigo-<data>/`; é só pedir *"volta o meu perfil antigo"*.
+- **Posso mandar só as referências?** Pode. Peça *"exporta só as minhas referências"*.
+- **E se eu mudar o meu perfil depois?** A cópia dele não muda sozinha. Se quiser mandar a versão nova, exporte de novo.
 
 ---
 
