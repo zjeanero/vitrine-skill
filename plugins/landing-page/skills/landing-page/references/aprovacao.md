@@ -28,7 +28,9 @@ A pessoa avalia sites prontos (dela, de teste ou de cliente) numa página simple
 node <pasta-desta-skill>/scripts/aprovacao.mjs <manifesto.json> <pasta>/aprovacao.html
 ```
 
-5. **Entregue o caminho do `aprovacao.html`** e explique em uma frase: abrir, avaliar, tocar em **Copiar resultado** e colar aqui.
+   Para publicar a página no claude.ai (por exemplo, para a pessoa avaliar pelo celular, longe do computador), gere com `--artefato` e publique esse arquivo como página privada.
+
+5. **Entregue o caminho do `aprovacao.html`** (ou o link da página publicada) e explique em uma frase: abrir, carimbar, tocar em **Assinar e copiar resultado** e colar aqui.
 
 ## 2. Processar o resultado
 
