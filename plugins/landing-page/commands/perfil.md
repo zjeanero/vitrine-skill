@@ -4,7 +4,7 @@ argument-hint: "[links ou pedido, ex.: adiciona https://site.com]"
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*)
 ---
 
-Use a skill `landing-page` (no plugin, `landing-page:landing-page`) e siga `references/perfil.md`.
+Use a skill `landing-page` (no plugin, `lp:landing-page`) e siga `references/perfil.md`.
 
 Pedido: $ARGUMENTS
 

@@ -4,7 +4,7 @@ argument-hint: "[cliente]"
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(mv:*)
 ---
 
-Use a skill `landing-page` (no plugin, `landing-page:landing-page`). Faça as etapas 1 a 3 do processo (briefing, escavação, conceito), aproveitando o `<cliente>/briefing.md` e o `material/` se existirem. Depois, gere a apresentação seguindo `references/apresentacao.md`.
+Use a skill `landing-page` (no plugin, `lp:landing-page`). Faça as etapas 1 a 3 do processo (briefing, escavação, conceito), aproveitando o `<cliente>/briefing.md` e o `material/` se existirem. Depois, gere a apresentação seguindo `references/apresentacao.md`.
 
 Cliente: $ARGUMENTS
 

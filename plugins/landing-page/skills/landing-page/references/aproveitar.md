@@ -40,7 +40,7 @@ Essas páginas costumam exigir login ou bloquear captura automática.
 
 Atualize `<cliente>/briefing.md`: cada fato com a fonte ("site atual", "Instagram", "Google, avaliação de 03/2026"). Se duas fontes discordarem, como o horário no Google e no site, marque o conflito e sugira perguntar ao cliente.
 
-## Diagnóstico do site atual (também usado em `/lp-revisar`)
+## Diagnóstico do site atual (também usado em `/lp:revisar`)
 
 Quando existe um site antigo, ou quando a pessoa pede para revisar um site, escreva um diagnóstico curto. Ele serve para o freelancer justificar o projeto ao cliente.
 - **De 3 a 6 problemas,** cada um com o porquê e o efeito no cliente final:
@@ -51,4 +51,4 @@ Quando existe um site antigo, ou quando a pessoa pede para revisar um site, escr
 - **O que está bom e deve ficar.**
 - **Tom respeitoso:** o site pode ter sido feito pelo próprio cliente ou por um sobrinho. Critique o resultado, nunca quem fez.
 
-Em `/lp-revisar` sem projeto novo, entregue só o diagnóstico, com os prints da primeira tela, como `diagnostico.md` na pasta indicada (ou numa pasta nova com o nome do site).
+Em `/lp:revisar` sem projeto novo, entregue só o diagnóstico, com os prints da primeira tela, como `diagnostico.md` na pasta indicada (ou numa pasta nova com o nome do site).

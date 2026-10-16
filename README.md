@@ -27,32 +27,32 @@ Os casos de teste e as ferramentas de avaliação ficam em `avaliacao/`. Exemplo
 Dentro do Claude Code:
 
 ```
-/plugin install landing-page --marketplace zjeanero/claude-skills
+/plugin install lp --marketplace zjeanero/claude-skills
 ```
 
 Ou no terminal:
 
 ```
-claude plugin install landing-page --marketplace zjeanero/claude-skills
+claude plugin install lp --marketplace zjeanero/claude-skills
 ```
 
-Para atualizar depois: `claude plugin update landing-page@claude-skills`. Para remover: `claude plugin uninstall landing-page@claude-skills`.
+Para atualizar depois: `claude plugin update lp@claude-skills`. Para remover: `claude plugin uninstall lp@claude-skills`.
 
 O script de screenshot precisa de Node 22 ou mais recente e de Chrome ou Edge instalado. Se o navegador estiver num lugar diferente do padrão, defina a variável `CHROME_PATH`.
 
 ### Usar
 
-Depois de instalar, digite **`/lp-inicio`**: o Claude mostra o passo a passo e pergunta por onde começar.
+Depois de instalar, digite **`/lp:inicio`**: o Claude mostra o passo a passo e pergunta por onde começar.
 
 | Comando | Para quê |
 |---|---|
-| `/lp-inicio` | Passo a passo e comandos |
-| `/lp-perfil` | Monta o seu perfil: referências (links ou prints), stack, gosto |
-| `/lp-briefing` | Mensagem pronta para o cliente no WhatsApp: perguntas e lista de fotos |
-| `/lp-aproveitar` | Extrai conteúdo do site, Instagram ou Google do cliente |
-| `/lp-conceitos` | Apresentação com 2 ou 3 direções para o cliente escolher (HTML + PDF) |
-| `/lp-site` | Constrói o site, com revisão no computador e no celular |
-| `/lp-revisar` | Diagnóstico de um site existente |
+| `/lp:inicio` | Passo a passo e comandos |
+| `/lp:perfil` | Monta o seu perfil: referências (links ou prints), stack, gosto |
+| `/lp:briefing` | Mensagem pronta para o cliente no WhatsApp: perguntas e lista de fotos |
+| `/lp:aproveitar` | Extrai conteúdo do site, Instagram ou Google do cliente |
+| `/lp:conceitos` | Apresentação com 2 ou 3 direções para o cliente escolher (HTML + PDF) |
+| `/lp:site` | Constrói o site, com revisão no computador e no celular |
+| `/lp:revisar` | Diagnóstico de um site existente |
 
 Também funciona falando normalmente, por exemplo "faz uma landing page pra padaria do Sérgio…". O passo a passo completo está no [GUIA.md](GUIA.md#4-como-usar-a-skill).
 

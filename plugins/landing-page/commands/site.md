@@ -4,7 +4,7 @@ argument-hint: "[cliente e/ou direção escolhida, ex.: padaria do Sérgio, dire
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(mv:*)
 ---
 
-Use a skill `landing-page` (no plugin, `landing-page:landing-page`) e siga o processo completo do `SKILL.md`.
+Use a skill `landing-page` (no plugin, `lp:landing-page`) e siga o processo completo do `SKILL.md`.
 
 Pedido: $ARGUMENTS
 

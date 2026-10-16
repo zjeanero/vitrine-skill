@@ -14,13 +14,13 @@ A pessoa pode chegar por um comando (`/lp-...`) ou falando normalmente. Identifi
 
 | Pedido | O que fazer |
 |---|---|
-| "Como uso isso?", `/lp-inicio`, ou primeiro uso | `references/comecar.md` |
-| Configurar o gosto, adicionar referência (link ou print), `/lp-perfil` | `references/perfil.md` |
-| Preparar as perguntas para o cliente, `/lp-briefing` | `references/briefing.md` |
-| Material do cliente: resposta, fotos, links de site, Instagram ou Google; `/lp-aproveitar` | `references/aproveitar.md` |
-| Mostrar caminhos visuais para o cliente escolher, `/lp-conceitos` | Etapas 1 a 3 abaixo + `references/apresentacao.md` |
-| Fazer o site, `/lp-site` | O processo completo abaixo |
-| Avaliar um site que já existe, `/lp-revisar` | Diagnóstico em `references/aproveitar.md` |
+| "Como uso isso?", `/lp:inicio`, ou primeiro uso | `references/comecar.md` |
+| Configurar o gosto, adicionar referência (link ou print), `/lp:perfil` | `references/perfil.md` |
+| Preparar as perguntas para o cliente, `/lp:briefing` | `references/briefing.md` |
+| Material do cliente: resposta, fotos, links de site, Instagram ou Google; `/lp:aproveitar` | `references/aproveitar.md` |
+| Mostrar caminhos visuais para o cliente escolher, `/lp:conceitos` | Etapas 1 a 3 abaixo + `references/apresentacao.md` |
+| Fazer o site, `/lp:site` | O processo completo abaixo |
+| Avaliar um site que já existe, `/lp:revisar` | Diagnóstico em `references/aproveitar.md` |
 
 **Primeiro uso:** se `~/.claude/landing-page/` não existir, a pessoa ainda não tem perfil.
 - **Pedido vago** ("oi", "como funciona"): mostre a versão curta do guia de `references/comecar.md` e pergunte por onde ela quer começar.
