@@ -20,7 +20,7 @@ Arquivos (em `plugins/landing-page/skills/landing-page/`):
 - `references/`: anti-padrões de "cara de IA", análise dos sites de referência, tipografia, requisitos de negócio local, stack.
 - `scripts/screenshot.mjs`: prints de desktop (1440×900) e celular (390×844), com relatório de erros de JS, recursos quebrados e rolagem horizontal. Não tem dependências.
 
-O registro de fontes e paletas de cada projeto, que evita clientes parecidos entre si, fica em `~/.claude/landing-page/registro.md`, fora do plugin, para sobreviver às atualizações. Os casos de teste e as ferramentas de avaliação ficam em `avaliacao/`.
+Os casos de teste e as ferramentas de avaliação ficam em `avaliacao/`. Exemplos de perfil ficam em `perfis/`.
 
 ### Instalar
 
@@ -42,4 +42,18 @@ O script de screenshot precisa de Node 22 ou mais recente e de Chrome ou Edge in
 
 ### Usar
 
-Peça uma landing page normalmente, por exemplo "faz uma landing page pra padaria do Sérgio…". A skill é acionada sozinha. Também dá para chamar com `/landing-page`.
+Peça uma landing page normalmente, por exemplo "faz uma landing page pra padaria do Sérgio…". A skill é acionada sozinha.
+
+### Deixe do seu jeito (perfil pessoal)
+
+A skill é a mesma para todo mundo. O gosto de cada um fica num **perfil** em `~/.claude/landing-page/`, fora do plugin, então as atualizações da skill não apagam nada. O perfil tem três arquivos:
+
+- `preferencias.md`: para quem você faz sites, sua stack (HTML, PHP, Astro, Next…), o que você ama e o que odeia.
+- `referencias.md`: sites que você admira, analisados pelo Claude.
+- `registro.md`: seus projetos entregues, para cada cliente receber fontes e cores diferentes.
+
+Para montar o seu, peça ao Claude:
+
+> configura a skill landing-page do meu jeito
+
+Ele faz algumas perguntas, tira prints dos sites que você admira, analisa e grava o perfil. Depois, para acrescentar uma referência, peça: "adiciona essa referência na skill landing-page: https://…". A pasta `perfis/` tem um perfil preenchido de exemplo.

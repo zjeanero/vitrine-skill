@@ -1,11 +1,8 @@
-# Referências do usuário
+# Referências de exemplo
 
-Estes são os sites que o usuário escolheu como norte de qualidade. Use-os para calibrar o método e o nível de acabamento, não para copiar efeitos.
+Quatro sites de estúdios e designers, analisados para mostrar o *formato* de uma boa análise de referência e de onde vieram os princípios do `SKILL.md`. Use-os para calibrar o método e o nível de acabamento, não para copiar efeitos.
 
-Para adicionar uma referência nova:
-1. Capture com `node scripts/screenshot.mjs <url> <pasta>`. Use `--click=<seletor>` para passar por telas de entrada.
-2. Olhe as imagens.
-3. Acrescente uma seção aqui, no mesmo formato.
+As referências de cada pessoa ficam no perfil dela, em `~/.claude/landing-page/referencias.md`, neste mesmo formato. Para montá-las, siga `perfil.md`. Se o perfil existir, as referências dele têm prioridade sobre estas.
 
 ## Unseen Studio (unseen.co/projects)
 

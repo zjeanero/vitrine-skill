@@ -1,6 +1,6 @@
 ---
 name: landing-page
-description: Cria landing pages e sites de uma página com identidade própria, que não parecem feitos por IA nem saídos de template, para clientes de freela/agência e negócios locais (restaurante, padaria, clínica, consultório, oficina, barbearia, loja, academia, escritório, profissional liberal). Cobre o processo inteiro - briefing, conceito visual tirado do mundo do cliente, tipografia, texto em português, construção em HTML/CSS/JS (PHP opcional), SEO local, WhatsApp e revisão visual por screenshot no desktop e no celular. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, página de captura, site institucional, página para um cliente ou negócio, redesign de página, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo que ele não use a expressão "landing page".
+description: Cria landing pages e sites de uma página com identidade própria, que não parecem feitos por IA nem saídos de template, para clientes de freela/agência e negócios locais (restaurante, padaria, clínica, consultório, oficina, barbearia, loja, academia, escritório, profissional liberal). Cobre o processo inteiro - briefing, conceito visual tirado do mundo do cliente, tipografia, texto em português, construção em HTML/CSS/JS (PHP opcional), SEO local, WhatsApp e revisão visual por screenshot no desktop e no celular. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, página de captura, site institucional, página para um cliente ou negócio, redesign de página, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo que ele não use a expressão "landing page". Use também para configurar ou personalizar esta skill (perfil com referências, stack e gosto de quem usa).
 ---
 
 # Landing page autoral
@@ -13,9 +13,9 @@ Em cada decisão (fonte, cor, layout, frase do título), o caminho mais fácil �
 
 A saída é trocar decisões prováveis por decisões que só fazem sentido para *este* cliente. Um teste vale para qualquer escolha: **se ela serviria igualmente para o concorrente do outro lado da rua, ela é padrão, não decisão.** Use esse teste o tempo todo: no conceito, na paleta, no título, na foto, no botão.
 
-## O que as referências do usuário ensinam
+## O que bons sites autorais têm em comum
 
-O usuário escolheu quatro sites como norte de qualidade: Unseen Studio, bychudy, pixelwrld e dão (daofor.design). A análise completa está em `references/referencias.md`. Os estilos são muito diferentes entre si, mas o método é o mesmo:
+Os princípios abaixo saíram da análise de quatro sites de estúdios e designers: Unseen Studio, bychudy, pixelwrld e dão (daofor.design). A análise completa está em `references/referencias-exemplo.md`. Os estilos são muito diferentes entre si, mas o método é o mesmo:
 
 1. **Uma ideia governa a página.** O bychudy *é* uma área de trabalho de computador; o pixelwrld é uma tela de ícones de apps; o Unseen é uma galeria em 3D; o dão é uma capa de revista que troca de disciplina ("FOR PHOTOGRAPHY", "FOR WEB DESIGN"). Nenhum deles começou de uma lista de seções.
 2. **A ideia vem do mundo de quem é apresentado.** A área de trabalho é a ferramenta do designer; os ícones são os produtos do product designer. A metáfora nunca é genérica: sai da rotina, dos objetos e da linguagem do próprio sujeito.
@@ -26,6 +26,17 @@ O usuário escolheu quatro sites como norte de qualidade: Unseen Studio, bychudy
 7. **Texto com voz humana.** "Welcome to my corner of the internet :)", "Design with class. Built to last.", "Made in Vietnam • Based in Amsterdam".
 
 O que **não** levar para cliente local: portão de entrada ("Enter"), áudio, rolagem virtual em WebGL, site de uma tela só. Isso funciona em portfólio de estúdio, cujo público quer ser surpreendido. Na padaria do bairro, atrapalha quem só quer o horário e o WhatsApp. Leve o *método*, não os efeitos.
+
+## Perfil pessoal
+
+Cada pessoa que usa esta skill pode ter um perfil próprio na pasta `~/.claude/landing-page/` (no Windows, `C:\Users\<nome>\.claude\landing-page\`). Ele fica fora da pasta da skill para sobreviver às atualizações. São três arquivos:
+- `preferencias.md`: para quem a pessoa faz sites, a stack preferida, o gosto, o que ela ama e o que odeia.
+- `referencias.md`: sites que ela admira, analisados no mesmo formato de `references/referencias-exemplo.md`.
+- `registro.md`: projetos já entregues, com fontes e paletas, para não repetir.
+
+No início de cada trabalho, leia os arquivos que existirem. Em gosto e stack, o perfil tem prioridade sobre os padrões desta skill. O método continua valendo sempre: escavação, honestidade, revisão visual. Se a pasta não existir, siga com os padrões e, na entrega, ofereça em uma frase montar o perfil.
+
+Para criar ou atualizar o perfil, siga `references/perfil.md`. Isso vale quando a pessoa pedir algo como "configura a skill do meu jeito", "adiciona essa referência" ou "eu trabalho com Next.js".
 
 ## Processo
 
@@ -82,7 +93,11 @@ Texto em português do Brasil, com a voz do dono do negócio:
 
 ### 5. Construção
 
-A stack padrão é HTML + CSS escrito à mão + JavaScript puro só onde houver interação. Use PHP apenas quando houver motivo concreto, como um formulário que envia e-mail ou partes repetidas em várias páginas. Antes de escrever o código, leia:
+A stack padrão é HTML + CSS escrito à mão + JavaScript puro só onde houver interação. Use PHP apenas quando houver motivo concreto, como um formulário que envia e-mail ou partes repetidas em várias páginas.
+
+Se o perfil pessoal pedir outra stack (Astro, Next.js, WordPress…), use a dele, e o método continua valendo. Em projetos com Tailwind ou bibliotecas de componentes, substitua os padrões delas (paleta, fontes, raios, sombras, ícones) pelos tokens do conceito, porque são justamente esses padrões que dão a "cara de IA".
+
+Antes de escrever o código, leia:
 - `references/stack.md`: estrutura, CSS, movimento, imagens e PHP.
 - `references/negocio-local.md`: WhatsApp, horários, SEO local, dados estruturados, desempenho no 4G e regras de conselhos profissionais.
 

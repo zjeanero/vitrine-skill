@@ -1,0 +1,81 @@
+# Montar ou atualizar o perfil pessoal
+
+O perfil faz a skill trabalhar do jeito de quem a usa: o gosto, a stack e os clientes dessa pessoa. Ele fica em `~/.claude/landing-page/`, fora da pasta da skill, para não se perder quando a skill for atualizada.
+
+## Quando usar
+
+- A pessoa pede para configurar ou personalizar a skill ("configura do meu jeito", "monta meu perfil").
+- A pessoa traz uma referência nova ("adiciona esse site nas minhas referências").
+- A pessoa muda uma preferência ("agora trabalho com Astro", "nunca mais quero carrossel").
+
+Para mudanças pequenas, edite só o arquivo afetado. Não refaça o perfil inteiro.
+
+## Passo a passo (perfil novo)
+
+### 1. Perguntar de uma vez
+
+Faça as perguntas numa lista curta. Se a pessoa não souber alguma, siga com o que tiver:
+1. Para quem você faz sites? (tipo de cliente, região, idioma)
+2. Qual stack você usa ou quer usar, e onde costuma hospedar?
+3. De 3 a 5 sites que você admira, e o que gosta em cada um.
+4. Algum estilo ou site que você odeia, ou que acha a cara do "feito por IA"?
+5. Tem alguma regra sua? (ex.: "nada de carrossel", "sempre botão de WhatsApp")
+
+### 2. Analisar as referências
+
+Para cada site, rode o script de screenshot:
+
+```bash
+node <pasta-desta-skill>/scripts/screenshot.mjs <url> <pasta-temporária>/<nome-do-site> --slices=6 --wait=4000
+```
+
+- **Site com tela de entrada** ("Enter", aviso de cookies): use `--click=<seletor do botão>`.
+- **Site com rolagem em WebGL ou JS:** o script rola com a roda do mouse automaticamente.
+
+Depois de capturar:
+- **Prints:** olhe pelo menos `desktop-01`, `mobile-01` e duas ou três fatias do meio da página.
+- **Fontes:** use o `report.json` e, se precisar, o HTML do site para ver as fontes realmente aplicadas.
+- **Não chute:** se não der para identificar algo, diga que não identificou.
+
+### 3. Escrever `referencias.md`
+
+Use o mesmo formato de `referencias-exemplo.md`. Para cada site:
+- **Ideia:** qual é a ideia que governa a página.
+- **Tipografia:** quais fontes e como são usadas.
+- **Cor e material:** paleta, textura, tratamento de imagem.
+- **Interface:** quanto de interface existe e de que tipo.
+- **Levar:** o que vale aplicar em projetos de cliente.
+- **Não levar:** o que funciona só naquele contexto.
+
+No fim, acrescente uma seção "O que têm em comum" com 3 a 5 princípios. Ela é a parte mais útil do arquivo: é o gosto da pessoa traduzido em regras.
+
+### 4. Escrever `preferencias.md`
+
+```markdown
+# Preferências
+
+## Para quem eu faço sites
+(tipos de cliente, região, idioma)
+
+## Stack
+(tecnologias, hospedagem, o que evitar e por quê)
+
+## Meu gosto
+(o que me atrai; referências em referencias.md)
+
+## Nunca fazer
+(regras pessoais)
+```
+
+### 5. Criar `registro.md`
+
+Crie o arquivo só se ele não existir. Nunca apague um registro antigo.
+
+```
+| Data | Cliente | Conceito | Fonte display / texto | Paleta dominante |
+|---|---|---|---|---|
+```
+
+### 6. Confirmar
+
+Mostre um resumo do perfil à pessoa: os princípios tirados das referências, a stack e as regras. Pergunte se ficou do jeito dela e ajuste o que ela pedir.
