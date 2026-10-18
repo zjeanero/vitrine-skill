@@ -22,6 +22,7 @@ A pessoa pode chegar por um comando (`/lp-...`) ou falando normalmente. Identifi
 | Fazer o site, `/vitrine:site` | O processo completo abaixo |
 | Avaliar um site que já existe, `/vitrine:revisar` | Diagnóstico em `references/aproveitar.md` |
 | Aprovar ou reprovar sites prontos, ou resultado de aprovação colado, `/vitrine:avaliar` | `references/aprovacao.md` |
+| Cliente quer mudar preço, cardápio, horário ou aviso sozinho; planilha do Google | `references/conteudo-editavel.md` |
 
 **Primeiro uso:** se `~/.claude/landing-page/` não existir, a pessoa ainda não tem perfil.
 - **Pedido vago** ("oi", "como funciona"): mostre a versão curta do guia de `references/comecar.md` e pergunte por onde ela quer começar.
@@ -86,6 +87,7 @@ Junte o necessário para não precisar inventar nada:
 - **Contato e funcionamento:** WhatsApp, telefone, endereço, horários, Instagram, formas de pagamento, entrega ou atendimento em domicílio.
 - **Material existente:** logo, cores da fachada/uniforme/embalagem, fotos reais, avaliações do Google.
 - **Ação principal:** quase sempre chamar no WhatsApp, ligar ou ir até o local.
+- **O que muda com frequência:** preços, cardápio, horários, avisos. Se o cliente quiser mudar isso sozinho, o site lê de uma planilha do Google (veja `references/conteudo-editavel.md`).
 
 Se já existir `<cliente>/briefing.md`, comece por ele e pelo `material/`.
 
@@ -147,6 +149,7 @@ Se o perfil pessoal pedir outra stack (Astro, Next.js, WordPress…), use a dele
 Antes de escrever o código, leia:
 - `references/stack.md`: estrutura, CSS, movimento, imagens e PHP.
 - `references/negocio-local.md`: WhatsApp, horários, SEO local, dados estruturados, desempenho no 4G e regras de conselhos profissionais.
+- `references/conteudo-editavel.md`: só se houver conteúdo que o cliente vai editar sozinho.
 
 Os pontos que mais afetam o resultado:
 - **Tokens primeiro.** Defina cores, fontes, escala e espaçamentos como variáveis CSS a partir do conceito, antes de escrever as seções.
@@ -209,6 +212,7 @@ O `NOTAS.md` deve ser curto e em português, com:
 - Tudo o que está pendente ou com marcador: depoimentos, fotos, dados a confirmar.
 - A lista de fotos para o cliente produzir.
 - Como publicar.
+- Se houver planilha: a seção "Conteúdo editável" de `references/conteudo-editavel.md`.
 
 Acrescente uma linha a `~/.claude/landing-page/registro.md`. Se o arquivo não existir, crie-o com este cabeçalho:
 

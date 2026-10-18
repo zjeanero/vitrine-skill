@@ -145,6 +145,12 @@ Plain HTML, CSS and JavaScript (plus PHP when needed), which run on any host. If
 </details>
 
 <details>
+<summary><b>Can the client change prices and hours on their own?</b></summary>
+
+Yes. Prices, menus, opening hours and notices can live in a Google Sheet the client edits, and the site picks up the change within minutes. The design stays in the code, and the content written in the HTML keeps the site working if the sheet fails.
+</details>
+
+<details>
 <summary><b>Where do the files go?</b></summary>
 
 Each client gets a folder with `briefing.md`, `material/` (the client's photos), `conceitos/`, `site/` and `NOTAS.md` (pending items and a photo list).

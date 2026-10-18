@@ -39,6 +39,7 @@ Obrigado!
   - "O que os clientes mais elogiam?"
   - "Qual produto sai mais?"
   - "Tem alguma coisa que só vocês fazem?"
+- **Pergunte se ele quer mudar algo sozinho:** "Você gostaria de mudar preços, cardápio ou horários sem depender de mim?" Se sim, o site lê de uma planilha (`conteudo-editavel.md`).
 - **Peça avaliações reais:** prints das avaliações do Google de que o cliente mais gosta, com autorização para usar.
 - **Lista de fotos específica** (de 4 a 6), tirada da escavação, com uma dica de como fotografar cada uma. "Foto do produto" é vago demais; "o pão de queijo partido ao meio, de perto, na luz da janela" é o nível certo.
 - **Segmentos com regras próprias.**

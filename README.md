@@ -143,6 +143,12 @@ HTML, CSS e JavaScript puros (PHP quando precisa), que rodam em qualquer hospeda
 </details>
 
 <details>
+<summary><b>O cliente consegue mudar preço e horário sozinho?</b></summary>
+
+Consegue. Preços, cardápio, horários e avisos podem ficar numa planilha do Google que o cliente edita, e o site atualiza em poucos minutos. O visual continua no código, e o conteúdo escrito no HTML segura o site se a planilha falhar.
+</details>
+
+<details>
 <summary><b>Onde ficam os arquivos?</b></summary>
 
 Cada cliente ganha uma pasta com `briefing.md`, `material/` (fotos do cliente), `conceitos/`, `site/` e `NOTAS.md` (pendências e lista de fotos).
