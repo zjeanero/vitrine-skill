@@ -58,7 +58,7 @@ Nomes como `--papel`, `--giz` e `--ferrugem` mantêm o conceito vivo enquanto vo
 ## Movimento
 
 - Um momento coreografado que reforça o conceito vale mais que fade-up em tudo.
-- Prefira CSS (transições, `@keyframes`, `animation-timeline`) com IntersectionObserver. Use biblioteca (GSAP etc.) só para um efeito que o CSS não resolva, carregada por CDN com versão fixa.
+- Prefira CSS (transições, `@keyframes`, `animation-timeline`) com IntersectionObserver. Use biblioteca (GSAP etc.) só para um efeito que o CSS não resolva, carregada por CDN com versão fixa. Em portfólio e site de estúdio, siga `portfolio.md`.
 - **O conteúdo nunca depende da animação para aparecer.** Se algo começa invisível para "entrar" depois, esconda só quando o JS estiver rodando: um script inline no `<head>` coloca a classe `js` no `<html>`, e o CSS esconde apenas com `.js .revelar`. Se o JS falhar, tudo continua visível.
 - **Sempre inclua:**
 

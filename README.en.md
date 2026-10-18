@@ -145,6 +145,12 @@ Plain HTML, CSS and JavaScript (plus PHP when needed), which run on any host. If
 </details>
 
 <details>
+<summary><b>Does it work for portfolios?</b></summary>
+
+Yes. For portfolios and studio sites, Vitrine uses real motion (smooth scrolling, headlines that rise line by line, a horizontal project gallery, and 3D when the concept calls for it), always keeping the content visible if something fails. On local business sites it holds back: visitors want the opening hours and the WhatsApp button.
+</details>
+
+<details>
 <summary><b>Can the client change prices and hours on their own?</b></summary>
 
 Yes. Prices, menus, opening hours and notices can live in a Google Sheet the client edits, and the site picks up the change within minutes. The design stays in the code, and the content written in the HTML keeps the site working if the sheet fails.

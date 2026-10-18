@@ -23,6 +23,7 @@ A pessoa pode chegar por um comando (`/lp-...`) ou falando normalmente. Identifi
 | Avaliar um site que já existe, `/vitrine:revisar` | Diagnóstico em `references/aproveitar.md` |
 | Aprovar ou reprovar sites prontos, ou resultado de aprovação colado, `/vitrine:avaliar` | `references/aprovacao.md` |
 | Cliente quer mudar preço, cardápio, horário ou aviso sozinho; planilha do Google | `references/conteudo-editavel.md` |
+| Portfólio, site pessoal criativo, estúdio, agência; animação avançada (GSAP, Lenis, Three.js) | Processo completo + `references/portfolio.md` |
 
 **Primeiro uso:** se `~/.claude/landing-page/` não existir, a pessoa ainda não tem perfil.
 - **Pedido vago** ("oi", "como funciona"): mostre a versão curta do guia de `references/comecar.md` e pergunte por onde ela quer começar.
@@ -150,6 +151,7 @@ Antes de escrever o código, leia:
 - `references/stack.md`: estrutura, CSS, movimento, imagens e PHP.
 - `references/negocio-local.md`: WhatsApp, horários, SEO local, dados estruturados, desempenho no 4G e regras de conselhos profissionais.
 - `references/conteudo-editavel.md`: só se houver conteúdo que o cliente vai editar sozinho.
+- `references/portfolio.md`: só em portfólio, site pessoal criativo ou estúdio.
 
 Os pontos que mais afetam o resultado:
 - **Tokens primeiro.** Defina cores, fontes, escala e espaçamentos como variáveis CSS a partir do conceito, antes de escrever as seções.
