@@ -1,4 +1,4 @@
-# Gera um .zip da skill "Alfaiate" para passar a alguém sem GitHub.
+# Gera um .zip da skill "Vitrine" para passar a alguém sem GitHub.
 #
 # Uso (no PowerShell, a partir da raiz do repositório):
 #   pwsh ferramentas/empacotar.ps1                       só a skill
@@ -7,8 +7,8 @@
 #
 # O .zip traz:
 #   LEIA-ME.txt        passo a passo para instalar
-#   skill/             marketplace + plugin, instalável com /plugin install alfaiate --marketplace <pasta skill>
-#   perfil-<nome>.md   (opcional) o seu perfil no formato de importação do /alfaiate:perfil
+#   skill/             marketplace + plugin, instalável com /plugin install vitrine --marketplace <pasta skill>
+#   perfil-<nome>.md   (opcional) o seu perfil no formato de importação do /vitrine:perfil
 
 param(
   [switch]$ComPerfil,
@@ -19,7 +19,7 @@ $ErrorActionPreference = 'Stop'
 
 $repo = Split-Path $PSScriptRoot -Parent
 $versao = (Get-Content "$repo\plugins\landing-page\.claude-plugin\plugin.json" -Raw | ConvertFrom-Json).version
-$pacote = "alfaiate-skill-$versao"
+$pacote = "vitrine-skill-$versao"
 $tmp = Join-Path ([IO.Path]::GetTempPath()) "$pacote-$(Get-Random)"
 $base = Join-Path $tmp $pacote
 
@@ -36,7 +36,7 @@ if ($ComPerfil) {
   $perfil = @"
 # Perfil da skill landing-page: $Nome
 
-Para usar: instale a skill (veja o LEIA-ME.txt) e digite /alfaiate:perfil importar <caminho deste arquivo>.
+Para usar: instale a skill (veja o LEIA-ME.txt) e digite /vitrine:perfil importar <caminho deste arquivo>.
 O perfil importado vira uma cópia sua: mude à vontade.
 
 <!-- lp:arquivo preferencias.md -->
@@ -53,14 +53,14 @@ $(Get-Content "$dir\referencias.md" -Raw)
 PERFIL DE QUEM TE MANDOU (opcional)
 Este pacote traz o arquivo perfil-$Nome.md, com o gosto de quem te mandou
 (preferências e referências; o registro de clientes não vem junto).
-- Para usar como ponto de partida:  /alfaiate:perfil importar <caminho do perfil-$Nome.md>
-- Para montar o seu do zero:        /alfaiate:perfil
+- Para usar como ponto de partida:  /vitrine:perfil importar <caminho do perfil-$Nome.md>
+- Para montar o seu do zero:        /vitrine:perfil
 O perfil importado é uma cópia sua: dá para mudar tudo ao seu gosto.
 "@
 }
 
 $leiame = @"
-SKILL "ALFAIATE" PARA O CLAUDE CODE
+SKILL "VITRINE" PARA O CLAUDE CODE
 Landing pages que não parecem feitas por IA, para clientes de freela e negócios locais.
 Versão $versao
 
@@ -69,9 +69,9 @@ COMO INSTALAR (uma vez só)
 2. Abra o Claude Code e digite o comando abaixo, trocando o caminho pelo da pasta "skill"
    que está aqui dentro (dica: arraste a pasta "skill" para a janela para colar o caminho):
 
-   /plugin install alfaiate --marketplace C:\Users\SEU-USUARIO\Documents\$pacote\skill
+   /plugin install vitrine --marketplace C:\Users\SEU-USUARIO\Documents\$pacote\skill
 
-3. Reinicie o Claude Code e digite:  /alfaiate:inicio
+3. Reinicie o Claude Code e digite:  /vitrine:inicio
    O Claude mostra o passo a passo e pergunta por onde você quer começar.
 $perfilLinha
 PRECISA TER
@@ -81,8 +81,8 @@ PRECISA TER
 QUANDO CHEGAR UMA VERSÃO NOVA (outro .zip)
 1. Descompacte por cima da mesma pasta.
 2. No terminal:
-   claude plugin marketplace update claude-skills
-   claude plugin update alfaiate@claude-skills
+   claude plugin marketplace update vitrine-skill
+   claude plugin update vitrine@vitrine-skill
 3. Reinicie o Claude Code.
 "@
 Set-Content -Encoding utf8 "$base\LEIA-ME.txt" $leiame

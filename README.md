@@ -1,6 +1,6 @@
 **Português** · [English](README.en.md)
 
-# Alfaiate: landing pages sob medida, que não parecem feitas por IA
+# Vitrine: landing pages que não parecem feitas por IA
 
 Plugin para o **Claude Code** que cria landing pages para clientes de freela e negócios locais. Cada página sai do mundo do próprio cliente, não de um template.
 
@@ -13,10 +13,10 @@ Plugin para o **Claude Code** que cria landing pages para clientes de freela e n
 No Claude Code, digite:
 
 ```
-/plugin install alfaiate --marketplace zjeanero/claude-skills
+/plugin install vitrine --marketplace zjeanero/vitrine-skill
 ```
 
-Feche e abra o Claude Code e digite **`/alfaiate:inicio`**. Ele confere se falta algo no seu computador e mostra o passo a passo.
+Feche e abra o Claude Code e digite **`/vitrine:inicio`**. Ele confere se falta algo no seu computador e mostra o passo a passo.
 
 <details>
 <summary><b>Primeira vez? O que precisa ter</b></summary>
@@ -30,12 +30,12 @@ Feche e abra o Claude Code e digite **`/alfaiate:inicio`**. Ele confere se falta
 
 | Para | Comando |
 |---|---|
-| Instalar pelo terminal | `claude plugin install alfaiate --marketplace zjeanero/claude-skills` |
+| Instalar pelo terminal | `claude plugin install vitrine --marketplace zjeanero/vitrine-skill` |
 | Instalar só num projeto | acrescente `--scope project` ou `--scope local` |
-| Atualizar | `claude plugin update alfaiate@claude-skills` |
-| Desligar / remover | `claude plugin disable alfaiate@claude-skills` / `claude plugin uninstall alfaiate@claude-skills` |
+| Atualizar | `claude plugin update vitrine@vitrine-skill` |
+| Desligar / remover | `claude plugin disable vitrine@vitrine-skill` / `claude plugin uninstall vitrine@vitrine-skill` |
 | Instalar sem GitHub | a partir do pacote .zip (veja [Seu perfil e compartilhar](#seu-perfil-e-compartilhar)) |
-| Claude Code antigo | `/plugin marketplace add zjeanero/claude-skills` e depois `/plugin install alfaiate@claude-skills` |
+| Claude Code antigo | `/plugin marketplace add zjeanero/vitrine-skill` e depois `/plugin install vitrine@vitrine-skill` |
 </details>
 
 <details>
@@ -43,7 +43,7 @@ Feche e abra o Claude Code e digite **`/alfaiate:inicio`**. Ele confere se falta
 
 | Problema | Solução |
 |---|---|
-| `/alfaiate:inicio` não aparece | Feche e abra o Claude Code |
+| `/vitrine:inicio` não aparece | Feche e abra o Claude Code |
 | Erro com `--marketplace` | Rode `claude update` |
 | Não encontrou o repositório | Ainda é privado: peça o pacote .zip |
 | "node não é reconhecido" | Instale o Node LTS em [nodejs.org](https://nodejs.org) e reabra o terminal |
@@ -54,13 +54,13 @@ Feche e abra o Claude Code e digite **`/alfaiate:inicio`**. Ele confere se falta
 
 | | Você digita | Você recebe |
 |:-:|---|---|
-| **0** | `/alfaiate:perfil` *(uma vez)* | O Claude aprende o seu gosto, a partir de links ou prints de referência |
-| **1** | `/alfaiate:briefing Padaria do Sérgio` | Uma mensagem pronta para o WhatsApp do cliente, com perguntas e lista de fotos |
-| **2** | Cole a resposta, ou `/alfaiate:aproveitar <link>` | Tudo organizado: o que é fato e o que falta |
-| **3** | `/alfaiate:conceitos` | 2 ou 3 caminhos visuais (HTML + PDF) para o cliente escolher |
-| **4** | `/alfaiate:site` | O site pronto, conferido no computador e no celular |
-| **5** | `/alfaiate:avaliar` | Uma página para aprovar ou reprovar os sites. A skill aprende o seu gosto com isso |
-| **+** | `/alfaiate:revisar <link>` | O diagnóstico de qualquer site: o que tem cara de IA e o que falta |
+| **0** | `/vitrine:perfil` *(uma vez)* | O Claude aprende o seu gosto, a partir de links ou prints de referência |
+| **1** | `/vitrine:briefing Padaria do Sérgio` | Uma mensagem pronta para o WhatsApp do cliente, com perguntas e lista de fotos |
+| **2** | Cole a resposta, ou `/vitrine:aproveitar <link>` | Tudo organizado: o que é fato e o que falta |
+| **3** | `/vitrine:conceitos` | 2 ou 3 caminhos visuais (HTML + PDF) para o cliente escolher |
+| **4** | `/vitrine:site` | O site pronto, conferido no computador e no celular |
+| **5** | `/vitrine:avaliar` | Uma página para aprovar ou reprovar os sites. A skill aprende o seu gosto com isso |
+| **+** | `/vitrine:revisar <link>` | O diagnóstico de qualquer site: o que tem cara de IA e o que falta |
 
 Os comandos são só atalhos: também funciona falando normalmente.
 
@@ -91,23 +91,23 @@ Três negócios fictícios receberam o mesmo pedido, uma vez com a skill e outra
 
 A skill é igual para todos. O seu gosto fica num **perfil**, em `~/.claude/landing-page/`, que as atualizações não apagam.
 
-- **Criar ou mudar o perfil:** `/alfaiate:perfil`
-- **Mandar para um amigo:** `/alfaiate:perfil exportar` gera um arquivo. Ele roda `/alfaiate:perfil importar <arquivo>` e adapta ao gosto dele. A cópia dele não mexe na sua.
-- **Mandar sem GitHub:** `pwsh ferramentas/empacotar.ps1 -ComPerfil -Nome <seu-nome>` gera um .zip com a skill e o perfil. Ele instala com `/plugin install alfaiate --marketplace <pasta>/skill`.
+- **Criar ou mudar o perfil:** `/vitrine:perfil`
+- **Mandar para um amigo:** `/vitrine:perfil exportar` gera um arquivo. Ele roda `/vitrine:perfil importar <arquivo>` e adapta ao gosto dele. A cópia dele não mexe na sua.
+- **Mandar sem GitHub:** `pwsh ferramentas/empacotar.ps1 -ComPerfil -Nome <seu-nome>` gera um .zip com a skill e o perfil. Ele instala com `/plugin install vitrine --marketplace <pasta>/skill`.
 
 <details>
 <summary><b>Passo a passo detalhado</b></summary>
 
 ```mermaid
 flowchart LR
-    A["<b>Você</b><br/>/alfaiate:perfil exportar"] -- "perfil-seunome.md" --> B["<b>Seu amigo</b><br/>/alfaiate:perfil importar"]
+    A["<b>Você</b><br/>/vitrine:perfil exportar"] -- "perfil-seunome.md" --> B["<b>Seu amigo</b><br/>/vitrine:perfil importar"]
     B --> C["Cópia do seu perfil"]
-    C -- "/alfaiate:perfil" --> D["Adaptado ao<br/>gosto dele"]
+    C -- "/vitrine:perfil" --> D["Adaptado ao<br/>gosto dele"]
 ```
 
-1. **Você** roda `/alfaiate:perfil exportar`. Sai um arquivo só, como `perfil-jean.md`, sem o registro de clientes. Mande por WhatsApp, e-mail ou Drive.
-2. **Ele** instala a skill e roda `/alfaiate:perfil importar perfil-jean.md`. Dá para arrastar o arquivo para a janela em vez de digitar o caminho.
-3. **Ele adapta falando normalmente:** `/alfaiate:perfil eu uso Astro`, `/alfaiate:perfil adiciona https://…`.
+1. **Você** roda `/vitrine:perfil exportar`. Sai um arquivo só, como `perfil-jean.md`, sem o registro de clientes. Mande por WhatsApp, e-mail ou Drive.
+2. **Ele** instala a skill e roda `/vitrine:perfil importar perfil-jean.md`. Dá para arrastar o arquivo para a janela em vez de digitar o caminho.
+3. **Ele adapta falando normalmente:** `/vitrine:perfil eu uso Astro`, `/vitrine:perfil adiciona https://…`.
 
 **Se ele já tiver um perfil,** o Claude pergunta antes de mexer: **juntar** (as suas referências entram junto com as dele), **substituir** (o perfil dele fica guardado em `antigo-<data>/`) ou **cancelar**.
 
@@ -125,7 +125,7 @@ Não. Você conversa com o Claude, e ele entrega a pasta pronta. Saber HTML só 
 <details>
 <summary><b>Que tecnologia o site usa?</b></summary>
 
-HTML, CSS e JavaScript puros (PHP quando precisa), que rodam em qualquer hospedagem. Se você usa outra stack (Astro, Next.js, WordPress…), diga no `/alfaiate:perfil`.
+HTML, CSS e JavaScript puros (PHP quando precisa), que rodam em qualquer hospedagem. Se você usa outra stack (Astro, Next.js, WordPress…), diga no `/vitrine:perfil`.
 </details>
 
 <details>
@@ -151,7 +151,7 @@ Cerca de 650 tokens fixos por sessão e uns 7 mil quando a skill é usada. Um si
 
 ```
 .claude-plugin/marketplace.json     catálogo para instalar com um comando
-plugins/alfaiate/                   o plugin: commands/ (os /alfaiate:*) e skills/landing-page/ (a skill)
+plugins/vitrine/                   o plugin: commands/ (os /vitrine:*) e skills/landing-page/ (a skill)
 perfis/modelo/                      perfil-modelo vazio
 avaliacao/                          testes com e sem a skill
 ferramentas/empacotar.ps1           gera o .zip para mandar sem GitHub
@@ -159,9 +159,9 @@ docs/img/                           imagens deste README
 ```
 
 **Para lançar uma versão:**
-1. Suba a `version` em `plugins/alfaiate/.claude-plugin/plugin.json`.
+1. Suba a `version` em `plugins/vitrine/.claude-plugin/plugin.json`.
 2. Rode `claude plugin validate .`.
-3. Faça o push e rode `claude plugin update alfaiate@claude-skills`.
+3. Faça o push e rode `claude plugin update vitrine@vitrine-skill`.
 </details>
 
 ## Licença

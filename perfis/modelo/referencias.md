@@ -1,6 +1,6 @@
 # Minhas referências
 
-Para adicionar uma referência, peça ao Claude: `/alfaiate:perfil adiciona https://…`, ou mande um print. Ele analisa e escreve aqui, neste formato.
+Para adicionar uma referência, peça ao Claude: `/vitrine:perfil adiciona https://…`, ou mande um print. Ele analisa e escreve aqui, neste formato.
 
 ## (nome da referência, link se houver)
 

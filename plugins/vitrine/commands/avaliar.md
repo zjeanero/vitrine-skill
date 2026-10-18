@@ -4,7 +4,7 @@ argument-hint: "[pasta ou sites para avaliar, ou cole o resultado da aprovação
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), PowerShell(node:*), Bash(mkdir:*), Bash(ls:*)
 ---
 
-Use a skill `landing-page` (no plugin, `alfaiate:landing-page`) e siga `references/aprovacao.md`.
+Use a skill `landing-page` (no plugin, `vitrine:landing-page`) e siga `references/aprovacao.md`.
 
 Pedido: $ARGUMENTS
 

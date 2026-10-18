@@ -1,18 +1,18 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "claude-skills",
-  "description": "Plugins do zjeanero para o Claude Code. Alfaiate: landing pages sob medida, que não parecem feitas por IA.",
+  "name": "vitrine-skill",
+  "description": "Vitrine: landing pages que não parecem feitas por IA, para freelas e negócios locais.",
   "owner": {
     "name": "zjeanero"
   },
   "plugins": [
     {
-      "name": "alfaiate",
-      "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: briefing para o cliente, aproveitar o que ele já tem, conceitos para aprovação, site com WhatsApp e SEO local, revisão visual por screenshot. Comece com /alfaiate:inicio.",
+      "name": "vitrine",
+      "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: briefing para o cliente, aproveitar o que ele já tem, conceitos para aprovação, site com WhatsApp e SEO local, revisão visual por screenshot. Comece com /vitrine:inicio.",
       "author": {
         "name": "zjeanero"
       },
-      "source": "./plugins/alfaiate",
+      "source": "./plugins/vitrine",
       "category": "development"
     }
   ]

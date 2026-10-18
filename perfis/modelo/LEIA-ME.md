@@ -13,7 +13,7 @@ Estes três arquivos são o **seu perfil**: o que faz a skill trabalhar do seu j
 Não precisa copiar nada. No Claude Code, digite:
 
 ```
-/alfaiate:perfil
+/vitrine:perfil
 ```
 
 O Claude faz algumas perguntas, analisa as suas referências (links ou prints) e cria os arquivos para você.
@@ -25,7 +25,7 @@ Copie os três arquivos para a pasta `~/.claude/landing-page/` (no Windows, `C:\
 ## Recebeu o perfil de alguém?
 
 ```
-/alfaiate:perfil importar perfil-<nome>.md
+/vitrine:perfil importar perfil-<nome>.md
 ```
 
 O perfil importado vira uma cópia sua. Depois, é só pedir para adaptar ao seu gosto.

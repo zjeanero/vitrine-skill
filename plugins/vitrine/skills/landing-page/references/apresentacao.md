@@ -30,7 +30,7 @@ Depois, mova `pagina.pdf` para `<cliente>/conceitos/`.
    - **De onde vem:** o objeto ou o jeito do negócio que inspirou a direção.
    - **Tipografia ao vivo:** o nome do negócio e um título real escritos nas fontes da direção, com acentos (ã, ç). Use texto, nunca imagem.
    - **Cores:** de 3 a 5 amostras, com nomes que digam de onde vêm ("casca do pão", "papel do saco") e não códigos.
-   - **A primeira tela da direção, de verdade:** feita em HTML e CSS no arquivo `direcao-N.html`, que funciona sozinho no computador e no celular. A apresentação mostra esse arquivo numa moldura de computador reduzida (`<iframe>` de 1440×900 com `transform: scale()`) e numa moldura de celular (`<iframe>` de 390×844). É o que mais convence o cliente. Com arquivos separados, cada direção também pode passar por `/alfaiate:avaliar`, e a construção reaproveita a direção escolhida.
+   - **A primeira tela da direção, de verdade:** feita em HTML e CSS no arquivo `direcao-N.html`, que funciona sozinho no computador e no celular. A apresentação mostra esse arquivo numa moldura de computador reduzida (`<iframe>` de 1440×900 com `transform: scale()`) e numa moldura de celular (`<iframe>` de 390×844). É o que mais convence o cliente. Com arquivos separados, cada direção também pode passar por `/vitrine:avaliar`, e a construção reaproveita a direção escolhida.
    - **O momento especial:** em 2 linhas, a coisa de que as pessoas vão lembrar.
    - **O que essa direção evita.**
    - **O que ela mantém do setor:** os sinais que fazem o cliente final reconhecer e confiar ("continua com cara de consultório: limpo, calmo, com o CRO à vista").
