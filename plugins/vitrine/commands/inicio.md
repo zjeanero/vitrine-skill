@@ -1,5 +1,5 @@
 ---
-description: Mostra o passo a passo da skill landing-page, confere se o computador está pronto e diz como começar
+description: Mostra o passo a passo da Vitrine, confere se o computador está pronto e diz como começar
 allowed-tools: Read, Glob, Bash(node:*), PowerShell(node:*)
 ---
 

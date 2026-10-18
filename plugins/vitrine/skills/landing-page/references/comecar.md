@@ -11,12 +11,14 @@ Mostre este guia quando a pessoa usar `/vitrine:inicio`, pedir ajuda ("como uso 
 
 ## O que eu faço
 
-Eu crio landing pages com identidade própria, que não parecem feitas por IA, para os seus clientes: restaurante, padaria, clínica, oficina, loja, escritório, profissional liberal. Cada página nasce do mundo do cliente, com os objetos, as palavras e o jeito do negócio dele. Nada de template.
+Seu site é a vitrine, e ela precisa ter a sua cara. Eu crio sites, landing pages e portfólios com personalidade, para você e para os seus clientes: restaurante, padaria, clínica, oficina, loja, escritório, profissional liberal. Começo descobrindo o que só aquele negócio, ou você, tem: os objetos do dia a dia, as palavras, o jeito de trabalhar. Depois uso isso no visual, no texto e nos detalhes. Nada de template.
 
 ## Passo a passo
 
 **Uma vez só: monte o seu perfil (uns 5 minutos)**
 `/vitrine:perfil`: me conte para quem você faz sites, qual stack usa, o que odeia, e me mande de 3 a 5 referências de sites que você admira. Podem ser **links ou prints** (arraste a imagem para o chat). Eu analiso e guardo o seu gosto. Todo site sai mais com a sua cara.
+
+**Para o seu próprio site ou portfólio:** é o mesmo caminho, e o cliente é você. Comece com `/vitrine:site meu portfólio` e me conte do seu trabalho.
 
 **Para cada cliente:**
 
@@ -36,7 +38,7 @@ Eu crio landing pages com identidade própria, que não parecem feitas por IA, p
 5. **Ajustes:** fale normalmente. "Aumenta o título", "troca a cor do botão", "o cliente mandou fotos novas, coloca no lugar das pendentes".
 
 6. **Aprovação:** `/vitrine:avaliar`
-   Uma página com os prints, para marcar Aprovado, Em dúvida ou Não aprovado. Com o tempo, eu aprendo o que funciona pra você e puxo os próximos sites para esse lado.
+   Uma página com os prints, para marcar Aprovado, Em dúvida ou Não aprovado e apontar no print o lugar exato de cada ajuste. Com o tempo, eu aprendo o que funciona pra você e puxo os próximos sites para esse lado.
 
 ## Comandos
 
@@ -49,7 +51,7 @@ Eu crio landing pages com identidade própria, que não parecem feitas por IA, p
 | `/vitrine:conceitos` | Apresentação das direções para o cliente escolher |
 | `/vitrine:site` | Constrói o site |
 | `/vitrine:revisar` | Diagnóstico de um site existente: o que tem "cara de IA" e o que falta |
-| `/vitrine:avaliar` | Página para aprovar ou reprovar sites prontos. Eu aprendo o seu gosto com isso |
+| `/vitrine:avaliar` | Página para aprovar sites prontos e marcar ajustes no print. Eu aprendo o seu gosto com isso |
 
 Nada disso é obrigatório: dá para pedir tudo falando normalmente, por exemplo "faz uma landing page pra barbearia do Marcos em Contagem…".
 
