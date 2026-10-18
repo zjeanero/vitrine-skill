@@ -5,7 +5,11 @@ A pessoa avalia sites prontos (dela, de teste ou de cliente) numa página simple
 ## 1. Gerar a página de aprovação
 
 1. **Escolha os sites:** os da pasta indicada, os projetos recentes do `registro.md` ou um lote de testes. Mais de 8 cansa; divida em lotes.
-2. **Garanta os prints de cada site:** `desktop-01.png`, `mobile-01.png` e `desktop-full.jpg`. Se faltarem, rode `scripts/screenshot.mjs` no `index.html` do site.
+2. **Garanta os prints de cada site:**
+   - `desktop-01.png`, `mobile-01.png` e `desktop-full.jpg`;
+   - para a pessoa poder **marcar no print** o lugar exato de cada ajuste, também `mobile-full.jpg`, `desktop-mapa.json` e `mobile-mapa.json` na mesma pasta.
+
+   O `scripts/screenshot.mjs` gera tudo isso; rode-o no `index.html` do site. Prints antigos, sem os mapas, ainda funcionam: aí a página só deixa desenhar uma área.
 3. **Escreva o manifesto** (`aprovacao-manifesto.json`), com caminhos relativos a ele:
 
 ```json
@@ -30,13 +34,13 @@ node <pasta-desta-skill>/scripts/aprovacao.mjs <manifesto.json> <pasta>/aprovaca
 
    Para publicar a página no claude.ai (por exemplo, para a pessoa avaliar pelo celular, longe do computador), gere com `--artefato` e publique esse arquivo como página privada.
 
-5. **Entregue o caminho do `aprovacao.html`** (ou o link da página publicada) e explique em uma frase: abrir, carimbar, tocar em **Assinar e copiar resultado** e colar aqui.
+5. **Entregue o caminho do `aprovacao.html`** (ou o link da página publicada) e explique em uma frase: abrir, carimbar, marcar no print o que quiser mudar, tocar em **Assinar e copiar resultado** e colar aqui.
 
 ## 2. Processar o resultado
 
 O texto colado termina com um bloco `<lp-aprovacao>{...}</lp-aprovacao>`. Ele tem:
 - o lote e a data;
-- para cada site: o código, o veredito (`aprovado`, `duvida`, `nao` ou nulo), as listas `gostei` e `naoCurti` e a `obs`;
+- para cada site: o código, o veredito (`aprovado`, `duvida`, `nao` ou nulo), as listas `gostei` e `naoCurti`, a `obs` e as `marcas` (ajustes apontados no print, veja abaixo);
 - `escolhas`: em cada grupo com mais de uma versão, qual iria para o cliente (um código, `nenhuma` ou nulo).
 
 **A escolha é o sinal mais forte de preferência.** Ela desempata quando tudo foi aprovado.
@@ -59,11 +63,37 @@ O texto colado termina com um bloco `<lp-aprovacao>{...}</lp-aprovacao>`. Ele te
 Em "Escolhido p/ cliente", use "Sim", "Não" ou "—" quando não houve comparação.
 
 4. **Recalcule `~/.claude/landing-page/gosto-aprendido.md`** a partir de **todo** o histórico (formato abaixo).
-5. **Responda à pessoa** com:
+5. **Anote os ajustes marcados** no `NOTAS.md` do site (veja "Marcas no print", abaixo).
+6. **Responda à pessoa** com:
    - o placar do lote;
    - o que aprendeu de novo;
    - no modo cego, a revelação de qual era qual;
-   - o que vai mudar nos próximos sites.
+   - o que vai mudar nos próximos sites;
+   - se houver marcas: quantos ajustes ficaram anotados, e a pergunta se é para aplicar agora.
+
+## Marcas no print
+
+Cada marca é um pedido de ajuste com lugar exato. Ela vem assim:
+
+```json
+{ "n": 1, "vista": "celular",
+  "alvo": { "seletor": "section.abertura h1", "tipo": "título", "rotulo": "Pouco de cada vez" },
+  "dentro": null, "contem": [], "area": { "x": 20, "y": 640, "w": 350, "h": 120 },
+  "obs": "Título um pouco menor no celular" }
+```
+
+- **`alvo`:** o componente que a pessoa tocou, com o seletor CSS do site renderizado.
+- **`dentro` e `contem`:** quando ela desenhou uma área livre, `alvo` vem nulo. `dentro` é o menor componente que contém a área, e `contem` lista os componentes que estão inteiros dentro dela.
+- **`area`:** a posição em pixels da página inteira, na `vista` indicada (computador com 1440 de largura, celular com 390).
+
+**Como tratar:**
+1. **Anote no `NOTAS.md`** do site, numa seção "Ajustes pedidos na aprovação (<data>)", um item por marca: `- [ ] (celular) título "Pouco de cada vez" (section.abertura h1): Título um pouco menor no celular`.
+2. **Marca sem anotação** quer dizer "isto me incomodou". Pergunte o que mudar antes de mexer.
+3. **Para aplicar:**
+   - ache o elemento pelo seletor (id e classes aparecem no HTML e no CSS do site). Numa área livre, use `dentro` e `contem`;
+   - respeite a `vista`. Ajuste de celular vai nos estilos base, que são mobile-first; ajuste de computador vai dentro do `@media` de tela larga. Assim um não estraga o outro.
+4. **Confira só o lugar mexido:** rode o screenshot de novo e abra a tela que contém a marca, sem precisar abrir todas. A tela é `floor(area.y / altura da tela) + 1`: 900 no computador e 844 no celular. Por exemplo, `y: 1900` no computador fica em `desktop-03.png`. Depois marque o item como feito no `NOTAS.md`.
+5. **O que vai para o `gosto-aprendido.md`:** só anotações que falam de gosto em geral, como "linha fina demais some". Elas entram em "Pedidos diretos". Correções específicas do site, como "trocar esta foto", ficam só no `NOTAS.md`.
 
 ## Formato do `gosto-aprendido.md`
 

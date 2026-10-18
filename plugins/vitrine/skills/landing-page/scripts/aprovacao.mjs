@@ -20,6 +20,10 @@
 //     ]
 //   }
 //
+// Marcar ajustes: se ao lado de desktop-full.jpg existirem mobile-full.jpg, desktop-mapa.json e mobile-mapa.json
+// (o screenshot.mjs gera os quatro), a página deixa tocar num componente do print, ou desenhar uma área,
+// e anotar o que mudar ali. Para caminhos diferentes, use "imagens.inteiraCelular" e "mapas": { "computador", "celular" }.
+//
 // Saídas: <saida.html> e, no modo cego, <saida>-chaves.json (qual versão é qual; não mande ao avaliador).
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -47,6 +51,24 @@ const embed = (p) => {
   return `data:${MIME[extname(f).toLowerCase()] || 'application/octet-stream'};base64,${readFileSync(f).toString('base64')}`;
 };
 
+// Arquivo irmão (ex.: mobile-full.jpg ao lado de desktop-full.jpg), se existir.
+const irmao = (p, de, para) => {
+  if (!p) return null;
+  const q = p.replace(de, para);
+  return q !== p && existsSync(resolve(base, q)) ? q : null;
+};
+// Mapa de componentes compactado em arrays: [x, y, w, h, pai, tipo, rótulo, seletor].
+const lerMapa = (p) => {
+  if (!p || !existsSync(resolve(base, p))) return null;
+  try {
+    const m = JSON.parse(readFileSync(resolve(base, p), 'utf8'));
+    return m.itens.map((i) => [i.x, i.y, i.w, i.h, i.p ?? -1, i.t, i.r, i.s]);
+  } catch (e) {
+    console.warn(`Aviso: mapa ilegível: ${p}`);
+    return null;
+  }
+};
+
 // Agrupa e, no modo cego, embaralha dentro de cada grupo e troca os ids por códigos opacos.
 const groups = new Map();
 for (const it of man.itens) {
@@ -60,15 +82,23 @@ for (const [grupo, its] of groups) {
   list.forEach((it, i) => {
     const code = man.cego ? randomBytes(3).toString('hex') : it.id;
     keys[code] = { id: it.id, grupo, rotulo: it.rotulo ?? null };
+    const inteira = it.imagens?.inteira;
+    const inteiraCelular = it.imagens?.inteiraCelular ?? irmao(inteira, /desktop-full\.jpg$/, 'mobile-full.jpg');
+    const imagens = {
+      desktop: embed(it.imagens?.desktop),
+      celular: embed(it.imagens?.celular),
+      inteira: embed(inteira),
+      inteiraCelular: embed(inteiraCelular),
+    };
+    const paginas = [];
+    if (imagens.inteira) paginas.push({ vista: 'computador', img: 'inteira', mapa: lerMapa(it.mapas?.computador ?? irmao(inteira, /desktop-full\.jpg$/, 'desktop-mapa.json')) });
+    if (imagens.inteiraCelular) paginas.push({ vista: 'celular', img: 'inteiraCelular', mapa: lerMapa(it.mapas?.celular ?? irmao(inteiraCelular, /mobile-full\.jpg$/, 'mobile-mapa.json')) });
     cards.push({
       codigo: code,
       grupo,
       nome: man.cego ? `Versão ${String.fromCharCode(65 + i)}` : it.rotulo || it.id,
-      imagens: {
-        desktop: embed(it.imagens?.desktop),
-        celular: embed(it.imagens?.celular),
-        inteira: embed(it.imagens?.inteira),
-      },
+      imagens,
+      paginas,
     });
   });
 }
@@ -106,6 +136,7 @@ const head = `<meta charset="utf-8">
   --foco: oklch(55% 0.2 262);
   --sombra: oklch(30% 0.05 170 / .22);
   --vela: oklch(15% 0.02 255 / .9);
+  --sobre-cor: oklch(99% 0 0);
   --display: "Big Shoulders", "Arial Narrow", Impact, sans-serif;
   --texto: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "Fragment Mono", ui-monospace, Consolas, monospace;
@@ -281,6 +312,97 @@ h1 { margin: 0; font: 800 clamp(2.5rem, 1.3rem + 5.4vw, 4.8rem)/.9 var(--display
 .zoom { position: fixed; inset: 0; z-index: 40; overflow: auto; background: var(--vela); cursor: zoom-out; padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px); }
 .zoom img { display: block; max-width: 100%; margin: 0 auto; }
 
+/* ajustes marcados no print: a tinta magenta da correção de prova */
+.marcas { display: grid; gap: 6px; }
+.marcas-topo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 14px; }
+.marcas-topo .rotulo { margin: 0; color: var(--tinta-suave); }
+.marcar {
+  font: 600 .95rem/1.2 var(--texto); color: var(--magenta); background: transparent;
+  border: 1.5px solid currentColor; border-radius: 3px; padding: 10px 14px; min-height: 44px; cursor: pointer;
+}
+.marcar:hover { background: color-mix(in oklch, var(--magenta) 8%, transparent); }
+.marcas-lista { list-style: none; margin: 0; padding: 0; display: grid; }
+.marca-linha {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px; align-items: start; width: 100%;
+  padding: 9px 2px; background: transparent; border: 0; border-bottom: 1px dashed var(--fio);
+  color: var(--tinta); text-align: left; cursor: pointer;
+}
+.marca-linha .onde { display: block; font: 400 .76rem/1.35 var(--mono); color: var(--tinta-suave); overflow-wrap: anywhere; }
+.marca-linha .pedido { display: block; font: 400 .95rem/1.4 var(--texto); overflow-wrap: anywhere; }
+.pino {
+  display: inline-grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 13px;
+  background: var(--magenta); color: var(--sobre-cor); font: 400 .78rem/1 var(--mono); border: 0;
+}
+
+/* mesa de marcação: o print inteiro, com o mapa dos componentes por cima */
+.mesa-marcar {
+  position: fixed; inset: 0; z-index: 50; display: grid; grid-template-rows: auto minmax(0, 1fr);
+  background: var(--faixa); color: var(--faixa-texto);
+}
+.mm-barra {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+  border-bottom: 1px solid color-mix(in oklch, var(--faixa-texto) 20%, transparent);
+}
+.mm-titulo { margin: 0 auto 0 0; min-width: 0; font: 800 1.1rem/1.1 var(--display); text-transform: uppercase; letter-spacing: .06em; }
+.mm-grupo { display: flex; border: 1px solid color-mix(in oklch, var(--faixa-texto) 35%, transparent); border-radius: 3px; }
+.mm-grupo button, .mm-perto {
+  background: transparent; color: var(--faixa-texto); border: 0; padding: 9px 12px; min-height: 40px;
+  font: 400 .78rem/1 var(--mono); letter-spacing: .04em; cursor: pointer;
+}
+.mm-perto { border: 1px solid color-mix(in oklch, var(--faixa-texto) 35%, transparent); border-radius: 3px; }
+.mm-grupo button[aria-pressed="true"], .mm-perto[aria-pressed="true"] { background: var(--faixa-texto); color: var(--faixa); }
+.mm-grupo button:disabled { opacity: .4; cursor: not-allowed; }
+.mm-pronto {
+  font: 800 .95rem/1 var(--display); text-transform: uppercase; letter-spacing: .08em;
+  background: var(--magenta); color: var(--sobre-cor); border: 0; border-radius: 3px; padding: 11px 16px; min-height: 42px; cursor: pointer;
+}
+.mm-corpo { display: grid; grid-template-rows: minmax(0, 1fr) auto; min-height: 0; }
+.mm-rolagem { overflow: auto; overscroll-behavior: contain; padding: 16px max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px)); }
+.mm-palco { position: relative; margin: 0 auto; width: 100%; max-width: 1100px; }
+.mm-palco[data-vista="celular"] { max-width: 390px; }
+.mm-palco.perto { max-width: none; width: 220%; }
+.mm-palco[data-vista="celular"].perto { width: 160%; max-width: 640px; }
+.mm-palco img { display: block; width: 100%; height: auto; max-width: none; background: var(--folha); user-select: none; -webkit-user-drag: none; }
+.mm-camada { position: absolute; inset: 0; cursor: pointer; }
+.mm-camada[data-modo="area"] { touch-action: none; cursor: crosshair; }
+.mm-caixa { position: absolute; pointer-events: none; }
+.mm-caixa.foco { outline: 2px dashed var(--ciano); background: color-mix(in oklch, var(--ciano) 14%, transparent); }
+.mm-caixa.marca { outline: 2px solid var(--magenta); background: color-mix(in oklch, var(--magenta) 10%, transparent); }
+.mm-caixa.marca.ativa { outline-width: 4px; background: color-mix(in oklch, var(--magenta) 18%, transparent); }
+.mm-caixa.desenho { outline: 2px dashed var(--magenta); background: color-mix(in oklch, var(--magenta) 8%, transparent); }
+.mm-caixa .pino { position: absolute; left: -13px; top: -13px; pointer-events: auto; cursor: pointer; box-shadow: 0 0 0 2px var(--folha); }
+.mm-etiqueta {
+  position: absolute; transform: translateY(-100%); pointer-events: none; max-width: 70%;
+  background: var(--ciano); color: var(--tinta); font: 400 .72rem/1.2 var(--mono); padding: 3px 6px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mm-painel {
+  background: var(--folha); color: var(--tinta); display: grid; gap: 12px; align-content: start;
+  max-height: 40vh; overflow: auto;
+  padding: 14px max(16px, env(safe-area-inset-right, 0px)) calc(14px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+}
+.mm-painel .rotulo { margin: 0; color: var(--tinta-suave); }
+.mm-alvo { margin: 0; font: 600 1rem/1.35 var(--texto); overflow-wrap: anywhere; }
+.mm-ajuda { margin: 0; color: var(--tinta-suave); max-width: 46ch; }
+.mm-acoes { display: flex; flex-wrap: wrap; gap: 8px; }
+.mm-acoes button {
+  background: transparent; color: var(--tinta); border: 1.5px solid var(--tinta); border-radius: 3px;
+  padding: 9px 12px; min-height: 40px; font: 600 .85rem/1.2 var(--texto); cursor: pointer;
+}
+.mm-acoes .apagar { color: var(--reprova); border-color: var(--reprova); }
+.mm-painel .anotacao { min-height: 58px; }
+@media (max-width: 560px) {
+  .mm-titulo { display: none; }
+  .mm-barra { gap: 8px; }
+  .mm-grupo button, .mm-perto { padding: 9px 10px; letter-spacing: 0; }
+  .mm-pronto { padding: 11px 13px; }
+}
+@media (min-width: 900px) {
+  .mm-corpo { grid-template-rows: none; grid-template-columns: minmax(0, 1fr) 340px; }
+  .mm-painel { max-height: none; }
+}
+
 @media (min-width: 680px) {
   .conferencia { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
 }
@@ -297,7 +419,7 @@ const bodyContent = `<svg width="0" height="0" style="position:absolute" aria-hi
   <div class="barra-cor" aria-hidden="true"><i class="c"></i><i class="m"></i><i class="y"></i><i class="k"></i><i class="t1"></i><i class="t2"></i><i class="t3"></i></div>
   <p class="meta rotulo">Prova · lote ${escapeHtml(data.lote)} · ${data.cards.length} ${data.cards.length === 1 ? 'peça' : 'peças'}</p>
   <h1>${escapeHtml(data.titulo)}</h1>
-  <p class="ajuda">Carimbe cada peça, marque o que funcionou e o que não funcionou e anote o que você mudaria. Toque num print para ampliar.${data.cego ? ' As versões têm nomes sorteados, para você avaliar sem saber qual é qual.' : ''} No fim, assine e copie o resultado para colar no Claude. As respostas ficam salvas neste navegador.</p>
+  <p class="ajuda">Carimbe cada peça, marque o que funcionou e o que não funcionou e anote o que você mudaria. Toque num print para ampliar, ou em Marcar no print para apontar o lugar exato de um ajuste.${data.cego ? ' As versões têm nomes sorteados, para você avaliar sem saber qual é qual.' : ''} No fim, assine e copie o resultado para colar no Claude. As respostas ficam salvas neste navegador.</p>
 </header>
 <main id="lista" class="miolo"></main>
 <footer class="assinatura">
@@ -311,6 +433,23 @@ const bodyContent = `<svg width="0" height="0" style="position:absolute" aria-hi
   </div>
 </footer>
 <div class="zoom" id="zoom" hidden><img alt=""></div>
+<div class="mesa-marcar" id="marcar" hidden role="dialog" aria-modal="true" aria-label="Marcar ajustes no print">
+  <div class="mm-barra">
+    <p class="mm-titulo"></p>
+    <div class="mm-grupo" data-grupo="vista" role="group" aria-label="Qual print">
+      <button type="button" data-v="computador">Computador</button><button type="button" data-v="celular">Celular</button>
+    </div>
+    <div class="mm-grupo" data-grupo="modo" role="group" aria-label="Como marcar">
+      <button type="button" data-v="componente">Componente</button><button type="button" data-v="area">Área livre</button>
+    </div>
+    <button type="button" class="mm-perto" aria-pressed="false" aria-label="Aproximar o print">Zoom</button>
+    <button type="button" class="mm-pronto">Pronto</button>
+  </div>
+  <div class="mm-corpo">
+    <div class="mm-rolagem"><div class="mm-palco"><img alt="Print da página inteira"><div class="mm-camada"></div></div></div>
+    <aside class="mm-painel" aria-live="polite"></aside>
+  </div>
+</div>
 <script type="application/json" id="dados">${JSON.stringify(data).replace(/</g, '\\u003c')}</script>
 <script>
 (() => {
@@ -322,7 +461,8 @@ const bodyContent = `<svg width="0" height="0" style="position:absolute" aria-hi
   let estado = {};
   try { estado = JSON.parse(localStorage.getItem(chave) || '{}') || {}; } catch (e) { estado = {}; }
   const salvar = () => { try { localStorage.setItem(chave, JSON.stringify(estado)); } catch (e) {} };
-  const item = (c) => (estado[c] ||= { veredito: null, gostei: [], naoCurti: [], obs: '' });
+  const item = (c) => (estado[c] ||= { veredito: null, gostei: [], naoCurti: [], obs: '', marcas: [] });
+  const marcasDe = (s) => (s.marcas ||= []);
   const escolhas = (estado.__escolhas ||= {});
 
   const el = (tag, attrs = {}, ...filhos) => {
@@ -346,7 +486,246 @@ const bodyContent = `<svg width="0" height="0" style="position:absolute" aria-hi
   const zoom = document.getElementById('zoom');
   const abrirZoom = (src) => { zoom.querySelector('img').src = src; zoom.hidden = false; zoom.scrollTop = 0; };
   zoom.addEventListener('click', () => { zoom.hidden = true; });
-  document.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') zoom.hidden = true; });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key !== 'Escape') return;
+    if (!mm.hidden) fecharMarcar(); else zoom.hidden = true;
+  });
+
+  // ---------- marcar ajustes no print ----------
+  // Cada item do mapa é [x, y, w, h, pai, tipo, rótulo, seletor], em px da página inteira.
+  const mm = document.getElementById('marcar');
+  const mmTitulo = mm.querySelector('.mm-titulo');
+  const mmVistas = mm.querySelector('[data-grupo="vista"]');
+  const mmModos = mm.querySelector('[data-grupo="modo"]');
+  const mmPerto = mm.querySelector('.mm-perto');
+  const rolagem = mm.querySelector('.mm-rolagem');
+  const palco = mm.querySelector('.mm-palco');
+  const mmImg = palco.querySelector('img');
+  const camada = mm.querySelector('.mm-camada');
+  const painel = mm.querySelector('.mm-painel');
+  const NOME_VISTA = { computador: 'Computador', celular: 'Celular' };
+  let atual = null;
+  let natW = 1, natH = 1;
+
+  const curto = (t, n) => (t.length > n ? t.slice(0, n - 1) + '…' : t);
+  const maiuscula = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+  const info = (e) => ({ seletor: e[7], tipo: e[5], rotulo: e[6] });
+  const caixaDe = (e) => ({ x: e[0], y: e[1], w: e[2], h: e[3] });
+  const descrever = (m) => m.alvo
+    ? maiuscula(m.alvo.tipo) + (m.alvo.rotulo ? ' "' + curto(m.alvo.rotulo, 46) + '"' : '')
+    : 'Área livre' + (m.dentro ? ', em ' + m.dentro.tipo + (m.dentro.rotulo ? ' "' + curto(m.dentro.rotulo, 32) + '"' : '') : '');
+  const paginaAtual = () => atual.c.paginas.find((p) => p.vista === atual.vista);
+  const mapaAtual = () => (paginaAtual() || {}).mapa || null;
+
+  function noPonto(mapa, x, y) {
+    let melhor = -1, menor = Infinity;
+    mapa.forEach((e, i) => {
+      if (x >= e[0] && x <= e[0] + e[2] && y >= e[1] && y <= e[1] + e[3] && e[2] * e[3] < menor) { menor = e[2] * e[3]; melhor = i; }
+    });
+    return melhor;
+  }
+  // Área desenhada: o menor componente que a contém e os componentes de fora mais externos que estão dentro dela.
+  function analisarArea(mapa, a) {
+    let dentro = null, menor = Infinity;
+    const dentroDela = new Set();
+    mapa.forEach((e, i) => {
+      if (e[0] <= a.x && e[1] <= a.y && e[0] + e[2] >= a.x + a.w && e[1] + e[3] >= a.y + a.h && e[2] * e[3] < menor) { menor = e[2] * e[3]; dentro = e; }
+      if (e[0] >= a.x && e[1] >= a.y && e[0] + e[2] <= a.x + a.w && e[1] + e[3] <= a.y + a.h) dentroDela.add(i);
+    });
+    const contem = [...dentroDela].filter((i) => !dentroDela.has(mapa[i][4]))
+      .sort((p, q) => mapa[q][2] * mapa[q][3] - mapa[p][2] * mapa[p][3]).slice(0, 4).map((i) => info(mapa[i]));
+    return { dentro: dentro ? info(dentro) : null, contem };
+  }
+
+  const pct = (v, total) => (100 * v / total) + '%';
+  function posicionar(n, a) {
+    n.style.left = pct(a.x, natW); n.style.top = pct(a.y, natH);
+    n.style.width = pct(a.w, natW); n.style.height = pct(a.h, natH);
+  }
+  function pontoPagina(ev) {
+    const r = camada.getBoundingClientRect();
+    const x = Math.min(natW, Math.max(0, (ev.clientX - r.left) / r.width * natW));
+    const y = Math.min(natH, Math.max(0, (ev.clientY - r.top) / r.height * natH));
+    return [Math.round(x), Math.round(y)];
+  }
+
+  const foco = el('div', { class: 'mm-caixa foco', hidden: '' });
+  const etiqueta = el('div', { class: 'mm-etiqueta', hidden: '' });
+  function mostrarFoco(i) {
+    const mapa = mapaAtual();
+    if (!mapa || i < 0) { foco.hidden = true; etiqueta.hidden = true; return; }
+    const e = mapa[i];
+    posicionar(foco, caixaDe(e));
+    etiqueta.style.left = pct(e[0], natW); etiqueta.style.top = pct(e[1], natH);
+    etiqueta.textContent = maiuscula(e[5]) + (e[6] ? ': ' + e[6] : '');
+    foco.hidden = false; etiqueta.hidden = false;
+  }
+
+  function novaMarca(dados) {
+    const lista = marcasDe(atual.s);
+    const m = Object.assign({ n: lista.length + 1, vista: atual.vista, i: -1, alvo: null, dentro: null, contem: [], area: null, obs: '' }, dados);
+    lista.push(m);
+    atual.ativa = m.n;
+    salvar();
+    desenhar();
+    const t = painel.querySelector('textarea');
+    if (t) t.focus({ preventScroll: true });
+  }
+
+  function desenhar() {
+    camada.querySelectorAll('.marca').forEach((n) => n.remove());
+    for (const m of marcasDe(atual.s)) {
+      if (m.vista !== atual.vista) continue;
+      const b = el('div', { class: 'mm-caixa marca' + (m.n === atual.ativa ? ' ativa' : '') });
+      posicionar(b, m.area);
+      const pino = el('button', { class: 'pino', type: 'button', 'aria-label': 'Marca ' + m.n + ': ' + descrever(m), text: String(m.n) });
+      pino.addEventListener('pointerdown', (ev) => ev.stopPropagation());
+      pino.addEventListener('click', (ev) => { ev.stopPropagation(); atual.ativa = m.n; desenhar(); });
+      b.append(pino);
+      camada.append(b);
+    }
+    for (const b of mmVistas.querySelectorAll('button')) {
+      b.setAttribute('aria-pressed', String(b.dataset.v === atual.vista));
+      b.hidden = !atual.c.paginas.some((p) => p.vista === b.dataset.v);
+    }
+    for (const b of mmModos.querySelectorAll('button')) {
+      b.setAttribute('aria-pressed', String(b.dataset.v === atual.modo));
+      if (b.dataset.v === 'componente') b.disabled = !mapaAtual();
+    }
+    camada.dataset.modo = atual.modo;
+    renderPainel();
+  }
+
+  function renderPainel() {
+    painel.replaceChildren();
+    const lista = marcasDe(atual.s);
+    const m = lista.find((x) => x.n === atual.ativa);
+    if (m) {
+      const t = el('textarea', { id: 'mm-obs', class: 'anotacao', placeholder: 'O que mudar aqui?', 'aria-label': 'O que mudar na marca ' + m.n });
+      t.value = m.obs;
+      t.addEventListener('input', () => {
+        m.obs = t.value; salvar();
+        const p = painel.querySelector('.pedido[data-n="' + m.n + '"]');
+        if (p) p.textContent = m.obs || 'Sem anotação ainda';
+      });
+      const acoes = el('div', { class: 'mm-acoes' });
+      const mapa = (atual.c.paginas.find((p) => p.vista === m.vista) || {}).mapa;
+      if (mapa && m.i >= 0 && mapa[m.i][4] >= 0) {
+        const maior = el('button', { type: 'button', text: 'Pegar a área em volta' });
+        maior.addEventListener('click', () => {
+          m.i = mapa[m.i][4]; m.alvo = info(mapa[m.i]); m.area = caixaDe(mapa[m.i]);
+          salvar(); desenhar();
+        });
+        acoes.append(maior);
+      }
+      const apagar = el('button', { type: 'button', class: 'apagar', text: 'Apagar marca' });
+      apagar.addEventListener('click', () => {
+        lista.splice(lista.indexOf(m), 1);
+        lista.forEach((x, k) => { x.n = k + 1; });
+        atual.ativa = null; salvar(); desenhar();
+      });
+      acoes.append(apagar);
+      painel.append(el('p', { class: 'rotulo', text: 'Marca ' + m.n + ' · ' + NOME_VISTA[m.vista] }), el('p', { class: 'mm-alvo', text: descrever(m) }), t, acoes);
+    } else {
+      painel.append(el('p', { class: 'mm-ajuda', text: mapaAtual()
+        ? 'Toque num título, texto, botão, imagem ou seção do print para marcar o que mudar ali. Para marcar um pedaço qualquer, use Área livre e arraste.'
+        : 'Arraste sobre o print para marcar a área que você quer mudar.' }));
+    }
+    if (lista.length) {
+      const ol = el('ol', { class: 'marcas-lista' });
+      for (const x of lista) {
+        const b = el('button', { class: 'marca-linha', type: 'button' },
+          el('span', { class: 'pino', text: String(x.n) }),
+          el('span', {}, el('span', { class: 'onde', text: NOME_VISTA[x.vista] + ' · ' + descrever(x) }), el('span', { class: 'pedido', 'data-n': String(x.n), text: x.obs || 'Sem anotação ainda' })));
+        b.addEventListener('click', () => irPara(x));
+        ol.append(el('li', {}, b));
+      }
+      painel.append(el('p', { class: 'rotulo', text: 'Marcas desta peça' }), ol);
+    }
+  }
+
+  async function trocarVista(vista) {
+    atual.vista = vista;
+    const pg = paginaAtual();
+    if (!pg.mapa) atual.modo = 'area';
+    palco.dataset.vista = vista;
+    mmImg.src = atual.c.imagens[pg.img];
+    try { await mmImg.decode(); } catch (e) {}
+    natW = mmImg.naturalWidth || 1; natH = mmImg.naturalHeight || 1;
+    mostrarFoco(-1);
+    desenhar();
+  }
+
+  async function irPara(m) {
+    atual.ativa = m.n;
+    if (m.vista !== atual.vista) await trocarVista(m.vista); else desenhar();
+    const topo = m.area.y / natH * palco.offsetHeight;
+    rolagem.scrollTop = Math.max(0, topo - 80);
+  }
+
+  function abrirMarcar(c, s, n, aoFechar) {
+    const m = n ? marcasDe(s).find((x) => x.n === n) : null;
+    atual = { c, s, vista: m ? m.vista : c.paginas[0].vista, modo: 'componente', ativa: null, aoFechar };
+    mmTitulo.textContent = 'Marcar ajustes · ' + c.nome;
+    mm.hidden = false;
+    document.body.style.overflow = 'hidden';
+    trocarVista(atual.vista).then(() => { if (m) irPara(m); else rolagem.scrollTop = 0; });
+  }
+  function fecharMarcar() {
+    mm.hidden = true;
+    document.body.style.overflow = '';
+    if (atual && atual.aoFechar) atual.aoFechar();
+  }
+
+  camada.append(foco, etiqueta);
+  mm.querySelector('.mm-pronto').addEventListener('click', fecharMarcar);
+  mmVistas.addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (b && b.dataset.v !== atual.vista) trocarVista(b.dataset.v); });
+  mmModos.addEventListener('click', (ev) => { const b = ev.target.closest('button'); if (b && !b.disabled) { atual.modo = b.dataset.v; mostrarFoco(-1); desenhar(); } });
+  mmPerto.addEventListener('click', () => {
+    const perto = palco.classList.toggle('perto');
+    mmPerto.setAttribute('aria-pressed', String(perto));
+  });
+
+  // Tocar no componente: o clique (ou toque) marca o menor componente sob o dedo; o mouse mostra antes qual é.
+  camada.addEventListener('click', (ev) => {
+    if (atual.modo !== 'componente') return;
+    const mapa = mapaAtual();
+    if (!mapa) return;
+    const [x, y] = pontoPagina(ev);
+    const i = noPonto(mapa, x, y);
+    if (i < 0) return;
+    mostrarFoco(-1);
+    novaMarca({ i, alvo: info(mapa[i]), area: caixaDe(mapa[i]) });
+  });
+  // Desenhar área: arrastar com o mouse ou o dedo.
+  let inicio = null, desenho = null;
+  camada.addEventListener('pointerdown', (ev) => {
+    if (atual.modo !== 'area') return;
+    ev.preventDefault();
+    try { camada.setPointerCapture(ev.pointerId); } catch (e) {}
+    inicio = pontoPagina(ev);
+    desenho = el('div', { class: 'mm-caixa desenho' });
+    posicionar(desenho, { x: inicio[0], y: inicio[1], w: 0, h: 0 });
+    camada.append(desenho);
+  });
+  const retangulo = (a, b) => ({ x: Math.min(a[0], b[0]), y: Math.min(a[1], b[1]), w: Math.abs(a[0] - b[0]), h: Math.abs(a[1] - b[1]) });
+  camada.addEventListener('pointermove', (ev) => {
+    if (inicio) { posicionar(desenho, retangulo(inicio, pontoPagina(ev))); return; }
+    if (atual.modo !== 'componente' || ev.pointerType !== 'mouse' || !mapaAtual()) return;
+    const [x, y] = pontoPagina(ev);
+    mostrarFoco(noPonto(mapaAtual(), x, y));
+  });
+  camada.addEventListener('pointerleave', () => { if (!inicio) mostrarFoco(-1); });
+  const terminarDesenho = (ev, valer) => {
+    if (!inicio) return;
+    const a = retangulo(inicio, pontoPagina(ev));
+    inicio = null; desenho.remove(); desenho = null;
+    if (!valer || a.w < 12 || a.h < 12) return;
+    const mapa = mapaAtual();
+    novaMarca(Object.assign({ area: a }, mapa ? analisarArea(mapa, a) : {}));
+  };
+  camada.addEventListener('pointerup', (ev) => terminarDesenho(ev, true));
+  camada.addEventListener('pointercancel', (ev) => terminarDesenho(ev, false));
 
   const lista = document.getElementById('lista');
   let numero = 0;
@@ -374,6 +753,25 @@ const bodyContent = `<svg width="0" height="0" style="position:absolute" aria-hi
         prints.append(b);
       }
       folha.append(prints);
+
+      if (c.paginas.length) {
+        const botao = el('button', { class: 'marcar', type: 'button' });
+        const ol = el('ol', { class: 'marcas-lista' });
+        const renderLista = () => {
+          ol.replaceChildren(...marcasDe(s).map((m) => {
+            const b = el('button', { class: 'marca-linha', type: 'button' },
+              el('span', { class: 'pino', text: String(m.n) }),
+              el('span', {}, el('span', { class: 'onde', text: NOME_VISTA[m.vista] + ' · ' + descrever(m) }), el('span', { class: 'pedido', text: m.obs || 'Sem anotação ainda' })));
+            b.addEventListener('click', () => abrirMarcar(c, s, m.n, renderLista));
+            return el('li', {}, b);
+          }));
+          botao.textContent = marcasDe(s).length ? 'Marcar mais' : 'Marcar no print';
+        };
+        botao.addEventListener('click', () => abrirMarcar(c, s, null, renderLista));
+        renderLista();
+        folha.append(el('div', { class: 'marcas' },
+          el('div', { class: 'marcas-topo' }, el('p', { class: 'rotulo', text: 'Ajustes marcados no print' }), botao), ol));
+      }
 
       const carimbos = el('div', { class: 'carimbos', role: 'group', 'aria-label': 'Veredito de ' + c.nome });
       for (const [v, t] of VEREDITOS) {
@@ -452,11 +850,13 @@ const bodyContent = `<svg width="0" height="0" style="position:absolute" aria-hi
     const itens = [];
     for (const c of data.cards) {
       const s = item(c.codigo);
-      itens.push({ codigo: c.codigo, veredito: s.veredito, gostei: s.gostei, naoCurti: s.naoCurti, obs: s.obs.trim() });
+      const marcas = marcasDe(s).map((m) => ({ n: m.n, vista: m.vista, alvo: m.alvo, dentro: m.dentro, contem: m.contem, area: m.area, obs: m.obs.trim() }));
+      itens.push({ codigo: c.codigo, veredito: s.veredito, gostei: s.gostei, naoCurti: s.naoCurti, obs: s.obs.trim(), marcas });
       linhas.push(c.grupo + ' · ' + c.nome + ': ' + (NOMES[s.veredito] || 'sem avaliação') +
         (s.gostei.length ? ' · gostei: ' + s.gostei.join(', ') : '') +
         (s.naoCurti.length ? ' · não curti: ' + s.naoCurti.join(', ') : '') +
         (s.obs.trim() ? ' · obs: "' + s.obs.trim() + '"' : ''));
+      for (const m of marcasDe(s)) linhas.push('   ✎ ' + m.n + ' (' + m.vista + ' · ' + descrever(m) + '): ' + (m.obs.trim() || 'sem anotação'));
     }
     const escolhasLista = grupos.filter((g) => g.cards.length >= 2).map((g) => ({ grupo: g.nome, codigo: escolhas[g.nome] || null }));
     if (escolhasLista.length) {

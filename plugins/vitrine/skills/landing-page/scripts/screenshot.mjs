@@ -23,6 +23,8 @@
 //   desktop-01.png, desktop-02.png ...       uma imagem por tela rolada (1440x900)
 //   mobile-01.png, mobile-02.png ...         idem no celular (390x844)
 //   desktop-full.jpg, mobile-full.jpg        página inteira (até 12000px de altura)
+//   desktop-mapa.json, mobile-mapa.json      caixas dos componentes na página inteira (usadas na aprovação
+//                                            para marcar onde mudar; não precisa ler)
 //   report.json                              erros de JS, recursos que falharam, rolagem horizontal,
 //                                            conteúdo cortado na borda, fonte do título, WhatsApp na 1ª tela
 
@@ -310,6 +312,79 @@ const LAYOUT_JS = `(() => {
   return { scrollWidth: doc.scrollWidth, clientWidth: vw, overflowX, overflowingElements: wide, cortadoNaBorda: overflowX ? [] : cut, fonts };
 })()`;
 
+// Mapa de componentes da página: caixas (em px do documento) de seções, títulos, textos, botões,
+// imagens, listas e blocos, com um seletor CSS e um rótulo legível. A página de aprovação usa o mapa
+// para a pessoa tocar num componente do print e anotar exatamente o que mudar.
+const MAPA_JS = `(() => {
+  const doc = document.documentElement;
+  const W = doc.clientWidth, H = Math.min(12000, Math.max(doc.scrollHeight, document.body ? document.body.scrollHeight : 0));
+  const sy = window.scrollY, sx = window.scrollX;
+  const TIPOS = { HEADER: 'cabeçalho', NAV: 'menu', MAIN: 'conteúdo', SECTION: 'seção', ARTICLE: 'bloco', ASIDE: 'bloco', FOOTER: 'rodapé',
+    FORM: 'formulário', FIGURE: 'imagem', IMG: 'imagem', PICTURE: 'imagem', SVG: 'desenho', VIDEO: 'vídeo', CANVAS: 'desenho',
+    H1: 'título', H2: 'título', H3: 'subtítulo', H4: 'subtítulo', P: 'texto', BLOCKQUOTE: 'citação', UL: 'lista', OL: 'lista', DL: 'lista',
+    TABLE: 'tabela', DT: 'texto', DD: 'texto', A: 'link', BUTTON: 'botão', LABEL: 'campo', LI: 'item', DIV: 'bloco', DETAILS: 'bloco', SUMMARY: 'texto' };
+  const visivel = (el) => { const cs = getComputedStyle(el); return cs.display !== 'none' && cs.visibility !== 'hidden' && parseFloat(cs.opacity) > 0.05; };
+  const fixo = (el) => { for (let a = el; a && a !== doc; a = a.parentElement) if (getComputedStyle(a).position === 'fixed') return true; return false; };
+  const esc = (s) => (window.CSS && CSS.escape ? CSS.escape(s) : s);
+  const seletor = (el) => {
+    if (el.id) return '#' + esc(el.id);
+    const partes = [];
+    for (let a = el; a && a !== document.body && a !== doc; a = a.parentElement) {
+      if (a.id) { partes.unshift('#' + esc(a.id)); break; }
+      let p = a.tagName.toLowerCase();
+      const cl = [...a.classList].filter((c) => !/^(js-|is-|visto|ativo|aberto)/.test(c))[0];
+      if (cl) p += '.' + esc(cl);
+      const irmaos = a.parentElement ? [...a.parentElement.children].filter((x) => x.tagName === a.tagName) : [];
+      if (irmaos.length > 1) p += ':nth-of-type(' + (irmaos.indexOf(a) + 1) + ')';
+      partes.unshift(p);
+      const s = partes.join(' > ');
+      try { if (document.querySelectorAll(s).length === 1) return s; } catch (e) {}
+    }
+    return partes.join(' > ');
+  };
+  const texto = (el) => (el.innerText || el.textContent || '').replace(/\\s+/g, ' ').trim();
+  const rotulo = (el) => {
+    const t = el.tagName.toUpperCase();
+    if (t === 'IMG') return el.alt || 'imagem';
+    if (t === 'SVG' || t === 'CANVAS') return el.getAttribute('aria-label') || '';
+    if (/^(SECTION|HEADER|FOOTER|NAV|MAIN|ARTICLE|ASIDE|FORM|DIV|FIGURE|UL|OL|DL)$/.test(t)) {
+      const h = el.querySelector('h1,h2,h3,h4,legend,figcaption,summary');
+      return el.getAttribute('aria-label') || (h ? texto(h) : '') || texto(el);
+    }
+    return el.getAttribute('aria-label') || texto(el);
+  };
+  const SEL = 'header,nav,main,section,article,aside,footer,form,figure,img,picture,svg,video,canvas,h1,h2,h3,h4,p,blockquote,ul,ol,dl,dt,dd,table,a,button,label,li,div,details,summary';
+  const itens = [];
+  const naLista = new Map();
+  for (const el of document.body.querySelectorAll(SEL)) {
+    if (el.closest('svg') && el.tagName.toLowerCase() !== 'svg') continue;
+    if (el.tagName.toLowerCase() === 'svg' && el.parentElement && el.parentElement.closest('a,button')) continue;
+    const r = el.getBoundingClientRect();
+    const t = el.tagName.toUpperCase();
+    const min = t === 'DIV' ? [120, 48] : t === 'LI' ? [60, 40] : t === 'SVG' ? [40, 40] : [20, 14];
+    if (r.width < min[0] || r.height < min[1]) continue;
+    if (r.top + sy >= H || !visivel(el) || fixo(el)) continue;
+    if (t === 'DIV' && !el.className) continue;
+    let pai = null;
+    for (let a = el.parentElement; a; a = a.parentElement) if (naLista.has(a)) { pai = naLista.get(a); break; }
+    const caixa = { x: Math.round(r.left + sx), y: Math.round(r.top + sy), w: Math.round(r.width), h: Math.round(r.height) };
+    if (pai !== null) {
+      const p = itens[pai];
+      const igual = Math.abs(p.x - caixa.x) < 3 && Math.abs(p.y - caixa.y) < 3 && Math.abs(p.w - caixa.w) < 3 && Math.abs(p.h - caixa.h) < 3;
+      if (igual) {
+        // Mesma caixa do pai: fica a mais significativa (um bloco genérico cede lugar ao elemento semântico).
+        if (p.t === 'bloco' && TIPOS[t] !== 'bloco') Object.assign(p, { s: seletor(el), t: TIPOS[t], r: rotulo(el).slice(0, 70) });
+        naLista.set(el, pai);
+        continue;
+      }
+    }
+    naLista.set(el, itens.length);
+    itens.push({ s: seletor(el), t: TIPOS[t] || 'bloco', r: rotulo(el).slice(0, 70), ...caixa, p: pai });
+    if (itens.length >= 450) break;
+  }
+  return { largura: W, altura: H, itens };
+})()`;
+
 async function capture(browser, name, vp) {
   const { on } = browser;
   const tab = await openTab(browser);
@@ -438,6 +513,12 @@ async function capture(browser, name, vp) {
       // Densidade 1: em densidade 2 uma página longa passa do limite de textura e derruba o Chrome.
       await s('Emulation.setDeviceMetricsOverride', { width: vp.width, height: vp.height, deviceScaleFactor: 1, mobile: vp.mobile });
       await sleep(800);
+      try {
+        writeFileSync(join(outDir, `${name}-mapa.json`), JSON.stringify(await evaluate(MAPA_JS)));
+        files.push(`${name}-mapa.json`);
+      } catch (e) {
+        errors.push(`mapa de componentes: ${e.message}`);
+      }
       const shot = s('Page.captureScreenshot', {
         format: 'jpeg',
         quality: 75,
@@ -531,6 +612,6 @@ for (const [name, r] of Object.entries(report.results)) {
   if (r.primeiraTela?.linksWhatsApp && !r.primeiraTela.whatsappNaPrimeiraTela && name === 'mobile') notes.push('WhatsApp fora da primeira tela no celular');
   const font = fd ? ` | título: ${fd.fonte} ${fd.tamanhoPx}px` : '';
   const sheet = r.folhaDeContato ? ` | ${r.folhaDeContato}` : '';
-  console.log(`${name}: ${r.files.length} imagens, altura ${r.pageHeight}px${font}${sheet}${notes.length ? ' | ' + notes.join(' | ') : ' | ok'}`);
+  console.log(`${name}: ${r.files.filter((f) => !f.endsWith(".json")).length} imagens, altura ${r.pageHeight}px${font}${sheet}${notes.length ? ' | ' + notes.join(' | ') : ' | ok'}`);
 }
 console.log(`Saída: ${outDir}`);

@@ -18,6 +18,7 @@ Uma skill para o **Claude Code** que cria sites, landing pages e portfólios com
 - **Confere antes de entregar.** Tira prints no computador e no celular, procura texto cortado, letra pequena e linha que some, e corrige.
 - **Pronta para o dia a dia do freela.** Mensagem de briefing para o WhatsApp do cliente, 2 ou 3 conceitos em PDF para ele escolher e site em HTML puro, que roda em qualquer hospedagem.
 - **Feita para negócio local.** Botão de WhatsApp, horários, endereço, Google e as regras de propaganda dos conselhos (CFO, CFM, OAB).
+- **Ajuste com precisão.** Na página de aprovação, você toca num título, botão ou seção do print e escreve o que mudar ali. A skill sabe exatamente qual elemento mexer.
 - **Aprende o seu gosto.** Você aprova ou reprova os sites numa página própria, e a skill guarda o que funciona para você nos próximos trabalhos.
 
 ## Instalação
@@ -71,7 +72,7 @@ Feche e abra o Claude Code e digite **`/vitrine:inicio`**. Ele confere se falta 
 | **2** | Cole a resposta, ou `/vitrine:aproveitar <link>` | Tudo organizado: o que é fato e o que falta |
 | **3** | `/vitrine:conceitos` | 2 ou 3 caminhos visuais (HTML + PDF) para o cliente escolher |
 | **4** | `/vitrine:site` | O site pronto, conferido no computador e no celular |
-| **5** | `/vitrine:avaliar` | Uma página para aprovar ou reprovar os sites. A skill aprende o seu gosto com isso |
+| **5** | `/vitrine:avaliar` | Uma página para aprovar ou reprovar os sites e marcar no print o lugar exato de cada ajuste. A skill aprende o seu gosto com isso |
 | **+** | `/vitrine:revisar <link>` | O diagnóstico de qualquer site: o que tem cara de IA e o que falta |
 
 Os comandos são só atalhos: também funciona falando normalmente.

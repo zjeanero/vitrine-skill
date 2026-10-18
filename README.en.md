@@ -20,6 +20,7 @@
 - **Checks before delivering.** It takes desktop and mobile screenshots, looks for clipped text, tiny type and lines that vanish, and fixes them.
 - **Fits a freelancer's workflow.** A briefing message for the client's WhatsApp, 2 or 3 concepts as a PDF for them to pick, and a site in plain HTML that runs on any host.
 - **Built for local businesses.** WhatsApp button, opening hours, address, Google, and the advertising rules of Brazilian professional boards (CFO, CFM, OAB).
+- **Precise tweaks.** On the review page you tap a heading, button or section in the screenshot and write what to change there. The skill knows exactly which element to edit.
 - **Learns your taste.** You approve or reject sites on a review page, and the skill keeps what works for you for the next jobs.
 
 ## Installation
@@ -73,7 +74,7 @@ Close and reopen Claude Code and type **`/vitrine:inicio`** (*início* = start).
 | **2** | Paste the reply, or `/vitrine:aproveitar <link>` *(reuse)* | Everything organized: what's confirmed and what's missing |
 | **3** | `/vitrine:conceitos` *(concepts)* | 2 or 3 visual directions (HTML + PDF) for the client to pick |
 | **4** | `/vitrine:site` | The finished site, checked on desktop and mobile |
-| **5** | `/vitrine:avaliar` *(evaluate)* | A page to approve or reject the sites. The skill learns your taste from it |
+| **5** | `/vitrine:avaliar` *(evaluate)* | A page to approve or reject the sites and pin the exact spot of each tweak on the screenshot. The skill learns your taste from it |
 | **+** | `/vitrine:revisar <link>` *(review)* | An audit of any website: what looks AI-made and what's missing |
 
 The commands are just shortcuts: plain language works too.
