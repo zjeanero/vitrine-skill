@@ -8,6 +8,16 @@ Plugin para o **Claude Code** que cria landing pages para clientes de freela e n
 
 <sub>Mesmo pedido, mesmo modelo de IA. À esquerda, sem a skill; à direita, com ela.</sub>
 
+## O que ela tem de diferente
+
+- **Cada site nasce do cliente.** A skill procura o que só aquele negócio tem (o saco de pão da padaria, a ordem de serviço da oficina, a ficha da clínica) e transforma isso no conceito visual.
+- **Diferente, mas reconhecível.** Foge do clichê do setor sem perder os sinais dele: clínica continua parecendo clínica.
+- **Nada inventado.** Depoimento, preço, prêmio ou foto que o cliente não deu fica marcado `[[assim]]`, ou a skill diz exatamente qual foto tirar.
+- **Confere antes de entregar.** Tira prints no computador e no celular, procura texto cortado, letra pequena e linha que some, e corrige.
+- **Pronta para o dia a dia do freela.** Mensagem de briefing para o WhatsApp do cliente, 2 ou 3 conceitos em PDF para ele escolher e site em HTML puro, que roda em qualquer hospedagem.
+- **Feita para negócio local.** Botão de WhatsApp, horários, endereço, Google e as regras de propaganda dos conselhos (CFO, CFM, OAB).
+- **Aprende o seu gosto.** Você aprova ou reprova os sites numa página própria, e a skill guarda o que funciona para você nos próximos trabalhos.
+
 ## Instalação
 
 No Claude Code, digite:
@@ -75,7 +85,8 @@ Um prompt direto já acerta o básico técnico. A skill garante o resto:
 | **Conteúdo** | Inventa o que falta | Nunca inventa: marca `[[assim]]` |
 | **Conferência** | Entrega sem olhar | Prints no computador e no celular, e correção antes de entregar |
 | **Negócio local** | Genérico | WhatsApp, horários, Google, regras de conselhos (CFO, CFM, OAB) |
-| **Seu gosto** | Do zero a cada conversa | Um perfil salvo com referências e stack |
+| **Para o cliente** | Só o site | Briefing para o WhatsApp e 2 ou 3 conceitos para ele escolher |
+| **Seu gosto** | Do zero a cada conversa | Um perfil salvo com referências e stack, que aprende com cada site que você aprova |
 
 <details>
 <summary><b>Mais exemplos e como foi testado</b></summary>
@@ -151,7 +162,7 @@ Cerca de 650 tokens fixos por sessão e uns 7 mil quando a skill é usada. Um si
 
 ```
 .claude-plugin/marketplace.json     catálogo para instalar com um comando
-plugins/vitrine/                   o plugin: commands/ (os /vitrine:*) e skills/landing-page/ (a skill)
+plugins/vitrine/                    o plugin: commands/ (os /vitrine:*) e skills/landing-page/ (a skill)
 perfis/modelo/                      perfil-modelo vazio
 avaliacao/                          testes com e sem a skill
 ferramentas/empacotar.ps1           gera o .zip para mandar sem GitHub

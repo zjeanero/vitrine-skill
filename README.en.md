@@ -10,6 +10,16 @@
 
 <sub>Same request, same AI model. Left: without the skill ("Sem a skill"). Right: with it ("Com a skill").</sub>
 
+## What makes it different
+
+- **Every site starts from the client.** The skill looks for what only that business has (the bakery's bread bag, the repair shop's work order, the clinic's patient form) and turns it into the visual concept.
+- **Different, but recognizable.** It avoids the industry's clichés without losing its cues: a clinic still looks like a clinic.
+- **Nothing made up.** Testimonials, prices, awards or photos the client didn't provide are marked `[[like this]]`, or the skill says exactly which photo to take.
+- **Checks before delivering.** It takes desktop and mobile screenshots, looks for clipped text, tiny type and lines that vanish, and fixes them.
+- **Fits a freelancer's workflow.** A briefing message for the client's WhatsApp, 2 or 3 concepts as a PDF for them to pick, and a site in plain HTML that runs on any host.
+- **Built for local businesses.** WhatsApp button, opening hours, address, Google, and the advertising rules of Brazilian professional boards (CFO, CFM, OAB).
+- **Learns your taste.** You approve or reject sites on a review page, and the skill keeps what works for you for the next jobs.
+
 ## Installation
 
 In Claude Code, type:
@@ -77,7 +87,8 @@ A plain prompt already gets the technical basics right. The skill takes care of 
 | **Content** | Makes up what's missing | Never makes things up: marks `[[like this]]` |
 | **Checking** | Delivers without looking | Desktop and mobile screenshots, fixed before delivery |
 | **Local business** | Generic | WhatsApp, opening hours, Google, professional advertising rules |
-| **Your taste** | Starts from scratch every time | A saved profile with your references and stack |
+| **For the client** | Just the site | A WhatsApp briefing and 2 or 3 concepts to choose from |
+| **Your taste** | Starts from scratch every time | A saved profile with your references and stack that learns from every site you approve |
 
 <details>
 <summary><b>More examples and how it was tested</b></summary>
@@ -153,7 +164,7 @@ About 650 tokens per session, and roughly 7k each time the skill is used. A comp
 
 ```
 .claude-plugin/marketplace.json     catalog for one-command install
-plugins/vitrine/                   the plugin: commands/ (the /vitrine:*) and skills/landing-page/ (the skill)
+plugins/vitrine/                    the plugin: commands/ (the /vitrine:*) and skills/landing-page/ (the skill)
 perfis/modelo/                      empty profile template
 avaliacao/                          with/without-skill tests
 ferramentas/empacotar.ps1           builds the .zip to share without GitHub
