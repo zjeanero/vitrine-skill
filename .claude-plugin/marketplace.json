@@ -1,14 +1,14 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "vitrine-skill",
-  "description": "Vitrine: landing pages que não parecem feitas por IA, para freelas e negócios locais.",
+  "description": "Seu site é a vitrine. Ela precisa ter a sua cara.",
   "owner": {
     "name": "zjeanero"
   },
   "plugins": [
     {
       "name": "vitrine",
-      "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: briefing para o cliente, aproveitar o que ele já tem, conceitos para aprovação, site com WhatsApp e SEO local, revisão visual por screenshot. Comece com /vitrine:inicio.",
+      "description": "Sites, landing pages e portfólios com personalidade, para você e para seus clientes: briefing, conceitos para aprovar, site pronto e conferido no celular, e uma página de aprovação que aprende o seu gosto. Comece com /vitrine:inicio.",
       "author": {
         "name": "zjeanero"
       },

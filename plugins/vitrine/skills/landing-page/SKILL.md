@@ -1,6 +1,6 @@
 ---
 name: landing-page
-description: Cria landing pages com identidade própria, que não parecem feitas por IA, para clientes de freela e negócios locais (restaurante, padaria, clínica, oficina, barbearia, loja, escritório, profissional liberal). Cobre o trabalho inteiro - mensagem de briefing para o cliente, aproveitar o que ele já tem (site, Instagram, Google), apresentação de conceitos para aprovação, construção em HTML/CSS/JS (ou a stack do perfil), SEO local, WhatsApp e revisão visual por screenshot. Use sempre que o usuário pedir landing page, site, one-page, página de vendas, site institucional, página para cliente, redesign, briefing de cliente, proposta visual, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo sem dizer "landing page". Use também para configurar o perfil da skill (referências, stack, gosto), para revisar um site existente e quando a pessoa perguntar como usar a skill. Também em inglês: "landing page", "website", "one-pager", "sales page", "looks AI-generated".
+description: Cria sites e landing pages com personalidade, que não parecem feitas por IA, para clientes de freela, negócios locais (restaurante, padaria, clínica, oficina, loja, escritório) e para o portfólio ou site pessoal de quem usa. Cobre o trabalho inteiro - mensagem de briefing para o cliente, aproveitar o que ele já tem (site, Instagram, Google), apresentação de conceitos para aprovação, construção em HTML/CSS/JS, SEO local, WhatsApp e revisão visual por screenshot. Use sempre que o usuário pedir landing page, site, portfólio, one-page, página de vendas, site institucional, página para cliente, redesign, briefing de cliente, proposta visual, ou disser que um site está genérico, "com cara de IA" ou "vibecodado", mesmo sem dizer "landing page". Use também para configurar o perfil da skill (referências, stack, gosto), para revisar um site existente e quando a pessoa perguntar como usar a skill. Também em inglês: "landing page", "website", "portfolio", "one-pager", "sales page", "looks AI-generated".
 allowed-tools: Read, Glob, Grep, Write, Edit, Bash(node:*), PowerShell(node:*), Bash(mkdir:*), Bash(ls:*), Bash(cp:*), Bash(mv:*)
 ---
 
@@ -99,6 +99,8 @@ Antes de pensar em layout, faça por escrito um inventário do mundo desse negó
 - **Vocabulário:** como o dono fala, os termos do ofício, os apelidos dos produtos.
 - **Rituais e tempo:** o que acontece em cada horário, sazonalidade, filas, fornadas, plantões, prazos.
 - **Lugar:** rua, bairro, cidade, clima, referências locais.
+
+**Quando o site é da própria pessoa** (portfólio, site pessoal, estúdio), ela é o cliente. O inventário vem do ofício dela: caderno de esboços, ferramentas, arquivos de trabalho, processo, o jeito como ela fala do que faz.
 
 Os artefatos são a fonte mais rica de design único. Cada um já traz uma tipografia, uma grade, uma paleta e um jeito de organizar informação que nenhum template tem.
 

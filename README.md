@@ -1,8 +1,10 @@
 **Português** · [English](README.en.md)
 
-# Vitrine: landing pages que não parecem feitas por IA
+# Vitrine
 
-Plugin para o **Claude Code** que cria landing pages para clientes de freela e negócios locais. Cada página sai do mundo do próprio cliente, não de um template.
+**Seu site é a vitrine. Ela precisa ter a sua cara.**
+
+Uma skill para o **Claude Code** que cria sites, landing pages e portfólios com personalidade. Ela começa descobrindo o que torna você, ou o seu cliente, diferente, e usa isso no visual, no texto e nos detalhes.
 
 ![Mesmo pedido, sem e com a skill: Padaria Fermento & Lenha](docs/img/comparacao-padaria-fermento-lenha.jpg)
 
@@ -10,7 +12,7 @@ Plugin para o **Claude Code** que cria landing pages para clientes de freela e n
 
 ## O que ela tem de diferente
 
-- **Cada site nasce do cliente.** A skill procura o que só aquele negócio tem (o saco de pão da padaria, a ordem de serviço da oficina, a ficha da clínica) e transforma isso no conceito visual.
+- **Cada site nasce de quem está por trás.** A skill procura o que só aquele negócio ou aquela pessoa tem (o saco de pão da padaria, a ordem de serviço da oficina, o caderno de esboços de um designer) e faz disso o conceito visual.
 - **Diferente, mas reconhecível.** Foge do clichê do setor sem perder os sinais dele: clínica continua parecendo clínica.
 - **Nada inventado.** Depoimento, preço, prêmio ou foto que o cliente não deu fica marcado `[[assim]]`, ou a skill diz exatamente qual foto tirar.
 - **Confere antes de entregar.** Tira prints no computador e no celular, procura texto cortado, letra pequena e linha que some, e corrige.

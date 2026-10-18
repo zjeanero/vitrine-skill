@@ -1,10 +1,12 @@
 [Português](README.md) · **English**
 
-# Vitrine: landing pages that don't look AI-generated
+# Vitrine
 
-*Vitrine* is Portuguese for shop window. A **Claude Code** plugin that builds landing pages for freelance clients and local businesses. Each page grows out of the client's own world, not a template.
+**Your website is your shop window. It should look like you.**
 
-> Built for Brazilian small businesses: it writes in Brazilian Portuguese, and the command names are in Portuguese too.
+*Vitrine* is Portuguese for shop window. A skill for **Claude Code** that builds websites, landing pages and portfolios with personality. It starts by finding out what makes you, or your client, different, and puts that into the visuals, the copy and the details.
+
+> Made in Brazil: it writes in Brazilian Portuguese, and the command names are in Portuguese too.
 
 ![Same request, without and with the skill: a bakery](docs/img/comparacao-padaria-fermento-lenha.jpg)
 
@@ -12,7 +14,7 @@
 
 ## What makes it different
 
-- **Every site starts from the client.** The skill looks for what only that business has (the bakery's bread bag, the repair shop's work order, the clinic's patient form) and turns it into the visual concept.
+- **Every site starts from the person behind it.** The skill looks for what only that business or person has (the bakery's bread bag, the repair shop's work order, a designer's sketchbook) and builds the visual concept from it.
 - **Different, but recognizable.** It avoids the industry's clichés without losing its cues: a clinic still looks like a clinic.
 - **Nothing made up.** Testimonials, prices, awards or photos the client didn't provide are marked `[[like this]]`, or the skill says exactly which photo to take.
 - **Checks before delivering.** It takes desktop and mobile screenshots, looks for clipped text, tiny type and lines that vanish, and fixes them.

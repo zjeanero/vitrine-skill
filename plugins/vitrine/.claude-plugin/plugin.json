@@ -1,11 +1,18 @@
 {
   "name": "vitrine",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "license": "MIT",
-  "description": "Landing pages autorais, sem cara de IA, para clientes de freela e negócios locais: briefing para o cliente, aproveitar o que ele já tem, conceitos para aprovação, site com WhatsApp e SEO local, revisão visual por screenshot. Comece com /vitrine:inicio.",
+  "description": "Sites, landing pages e portfólios com personalidade, para você e para seus clientes: briefing, conceitos para aprovar, site pronto e conferido no celular, e uma página de aprovação que aprende o seu gosto. Comece com /vitrine:inicio.",
   "author": {
     "name": "zjeanero"
   },
   "repository": "https://github.com/zjeanero/vitrine-skill",
-  "keywords": ["landing-page", "design", "frontend", "negocio-local", "pt-br"]
+  "keywords": [
+    "landing-page",
+    "portfolio",
+    "design",
+    "frontend",
+    "negocio-local",
+    "pt-br"
+  ]
 }
