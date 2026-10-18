@@ -57,7 +57,7 @@ Feche e abra o Claude Code e digite **`/vitrine:inicio`**. Ele confere se falta 
 |---|---|
 | `/vitrine:inicio` não aparece | Feche e abra o Claude Code |
 | Erro com `--marketplace` | Rode `claude update` |
-| Não encontrou o repositório | Ainda é privado: peça o pacote .zip |
+| Não encontrou o repositório | Confira se digitou `zjeanero/vitrine-skill` certinho |
 | "node não é reconhecido" | Instale o Node LTS em [nodejs.org](https://nodejs.org) e reabra o terminal |
 | "Chrome/Edge não encontrado" | Instale o Google Chrome |
 </details>
@@ -124,7 +124,7 @@ flowchart LR
 
 **Se ele já tiver um perfil,** o Claude pergunta antes de mexer: **juntar** (as suas referências entram junto com as dele), **substituir** (o perfil dele fica guardado em `antigo-<data>/`) ou **cancelar**.
 
-**Pelo .zip:** ele descompacta numa pasta que não vá apagar e aponta para a pasta `skill` que veio dentro. O `LEIA-ME.txt` do pacote tem o passo a passo. A cada versão nova da skill é preciso mandar outro .zip; quando o repositório for público, basta o comando de instalação.
+**Pelo .zip:** ele descompacta numa pasta que não vá apagar e aponta para a pasta `skill` que veio dentro. O `LEIA-ME.txt` do pacote tem o passo a passo. A cada versão nova é preciso mandar outro .zip. Quem instalou pelo GitHub só roda `claude plugin update vitrine@vitrine-skill`.
 </details>
 
 ## Perguntas rápidas

@@ -59,7 +59,7 @@ Close and reopen Claude Code and type **`/vitrine:inicio`** (*início* = start).
 |---|---|
 | `/vitrine:inicio` doesn't show up | Close and reopen Claude Code |
 | Error about `--marketplace` | Run `claude update` |
-| Repository not found | It's still private: ask for the .zip package |
+| Repository not found | Check that you typed `zjeanero/vitrine-skill` correctly |
 | "node is not recognized" | Install Node LTS from [nodejs.org](https://nodejs.org) and reopen the terminal |
 | "Chrome/Edge não encontrado" (not found) | Install Google Chrome |
 </details>
@@ -126,7 +126,7 @@ flowchart LR
 
 **If they already have a profile,** Claude asks before touching anything: **merge** (your references join theirs), **replace** (theirs is kept in `antigo-<date>/`) or **cancel**.
 
-**With the .zip:** they unzip it into a folder they won't delete and point to the `skill` folder inside. The package's `LEIA-ME.txt` has the steps. Every new version of the skill means sending a new .zip; once the repository is public, the install command is all they need.
+**With the .zip:** they unzip it into a folder they won't delete and point to the `skill` folder inside. The package's `LEIA-ME.txt` has the steps. Every new version means sending a new .zip. Anyone who installed from GitHub just runs `claude plugin update vitrine@vitrine-skill`.
 </details>
 
 ## Quick questions
