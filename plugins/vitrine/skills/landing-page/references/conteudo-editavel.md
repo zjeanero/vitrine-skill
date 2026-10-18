@@ -36,7 +36,8 @@ Preço, cardápio, horário e aviso mudam toda semana. Em vez de o cliente chama
 - **Uma aba por lista,** com o nome do `data-lista`. A primeira linha tem os nomes das colunas, que os `data-col` usam.
 - **Coluna `disponivel`:** "não" tira o item do site sem apagar a linha. É assim que o cliente marca "acabou hoje".
 - **`data-formato="preco"`** transforma "28" ou "28,5" em "R$ 28,00" ou "R$ 28,50".
-- **`data-some-vazio`** esconde o elemento quando a célula está vazia, como uma descrição opcional ou um aviso que acabou.
+- **`data-some-vazio`** esconde o elemento quando a célula está vazia, como uma descrição opcional. Num campo solto, como um aviso, comece com `hidden`: ele só aparece quando a planilha tiver texto.
+- **`data-classe-se="coluna: classe"`** liga uma classe quando a coluna diz "sim". Serve para selo, destaque ou "novo", e o visual da classe fica no CSS.
 - **O `<template>` repete o HTML exato do item escrito à mão.** Assim, o print da revisão vale para o conteúdo vindo da planilha.
 - **Segurança:** o script só insere texto, nunca HTML. Link, cor e layout não vêm da planilha.
 
@@ -57,6 +58,14 @@ Preço, cardápio, horário e aviso mudam toda semana. Em vez de o cliente chama
    4. Publicar cada página como CSV: **Arquivo > Compartilhar > Publicar na Web**, escolher a página e **Valores separados por vírgula (.csv)**, e clicar em **Publicar**. Copiar o link.
    5. Colar os links aqui. A skill coloca cada um no `window.PLANILHAS` do `index.html`.
 4. **Compartilhe com o cliente** como **Editor**: em **Compartilhar**, coloque o e-mail dele.
+5. **Teste com a planilha de verdade:**
+   - Aberto direto do arquivo (`file://`), o site **não** lê a planilha, porque o Google só libera para sites com endereço.
+   - No computador, rode `node <pasta-desta-skill>/scripts/conteudo/servir.mjs <cliente>/site`. Ele põe o site em `http://127.0.0.1:…` e abre no navegador.
+   - Mude algo na planilha, espere uns 5 minutos e recarregue. Publicado, funciona igual.
+
+**O que deixar no código e anotar no `NOTAS.md`:**
+- regras que não são texto, como os prazos de uma calculadora;
+- os dados estruturados (JSON-LD). Se o horário mudar de vez, é preciso atualizar também o JSON-LD e o Google Perfil da Empresa.
 
 **Hospedagem com PHP:** prefira o intermediário `scripts/conteudo/planilha.php`.
 - Copie-o para a raiz do site e cole os links de publicação nele.

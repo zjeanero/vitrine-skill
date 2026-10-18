@@ -12,6 +12,10 @@
 //   </ul>
 //   Agrupada: data-agrupar="secao" na lista, mais um <template data-grupo> com [data-col="secao"] e [data-itens].
 //   Linha com "não" na coluna "disponivel" fica fora do site. data-some-vazio esconde o elemento quando a célula está vazia.
+//   data-classe-se="destaque: em-destaque" põe a classe quando a coluna "destaque" diz "sim".
+//
+// Aberta direto do arquivo (file://), a página não lê a planilha: o Google só libera para sites com endereço.
+// Para testar no computador, use servir.mjs; publicado, funciona.
 //
 // Configuração, antes deste script:
 //   <script>window.PLANILHAS = { informacoes: 'https://docs.google.com/spreadsheets/d/e/…/pub?gid=0&single=true&output=csv' };</script>
@@ -66,11 +70,17 @@
     return valor;
   }
 
+  const SIM = new Set(['sim', 's', 'x', 'true', '1', 'yes']);
   function preencher(raiz, dados) {
     raiz.querySelectorAll('[data-col]').forEach((el) => {
       const v = dados[norm(el.dataset.col)] ?? '';
       el.textContent = formatar(v, el.dataset.formato);
       if (el.hasAttribute('data-some-vazio')) el.hidden = !v;
+    });
+    // data-classe-se="coluna: classe" liga a classe quando a célula diz "sim" (selo, destaque, "novo").
+    raiz.querySelectorAll('[data-classe-se]').forEach((el) => {
+      const [col, classe] = el.dataset.classeSe.split(':').map((s) => s.trim());
+      if (col && classe) el.classList.toggle(classe, SIM.has(norm(dados[norm(col)])));
     });
   }
 
@@ -83,6 +93,7 @@
       els.forEach((el) => {
         const v = valores[norm(el.dataset.campo)];
         if (v) el.textContent = v;
+        if (el.hasAttribute('data-some-vazio')) el.hidden = !v; // aviso que só aparece quando tem texto
       });
     } catch (e) {
       falhas.push('informacoes');
