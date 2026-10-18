@@ -29,7 +29,7 @@ No Claude Code, digite:
 /plugin install vitrine --marketplace zjeanero/vitrine-skill
 ```
 
-Feche e abra o Claude Code e digite **`/vitrine:inicio`**. Ele confere se falta algo no seu computador e mostra o passo a passo.
+Feche e abra o Claude Code. Na primeira vez, a Vitrine abre uma página de boas-vindas no navegador. Depois, digite **`/vitrine:inicio`**: ele confere se falta algo no seu computador e mostra o passo a passo.
 
 <details>
 <summary><b>Primeira vez? O que precisa ter</b></summary>

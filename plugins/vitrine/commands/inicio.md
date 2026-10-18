@@ -3,7 +3,9 @@ description: Mostra o passo a passo da Vitrine, confere se o computador está pr
 allowed-tools: Read, Glob, Bash(node:*), PowerShell(node:*)
 ---
 
-Faça duas verificações rápidas antes de mostrar o guia:
+Primeiro, abra a página de boas-vindas no navegador: com a ferramenta Bash, rode `node "${CLAUDE_PLUGIN_ROOT}/scripts/boas-vindas.mjs" --abrir`. Diga numa frase que o guia também abriu no navegador.
+
+Depois, faça duas verificações rápidas antes de mostrar o guia:
 
 1. **Requisitos:** com a ferramenta Bash, rode `node "${CLAUDE_PLUGIN_ROOT}/skills/landing-page/scripts/screenshot.mjs" --verificar`.
    - Se tudo der "ok", não comente nada.

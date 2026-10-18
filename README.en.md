@@ -31,7 +31,7 @@ In Claude Code, type:
 /plugin install vitrine --marketplace zjeanero/vitrine-skill
 ```
 
-Close and reopen Claude Code and type **`/vitrine:inicio`** (*início* = start). It checks whether anything is missing on your computer and walks you through the steps.
+Close and reopen Claude Code. The first time, Vitrine opens a welcome page in your browser. Then type **`/vitrine:inicio`** (*início* = start): it checks whether anything is missing on your computer and walks you through the steps.
 
 <details>
 <summary><b>First time? What you need</b></summary>

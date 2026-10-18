@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vitrine instalada</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Big+Shoulders:wght@700;800&family=Fragment+Mono&family=Schibsted+Grotesk:wght@400;600&display=swap">
+<style>
+/* Uma vitrine de loja: o vidro escuro com o letreiro pintado a ouro, a placa de ABERTO pendurada
+   e etiquetas de preço amarradas, uma para cada passo do trabalho. */
+:root {
+  --vidro: oklch(23% 0.035 195);
+  --vidro-fundo: oklch(17% 0.03 200);
+  --reflexo: oklch(100% 0 0 / .06);
+  --ouro-claro: oklch(88% 0.11 92);
+  --ouro: oklch(76% 0.13 82);
+  --ouro-escuro: oklch(52% 0.11 70);
+  --papel: oklch(98% 0.004 95);
+  --tinta: oklch(24% 0.02 220);
+  --tinta-suave: oklch(46% 0.02 220);
+  --barbante: oklch(70% 0.03 80);
+  --placa: oklch(52% 0.19 27);
+  --sobre-placa: oklch(98% 0.01 27);
+  --foco: oklch(80% 0.14 230);
+  --letreiro: "Yellowtail", "Brush Script MT", cursive;
+  --display: "Big Shoulders", "Arial Narrow", Impact, sans-serif;
+  --texto: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Fragment Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--vidro-fundo); }
+body {
+  margin: 0; color: var(--papel); font: 400 17px/1.55 var(--texto);
+  background:
+    linear-gradient(115deg, transparent 0 18%, var(--reflexo) 18% 24%, transparent 24% 62%, var(--reflexo) 62% 64%, transparent 64%),
+    radial-gradient(120% 80% at 50% 0%, var(--vidro), var(--vidro-fundo));
+  background-attachment: fixed;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.miolo { max-width: 1080px; margin-inline: auto; }
+a { color: var(--ouro-claro); }
+:focus-visible { outline: 3px solid var(--foco); outline-offset: 3px; }
+.rotulo { font: 400 .75rem/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+
+/* ---------- vitrine ---------- */
+.vitrine { display: grid; gap: 28px; padding-block: clamp(36px, 7vw, 84px) 40px; position: relative; }
+.vitrine .rotulo { color: var(--ouro); }
+.letreiro {
+  margin: 0; font: 400 clamp(5rem, 2rem + 16vw, 13rem)/.9 var(--letreiro); letter-spacing: .01em;
+  background: linear-gradient(180deg, var(--ouro-claro) 0 38%, var(--ouro) 52%, var(--ouro-escuro) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(3px 4px 0 oklch(12% 0.03 200 / .85));
+  padding-right: .1em;
+}
+.mote { margin: -8px 0 0; max-width: 20ch; font: 800 clamp(1.7rem, 1.1rem + 2.6vw, 3rem)/1.02 var(--display); text-transform: uppercase; letter-spacing: .01em; text-wrap: balance; }
+.apoio { margin: 0; max-width: 54ch; color: oklch(88% 0.015 190); }
+
+/* placa de ABERTO, pendurada por um barbante */
+.placa {
+  justify-self: start; position: relative; margin-top: 30px; max-width: 100%;
+  background: var(--placa); color: var(--sobre-placa); border-radius: 10px;
+  padding: 18px 22px 20px; display: grid; gap: 10px; transform: rotate(-2deg);
+  box-shadow: inset 0 0 0 3px oklch(98% 0.01 27 / .9), inset 0 0 0 6px var(--placa), 0 18px 30px -18px oklch(5% 0.02 200);
+}
+.placa::before, .placa::after { content: ""; position: absolute; top: -30px; width: 2px; height: 34px; background: var(--barbante); }
+.placa::before { left: 28%; transform: rotate(16deg); }
+.placa::after { right: 28%; transform: rotate(-16deg); }
+.placa strong { font: 800 clamp(2rem, 1.5rem + 2vw, 2.8rem)/1 var(--display); letter-spacing: .14em; }
+.placa p { margin: 0; font-size: .98rem; }
+.comando { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.comando code {
+  font: 400 1.05rem/1 var(--mono); background: oklch(20% 0.05 27 / .35); color: var(--sobre-placa);
+  padding: 12px 14px; border-radius: 4px; overflow-wrap: anywhere;
+}
+.copiar {
+  font: 600 .9rem/1 var(--texto); background: var(--sobre-placa); color: var(--placa); border: 0; border-radius: 4px;
+  padding: 12px 14px; min-height: 44px; cursor: pointer;
+}
+
+@media (min-width: 960px) {
+  .vitrine { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); column-gap: 56px; }
+  .vitrine > :not(.placa) { grid-column: 1; }
+  .placa { grid-column: 2; grid-row: 2 / span 3; align-self: center; justify-self: end; margin-top: 0; }
+}
+
+/* ---------- antes e depois ---------- */
+.antes { display: grid; gap: 10px; padding-block: 34px; }
+.antes figure { margin: 0; display: grid; gap: 10px; }
+.antes img { display: block; width: 100%; max-width: 100%; height: auto; border: 6px solid var(--papel); background: var(--papel); }
+.antes figcaption { color: oklch(84% 0.015 190); font-size: .92rem; }
+
+/* ---------- etiquetas: um passo em cada ---------- */
+h2 { margin: 0; font: 800 clamp(1.8rem, 1.3rem + 2vw, 2.7rem)/1 var(--display); text-transform: uppercase; letter-spacing: .02em; color: var(--ouro-claro); text-wrap: balance; }
+.passos { padding-block: 34px; display: grid; gap: 26px; }
+.etiquetas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); gap: 30px 22px; }
+.etiqueta {
+  position: relative; background: var(--papel); color: var(--tinta);
+  padding: 22px 18px 18px 30px; display: grid; gap: 6px; align-content: start;
+  clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 50%);
+}
+.etiqueta:nth-child(odd) { transform: rotate(-1.2deg); }
+.etiqueta:nth-child(even) { transform: rotate(1deg); }
+.etiqueta::before { content: ""; position: absolute; left: 10px; top: calc(50% - 5px); width: 10px; height: 10px; border-radius: 50%; background: var(--vidro-fundo); }
+.etiqueta .numero { font: 800 2.4rem/.9 var(--display); color: var(--ouro-escuro); }
+.etiqueta h3 { margin: 0; font: 600 1.05rem/1.25 var(--texto); }
+.etiqueta p { margin: 0; font-size: .93rem; color: var(--tinta-suave); }
+.etiqueta code { justify-self: start; margin-top: 4px; font: 400 .82rem/1.3 var(--mono); background: oklch(93% 0.02 92); color: var(--tinta); padding: 4px 7px; overflow-wrap: anywhere; }
+
+/* ---------- diferenças ---------- */
+.diferente { padding-block: 34px; display: grid; gap: 22px; }
+.lista { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0 34px; }
+.lista li { border-top: 1px solid oklch(80% 0.06 85 / .35); padding: 14px 0; min-width: 0; }
+.lista b { display: block; color: var(--ouro-claro); font-weight: 600; }
+.lista span { color: oklch(86% 0.015 190); font-size: .95rem; }
+
+/* ---------- começar ---------- */
+.comecar { padding-block: 34px 70px; display: grid; gap: 18px; }
+.comecar ol { margin: 0; padding-left: 1.3rem; display: grid; gap: 10px; max-width: 64ch; }
+.comecar code { font: 400 .92rem/1.3 var(--mono); color: var(--ouro-claro); }
+.rodape { border-top: 1px solid oklch(80% 0.06 85 / .3); padding-block: 20px calc(28px + env(safe-area-inset-bottom, 0px)); color: oklch(78% 0.015 190); font-size: .88rem; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .placa { animation: balanco 2.8s ease-in-out 1; transform-origin: 50% -30px; }
+  @keyframes balanco { 0% { transform: rotate(5deg); } 30% { transform: rotate(-4deg); } 60% { transform: rotate(1deg); } 100% { transform: rotate(-2deg); } }
+}
+</style>
+</head>
+<body>
+<div class="miolo">
+  <header class="vitrine">
+    <p class="rotulo">Skill para o Claude Code · instalada</p>
+    <h1 class="letreiro">Vitrine</h1>
+    <p class="mote">Seu site é a vitrine. Ela precisa ter a sua cara.</p>
+    <p class="apoio">A Vitrine cria sites, landing pages e portfólios com personalidade, para você e para os seus clientes. Ela começa descobrindo o que só aquele negócio, ou você, tem, e usa isso no visual, no texto e nos detalhes.</p>
+    <div class="placa" role="note" aria-label="Próximo passo">
+      <strong>ABERTO</strong>
+      <p>Volte ao Claude Code e digite:</p>
+      <div class="comando"><code id="cmd">/vitrine:inicio</code><button class="copiar" type="button" data-copiar="cmd">Copiar</button></div>
+      <p>Ele confere se o seu computador está pronto e mostra por onde começar.</p>
+    </div>
+  </header>
+
+  <section class="antes" aria-labelledby="t-antes">
+    <h2 id="t-antes">Mesmo pedido, outra cara</h2>
+    <figure>
+      <img src="antes-depois.jpg" alt="Duas versões do site da Padaria Fermento &amp; Lenha. À esquerda, sem a Vitrine: título serifado com uma palavra em itálico colorido e um forno ilustrado. À direita, com a Vitrine: o horário das fornadas, 7h e 16h, vira o título em letra de estêncil, ao lado de um saco de pão pardo carimbado e de uma etiqueta de encomenda." width="1440" height="904">
+      <figcaption>Padaria Fermento &amp; Lenha, um negócio fictício de teste. Mesmo pedido e mesmo modelo de IA: à esquerda sem a Vitrine, à direita com ela.</figcaption>
+    </figure>
+  </section>
+
+  <section class="passos" aria-labelledby="t-passos">
+    <h2 id="t-passos">Como funciona</h2>
+    <ol class="etiquetas">
+      <li class="etiqueta"><span class="numero">0</span><h3>Seu perfil, uma vez só</h3><p>Conte para quem você faz sites e mande de 3 a 5 referências que você admira, em link ou print.</p><code>/vitrine:perfil</code></li>
+      <li class="etiqueta"><span class="numero">1</span><h3>Briefing</h3><p>Uma mensagem pronta para o WhatsApp do cliente, com as perguntas e a lista de fotos.</p><code>/vitrine:briefing Padaria do Sérgio</code></li>
+      <li class="etiqueta"><span class="numero">2</span><h3>Material</h3><p>Cole a resposta do cliente ou mande o site, o Instagram ou o Google dele.</p><code>/vitrine:aproveitar &lt;link&gt;</code></li>
+      <li class="etiqueta"><span class="numero">3</span><h3>Conceitos</h3><p>2 ou 3 caminhos visuais, em HTML e PDF, para o cliente escolher.</p><code>/vitrine:conceitos</code></li>
+      <li class="etiqueta"><span class="numero">4</span><h3>Site</h3><p>O site pronto, conferido no computador e no celular antes de chegar até você.</p><code>/vitrine:site</code></li>
+      <li class="etiqueta"><span class="numero">5</span><h3>Aprovação</h3><p>Carimbe cada site e marque no print o lugar exato de cada ajuste. A skill aprende o seu gosto.</p><code>/vitrine:avaliar</code></li>
+    </ol>
+    <p class="apoio">Os comandos são só atalhos. Também dá para pedir falando normalmente: "faz o site da barbearia do Marcos em Contagem" ou "faz o meu portfólio".</p>
+  </section>
+
+  <section class="diferente" aria-labelledby="t-dif">
+    <h2 id="t-dif">O que ela tem de diferente</h2>
+    <ul class="lista">
+      <li><b>Cada site nasce de quem está por trás.</b><span>O saco de pão da padaria, a ordem de serviço da oficina e o caderno de esboços de um designer viram o conceito visual.</span></li>
+      <li><b>Diferente, mas reconhecível.</b><span>Foge do clichê do setor sem perder os sinais dele: clínica continua parecendo clínica.</span></li>
+      <li><b>Nada inventado.</b><span>Depoimento, preço ou prêmio que o cliente não deu fica marcado [[assim]] para você completar.</span></li>
+      <li><b>Confere antes de entregar.</b><span>Tira prints, procura texto cortado, letra pequena e linha que some, e corrige.</span></li>
+      <li><b>Feita para negócio local.</b><span>Botão de WhatsApp, horários, endereço, Google e as regras dos conselhos (CFO, CFM, OAB).</span></li>
+      <li><b>Aprende o seu gosto.</b><span>Cada site que você aprova ou reprova puxa os próximos para o seu lado.</span></li>
+    </ul>
+  </section>
+
+  <section class="comecar" aria-labelledby="t-comecar">
+    <h2 id="t-comecar">Por onde começar</h2>
+    <ol>
+      <li>No Claude Code, digite <code>/vitrine:inicio</code>. Se faltar algo no computador, ele explica o que instalar.</li>
+      <li>Monte o seu perfil com <code>/vitrine:perfil</code>. Leva uns 5 minutos, e todo site sai mais com a sua cara.</li>
+      <li>Escolha um cliente de verdade e comece pelo <code>/vitrine:briefing</code>, ou peça o seu portfólio.</li>
+    </ol>
+  </section>
+
+  <footer class="rodape">
+    <span>Precisa de Node 22 ou mais novo e do Chrome ou do Edge.</span>
+    <a href="https://github.com/zjeanero/vitrine-skill">github.com/zjeanero/vitrine-skill</a>
+    <span>Licença MIT</span>
+  </footer>
+</div>
+<script>
+document.querySelectorAll('[data-copiar]').forEach((b) => {
+  b.addEventListener('click', async () => {
+    const alvo = document.getElementById(b.dataset.copiar);
+    try {
+      await navigator.clipboard.writeText(alvo.textContent);
+      b.textContent = 'Copiado';
+    } catch (e) {
+      const r = document.createRange(); r.selectNodeContents(alvo);
+      const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      b.textContent = 'Selecionado: Ctrl+C';
+    }
+    setTimeout(() => { b.textContent = 'Copiar'; }, 2500);
+  });
+});
+</script>
+</body>
+</html>
